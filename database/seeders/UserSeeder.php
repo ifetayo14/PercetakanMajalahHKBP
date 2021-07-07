@@ -14,44 +14,49 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user')->insert([
-            'id' => '1',
+        DB::table('users')->insert([
+            'User_Id' => '1',
             'username' => 'admin',
+            'alamat' => 'Balige',
+            'email' => 'admin@gmail.com',
             'password' => 'pass123',
-            'role' => 'admin',
-            'name' => 'John Snow',
+            'role' => '1',
         ]);
 
-        DB::table('user')->insert([
-            'id' => '2',
+        DB::table('users')->insert([
+            'User_Id' => '2',
             'username' => 'testJemaat',
+            'alamat' => 'Medan',
+            'email' => 'jemaat@gmail.com',
             'password' => 'pass123',
-            'role' => 'jemaat',
-            'name' => 'Rob Stark',
+            'role' => '2',
         ]);
 
-        DB::table('user')->insert([
-            'id' => '3',
+        DB::table('users')->insert([
+            'User_Id' => '3',
             'username' => 'testPendeta',
+            'alamat' => 'Laguboti',
+            'email' => 'pendeta@gmail.com',
             'password' => 'pass123',
-            'role' => 'pendeta',
-            'name' => 'Sansa Stark',
+            'role' => '3',
         ]);
 
-        DB::table('user')->insert([
-            'id' => '4',
+        DB::table('users')->insert([
+            'User_Id' => '4',
             'username' => 'testSekjen',
+            'alamat' => 'Balige',
+            'email' => 'sekjen@gmail.com',
             'password' => 'pass123',
-            'role' => 'sekjen',
-            'name' => 'Arya Stark',
+            'role' => '4',
         ]);
 
-        DB::table('user')->insert([
-            'id' => '5',
+        DB::table('users')->insert([
+            'User_Id' => '5',
             'username' => 'testTimMajalah',
+            'alamat' => 'Porsea',
+            'email' => 'majalah@gmail.com',
             'password' => 'pass123',
-            'role' => 'timMajalah',
-            'name' => 'Bran Stark',
+            'role' => '5',
         ]);
     }
 }

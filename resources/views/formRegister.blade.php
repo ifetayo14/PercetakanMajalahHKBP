@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login</title>
+    <title>Register</title>
 
     <!-- Custom fonts for this template-->
     <link href="templateResources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -26,6 +26,7 @@
 </head>
 
 <body class="bg-gradient-primary">
+<br><br>
 <div class="container">
 
     <!-- Outer Row -->
@@ -43,39 +44,52 @@
                                     <img src="{{url('icon/logo.jpg')}}" alt="" class="loginIcon">
                                 </div>
                                 <br>
-                                @if($message = Session::get('error'))
-                                    <div class="alert alert-danger">
-                                            {{$message}}
-                                    </div>
-                                @elseif($message = Session::get('success'))
-                                    <div class="alert alert-success">
-                                        {{$message}}
-                                    </div>
-                                @endif
-                                <form class="user" method="post" action="{{url('loginProcess')}}">
+                                <form class="user" method="post" action="{{url('registerProcess')}}">
                                     @csrf
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" name="username" id="username" aria-describedby="emailHelp" placeholder="Username">
+                                        <span style="color: red">
+                                            @error('username'){{$message}}@enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user" name="password" id="password" placeholder="Password">
+                                        <span style="color: red">
+                                            @error('password'){{$message}}@enderror
+                                        </span>
                                     </div>
                                     <div class="form-group">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="remember" name="remember">
-                                            <label class="custom-control-label" for="remember">Remember Me</label>
-                                        </div>
+                                        <input type="text" class="form-control form-control-user" name="alamat" id="alamat" placeholder="Alamat">
+                                        <span style="color: red">
+                                            @error('alamat'){{$message}}@enderror
+                                        </span>
                                     </div>
-                                    <button href="" class="btn btn-primary btn-user btn-block">
-                                        Login
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user" name="email" id="email" placeholder="Email">
+                                        <span style="color: red">
+                                            @error('email'){{$message}}@enderror
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <label for="role" style="margin-left: 15px">Daftar Sebagai</label>
+                                            <select name="role" style="width: 225px; margin-left: 10px" class="form-control">
+                                                <option value="">...</option>
+                                                <option value="pendeta">Pendeta</option>
+                                                <option value="jemaat">Jemaat</option>
+                                            </select>
+                                        </div>
+                                        <span style="color: red">
+                                            @error('role'){{$message}}@enderror
+                                        </span>
+                                    </div>
+                                    <br>
+                                    <button href="" class="btn btn-success btn-user btn-block">
+                                        Daftar
                                     </button>
                                 </form>
                                 <br>
-                                <form class="user">
-                                    <a href="/registerForm" class="btn btn-success btn-user btn-block">
-                                        Register
-                                    </a>
-                                </form>
+                                <p>&nbsp;&nbsp;Sudah punya akun? <a href="/">Masuk</a></p>
                             </div>
                         </div>
                     </div>

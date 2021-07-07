@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\RegisterAccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,26 @@ Route::get('/', function () {
 Route::post('loginProcess', [LogController::class, 'loginProcess']);
 Route::get('logout', [LogController::class, 'logout']);
 
-Route::get('dashAdmin', [PageController::class, 'toAdmin']);
-Route::get('dashJemaat', [PageController::class, 'toJemaat']);
-Route::get('dashPendeta', [PageController::class, 'toPendeta']);
-Route::get('dashSekjen', [PageController::class, 'toSekjen']);
-Route::get('dashTimMajalah', [PageController::class, 'toTimMajalah']);
+Route::get('registerForm', [RegisterAccountController::class, 'create']);
+Route::post('registerProcess', [RegisterAccountController::class, 'store']);
+
+Route::middleware(['adminPage'])->group(function (){
+    Route::get('dashAdmin', [PageController::class, 'toAdmin']);
+});
+
+Route::middleware(['jemaatPage'])->group(function (){
+    Route::get('dashJemaat', [PageController::class, 'toJemaat']);
+});
+
+Route::middleware(['pendetaPage'])->group(function (){
+    Route::get('dashPendeta', [PageController::class, 'toPendeta']);
+});
+
+Route::middleware(['sekjenPage'])->group(function (){
+    Route::get('dashSekjen', [PageController::class, 'toSekjen']);
+});
+
+Route::middleware(['timMajalahPage'])->group(function (){
+    Route::get('dashTimMajalah', [PageController::class, 'toTimMajalah']);
+});
 
