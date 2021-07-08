@@ -10,25 +10,25 @@ use Illuminate\Support\Facades\Session;
 class LogController extends Controller
 {
     public function loginProcess(Request $request){
-        $data = DB::table('users')
+        $data = DB::table('user')
             ->where('username', $request->username)
             ->where('password', $request->password)->first();
 
         var_dump($data);
         if ($data){
-            $request->session()->put('username', $data->Username);
-            $request->session()->put('role', $data->Role);
+            $request->session()->put('username', $data->username);
+            $request->session()->put('role', $data->role_id);
 
-            if ($data->Role == '1'){
+            if ($data->role_id == '1'){
                 return redirect('dashAdmin');
             }
-            elseif ($data->Role == '2'){
+            elseif ($data->role_id == '2'){
                 return redirect('dashJemaat');
             }
-            elseif ($data->Role == '3'){
+            elseif ($data->role_id == '5'){
                 return redirect('dashPendeta');
             }
-            elseif ($data->Role == '4'){
+            elseif ($data->role_id == '3'){
                 return redirect('dashSekjen');
             }
             else{
