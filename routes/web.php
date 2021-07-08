@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterAccountController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::post('registerProcess', [RegisterAccountController::class, 'store']);
 
 Route::middleware(['adminPage'])->group(function (){
     Route::get('dashAdmin', [PageController::class, 'toAdmin']);
+    Route::get('akunPage', [AccountController::class, 'index']);
 });
 
 Route::middleware(['jemaatPage'])->group(function (){

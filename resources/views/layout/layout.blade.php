@@ -42,13 +42,86 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="{{url('dashboard')}}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
+        @if(\Illuminate\Support\Facades\Session::get('role') == '1')
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item {{(request()->is('dashAdmin') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('dashAdmin')}}">
+                    <img class="nav-icon" src="
+                    @if(request()->is('dashAdmin'))
+                        {{ url('icon/dashboard_active.png') }}" alt="">
+                    @else
+                        {{ url('icon/dashboard.png') }}" alt="">
+                    @endif
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li class="nav-item {{(request()->is('akunPage') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('akunPage')}}">
+                    <img class="nav-icon" src="
+                    @if(request()->is('akunPage'))
+                    {{ url('icon/users_active.png') }}" alt="">
+                    @else
+                        {{ url('icon/users.png') }}" alt="">
+                    @endif
+                    <span>Kelola Akun</span>
+                </a>
+            </li>
+
+        @elseif(\Illuminate\Support\Facades\Session::get('role') == '2')
+            <li class="nav-item {{(request()->is('dashJemaat') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('dashJemaat')}}">
+                    <img class="nav-icon" src="
+            @if(request()->is('dashJemaat'))
+                    {{ url('icon/dashboard_active.png') }}" alt="">
+                    @else
+                        {{ url('icon/dashboard.png') }}" alt="">
+                    @endif
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+        @elseif(\Illuminate\Support\Facades\Session::get('role') == '3')
+            <li class="nav-item {{(request()->is('dashSekjen') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('dashSekjen')}}">
+                    <img class="nav-icon" src="
+                    @if(request()->is('dashSekjen'))
+                    {{ url('icon/dashboard_active.png') }}" alt="">
+                    @else
+                        {{ url('icon/dashboard.png') }}" alt="">
+                    @endif
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+        @elseif(\Illuminate\Support\Facades\Session::get('role') == '4')
+            <li class="nav-item {{(request()->is('dashTimMajalah') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('dashTimMajalah')}}">
+                    <img class="nav-icon" src="
+                @if(request()->is('dashTimMajalah'))
+                    {{ url('icon/dashboard_active.png') }}" alt="">
+                    @else
+                        {{ url('icon/dashboard.png') }}" alt="">
+                    @endif
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+        @elseif(\Illuminate\Support\Facades\Session::get('role') == '5')
+            <li class="nav-item {{(request()->is('dashPendeta') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('dashPendeta')}}">
+                    <img class="nav-icon" src="
+            @if(request()->is('dashPendeta'))
+                    {{ url('icon/dashboard_active.png') }}" alt="">
+                    @else
+                        {{ url('icon/dashboard.png') }}" alt="">
+                    @endif
+                    <span>Dashboard</span>
+                </a>
+            </li>
+        @endif
+
 
 {{--        <!-- Divider -->--}}
 {{--        <hr class="sidebar-divider">--}}

@@ -9394,7 +9394,7 @@ a:focus {
     color: #fff;
 }
 .topbar.navbar-light .navbar-nav .nav-item .nav-link {
-    color: #d1d3e2;
+    color: #fff;
 }
 .topbar.navbar-light .navbar-nav .nav-item .nav-link:hover {
     color: #b7b9cc;
@@ -9421,8 +9421,13 @@ a:focus {
     font-size: 0.65rem;
     display: block;
 }
+/*customize sidebar*/
 .sidebar .nav-item.active .nav-link {
     font-weight: 700;
+    background-color: #FFF;
+}
+.sidebar .nav-item.active .nav-link span{
+     color: #0500FE;
 }
 .sidebar .nav-item .collapse {
     position: absolute;
@@ -9689,7 +9694,7 @@ a:focus {
     color: #b7b9cc;
 }
 .sidebar-light .nav-item .nav-link {
-    color: #858796;
+    color: #ffffff;
 }
 .sidebar-light .nav-item .nav-link i {
     color: #d1d3e2;
@@ -9732,7 +9737,7 @@ a:focus {
     color: rgba(255, 255, 255, 0.4);
 }
 .sidebar-dark .nav-item .nav-link {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 1);
 }
 .sidebar-dark .nav-item .nav-link i {
     color: rgba(255, 255, 255, 0.3);
@@ -10286,4 +10291,10 @@ body.sidebar-toggled footer.sticky-footer {
 }
 .mainIcon{
     width: 50px;
+}
+.nav-icon{
+    width: 28px;
+    height: 28px;
+    margin-top: -5px;
+    margin-right: 10px;
 }
