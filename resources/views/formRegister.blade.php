@@ -59,6 +59,12 @@
                                         </span>
                                     </div>
                                     <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="nama" id="nama" placeholder="Nama">
+                                        <span style="color: red">
+                                            @error('nama'){{$message}}@enderror
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
                                         <input type="text" class="form-control form-control-user" name="alamat" id="alamat" placeholder="Alamat">
                                         <span style="color: red">
                                             @error('alamat'){{$message}}@enderror

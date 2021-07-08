@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class RegisterAccountController extends Controller
 {
@@ -36,18 +37,21 @@ class RegisterAccountController extends Controller
      */
     public function store(Request $request)
     {
-        $getID = DB::table('users')->select('User_Id')->max('User_id');
+        $getID = DB::table('user')->select('user_id')->max('user_id');
         $newID = (int)$getID + 1;
+        $curDate = Carbon::now();
+
         if ($request->input('role') == 'jemaat'){
             $role = 2;
         }
         elseif ($request->input('role') == 'pendeta'){
-            $role = 3;
+            $role = 5;
         }
         $request->validate([
             'username'=>'required|alpha_num|unique:App\Models\User,Username',
             'password'=>'required|min:6',
             'alamat'=>'required',
+            'nama'=>'required',
             'email'=>'required|unique:App\Models\User,Email',
             'role'=>'required',
         ],
@@ -58,19 +62,24 @@ class RegisterAccountController extends Controller
             'password.required'=>'Password tidak boleh kosong',
             'password.min'=>'Panjang karakter password tidak dapat kurang dari 6 karakter',
             'alamat.required'=>'Alamat tidak boleh kosong',
+            'nama.required'=>'Nama tidak boleh kosong',
             'email.unique'=>'Email tidak tersedia, silahkan coba username lainnya',
             'email.required'=>'Email tidak boleh kosong',
             'role.required'=>'Role tidak boleh kosong',
         ]);
-        $queryInsert = DB::table('users')->insert([
-            'User_Id' => $newID,
-            'Username' => $request->input('username'),
-            'Alamat' => $request->input('alamat'),
-            'Email' => $request->input('email'),
-            'Password' => $request->input('password'),
-            'Status' => 'Aktif',
-            'Role' => $role,
-            'Created_By' => $request->input('username'),
+        $queryInsert = DB::table('user')->insert([
+            'user_id' => $newID,
+            'username' => $request->input('username'),
+            'password' => $request->input('password'),
+            'email' => $request->input('email'),
+            'nama' => $request->input('nama'),
+            'alamat' => $request->input('alamat'),
+            'status' => '0',
+            'role_id' => $role,
+            'created_by' => $request->input('username'),
+            'created_date' => $curDate,
+            'update_by' => $request->input('username'),
+            'updated_date' => $curDate,
         ]);
 
         if ($queryInsert){
