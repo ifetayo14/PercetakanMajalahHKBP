@@ -60,7 +60,7 @@ class PengumumanController extends Controller
         ]);
 
         if ($queryInsert){
-            return redirect('/index')->with('success', 'Daftar Akun Berhasil');
+            return redirect('/index')->with('success', 'Pengumuman Berhasil di Tambah!');
         }
     }
 
@@ -84,6 +84,9 @@ class PengumumanController extends Controller
     public function edit($id)
     {
         //
+        $pengumuman = DB::table('pengumuman')->where(['pengumuman_id' => $id])->get(); 
+        // var_dump($pengumuman);die();
+        return view('pengumuman.edit',compact('pengumuman'));
     }
 
     /**
@@ -95,7 +98,30 @@ class PengumumanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'judul'=>'required',
+            'isi'=>'required',
+        ],
+        [
+            'judul.required'=>'Judul tidak boleh kosong',
+            'isi.required'=>'Alamat tidak boleh kosong', 
+        ]);
+        $queryInsert = DB::table('pengumuman')->where(['pengumuman_id'=>$id])->update([
+            'user_id' => Session::get('user_id'),
+            'judul' => $request->input('judul'),
+            'deskripsi' => $request->input('deskripsi'),
+            'isi' => $request->input('isi'),
+            'expired_date' => $request->input('expired_date'),
+            'updated_by' =>Session::get('username'),
+            'updated_date' => Carbon::now(),
+        ]);
+
+        if ($queryInsert){
+            return redirect('/pengumuman')->with('success', 'Pengumuman Berhasil Update!');
+        }else{
+            
+            return redirect('/pengumuman')->with('danger', 'Pengumuman Tidak Berhasil Update!');
+        }
     }
 
     /**

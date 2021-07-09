@@ -35,10 +35,10 @@ Route::middleware(['adminPage'])->group(function (){
     Route::get('pengumuman', [PengumumanController::class, 'index']);
     Route::get('pengumuman/add', [PengumumanController::class, 'create']);
     Route::post('pengumuman/add', [PengumumanController::class, 'store']);
-    Route::get('pengumuman/view/$id', [PengumumanController::class, 'view']);
-    Route::get('pengumuman/edit/$id', [PengumumanController::class, 'update']);
-    Route::post('pengumuman/edit/$id', [PengumumanController::class, 'update']);
-    Route::get('pengumuman/delete/$id', [PengumumanController::class, 'update']);
+    Route::get('pengumuman/view/{id}', [PengumumanController::class, 'view']);
+    Route::get('pengumuman/edit/{id}', [PengumumanController::class, 'edit']);
+    Route::post('pengumuman/edit/{id}', [PengumumanController::class, 'update']);
+    Route::get('pengumuman/delete/{id}', [PengumumanController::class, 'update']);
 });
 
 Route::middleware(['jemaatPage'])->group(function (){
