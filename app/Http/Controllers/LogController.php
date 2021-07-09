@@ -18,6 +18,7 @@ class LogController extends Controller
         if ($data){
             $request->session()->put('username', $data->username);
             $request->session()->put('role', $data->role_id);
+            $request->session()->put('user_id', $data->user_id);
 
             if ($data->role_id == '1'){
                 return redirect('dashAdmin');

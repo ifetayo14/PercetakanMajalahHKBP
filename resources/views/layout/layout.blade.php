@@ -55,6 +55,14 @@
                     @endif
                     <span>Dashboard</span>
                 </a>
+                <a class="nav-link" href="{{url('pengumuman')}}"> 
+                    <span>Pengumuman</span>
+                </a>
+            </li>
+            <li class="nav-item {{(request()->is('pengumuman*') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('pengumuman')}}"> 
+                    <i class="fa fa-info"></i><span>Pengumuman</span>
+                </a>
             </li>
 
             <li class="nav-item {{(request()->is('akunPage') ? 'active' : '')}}">
