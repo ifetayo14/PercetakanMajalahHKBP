@@ -21,6 +21,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{url('templateResources/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{url('templateResources/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 
 </head>
 
@@ -33,7 +34,19 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center"
+           @if(\Illuminate\Support\Facades\Session::get('role') == '1')
+                href="{{url('dashAdmin')}}"
+           @elseif(\Illuminate\Support\Facades\Session::get('role') == '2')
+                href="{{url('dashJemaat')}}"
+           @elseif(\Illuminate\Support\Facades\Session::get('role') == '3')
+                href="{{url('dashSekjen')}}"
+           @elseif(\Illuminate\Support\Facades\Session::get('role') == '4')
+                href="{{url('dashTimMajalah')}}"
+           @else
+                href="{{url('dashPendeta')}}"
+           @endif
+        >
             <div class="sidebar-brand-icon">
                 <img src="{{ url('icon/logo-white.png') }}" class="mainIcon" alt="">
             </div>
@@ -47,29 +60,28 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{(request()->is('dashAdmin') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('dashAdmin')}}">
-                    <img class="nav-icon" src="
-                    @if(request()->is('dashAdmin'))
-                        {{ url('icon/dashboard_active.png') }}" alt="">
-                    @else
-                        {{ url('icon/dashboard.png') }}" alt="">
-                    @endif
+                    <i class="fa fa-tachometer-alt"
+                       style="color: {{(request()->is('dashAdmin') ? '#0500FE' : '#FFFFFF')}} ">
+                    </i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="nav-item  {{(request()->is('pengumuman*') ? 'active' : '')}}">
-                <a class="nav-link" href="{{url('pengumuman')}}"> 
-                    <i class="fa fa-info"></i><span>Pengumuman</span>
+                <a class="nav-link" href="{{url('pengumuman')}}">
+                    <i class="fa fa-info"
+                       style="
+                            margin-left: 5px;
+                            color: {{(request()->is('pengumuman*') ? '#0500FE' : '#FFFFFF')}}">
+                    </i>
+                    <span style="margin-left: 10px;">Pengumuman</span>
                 </a>
             </li>
 
-            <li class="nav-item {{(request()->is('akunPage') ? 'active' : '')}}">
-                <a class="nav-link" href="{{url('akunPage')}}">
-                    <img class="nav-icon" src="
-                    @if(request()->is('akunPage'))
-                    {{ url('icon/users_active.png') }}" alt="">
-                    @else
-                        {{ url('icon/users.png') }}" alt="">
-                    @endif
+            <li class="nav-item {{(request()->is('akun*') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('akun')}}">
+                    <i class="fa fa-users"
+                       style="color: {{(request()->is('akun*') ? '#0500FE' : '#FFFFFF')}}">
+                    </i>
                     <span>Kelola Akun</span>
                 </a>
             </li>
@@ -77,12 +89,9 @@
         @elseif(\Illuminate\Support\Facades\Session::get('role') == '2')
             <li class="nav-item {{(request()->is('dashJemaat') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('dashJemaat')}}">
-                    <img class="nav-icon" src="
-            @if(request()->is('dashJemaat'))
-                    {{ url('icon/dashboard_active.png') }}" alt="">
-                    @else
-                        {{ url('icon/dashboard.png') }}" alt="">
-                    @endif
+                    <i class="fa fa-tachometer-alt"
+                       style="color: {{(request()->is('dashJemaat') ? '#0500FE' : '#FFFFFF')}} ">
+                    </i>
                     <span>Dashboard</span>
                 </a>
             </li>
@@ -90,12 +99,9 @@
         @elseif(\Illuminate\Support\Facades\Session::get('role') == '3')
             <li class="nav-item {{(request()->is('dashSekjen') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('dashSekjen')}}">
-                    <img class="nav-icon" src="
-                    @if(request()->is('dashSekjen'))
-                    {{ url('icon/dashboard_active.png') }}" alt="">
-                    @else
-                        {{ url('icon/dashboard.png') }}" alt="">
-                    @endif
+                    <i class="fa fa-tachometer-alt"
+                       style="color: {{(request()->is('dashSekjen') ? '#0500FE' : '#FFFFFF')}} ">
+                    </i>
                     <span>Dashboard</span>
                 </a>
             </li>
@@ -103,12 +109,9 @@
         @elseif(\Illuminate\Support\Facades\Session::get('role') == '4')
             <li class="nav-item {{(request()->is('dashTimMajalah') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('dashTimMajalah')}}">
-                    <img class="nav-icon" src="
-                @if(request()->is('dashTimMajalah'))
-                    {{ url('icon/dashboard_active.png') }}" alt="">
-                    @else
-                        {{ url('icon/dashboard.png') }}" alt="">
-                    @endif
+                    <i class="fa fa-tachometer-alt"
+                       style="color: {{(request()->is('dashTimMajalah') ? '#0500FE' : '#FFFFFF')}} ">
+                    </i>
                     <span>Dashboard</span>
                 </a>
             </li>
@@ -116,103 +119,13 @@
         @elseif(\Illuminate\Support\Facades\Session::get('role') == '5')
             <li class="nav-item {{(request()->is('dashPendeta') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('dashPendeta')}}">
-                    <img class="nav-icon" src="
-            @if(request()->is('dashPendeta'))
-                    {{ url('icon/dashboard_active.png') }}" alt="">
-                    @else
-                        {{ url('icon/dashboard.png') }}" alt="">
-                    @endif
+                    <i class="fa fa-tachometer-alt"
+                       style="color: {{(request()->is('dashPendeta') ? '#0500FE' : '#FFFFFF')}} ">
+                    </i>
                     <span>Dashboard</span>
                 </a>
             </li>
         @endif
-
-
-{{--        <!-- Divider -->--}}
-{{--        <hr class="sidebar-divider">--}}
-
-{{--        <!-- Heading -->--}}
-{{--        <div class="sidebar-heading">--}}
-{{--            Interface--}}
-{{--        </div>--}}
-
-{{--        <!-- Nav Item - Pages Collapse Menu -->--}}
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"--}}
-{{--               aria-expanded="true" aria-controls="collapseTwo">--}}
-{{--                <i class="fas fa-fw fa-cog"></i>--}}
-{{--                <span>Components</span>--}}
-{{--            </a>--}}
-{{--            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">--}}
-{{--                <div class="bg-white py-2 collapse-inner rounded">--}}
-{{--                    <h6 class="collapse-header">Custom Components:</h6>--}}
-{{--                    <a class="collapse-item" href="buttons.html">Buttons</a>--}}
-{{--                    <a class="collapse-item" href="cards.html">Cards</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </li>--}}
-
-{{--        <!-- Nav Item - Utilities Collapse Menu -->--}}
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"--}}
-{{--               aria-expanded="true" aria-controls="collapseUtilities">--}}
-{{--                <i class="fas fa-fw fa-wrench"></i>--}}
-{{--                <span>Utilities</span>--}}
-{{--            </a>--}}
-{{--            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"--}}
-{{--                 data-parent="#accordionSidebar">--}}
-{{--                <div class="bg-white py-2 collapse-inner rounded">--}}
-{{--                    <h6 class="collapse-header">Custom Utilities:</h6>--}}
-{{--                    <a class="collapse-item" href="utilities-color.html">Colors</a>--}}
-{{--                    <a class="collapse-item" href="utilities-border.html">Borders</a>--}}
-{{--                    <a class="collapse-item" href="utilities-animation.html">Animations</a>--}}
-{{--                    <a class="collapse-item" href="utilities-other.html">Other</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </li>--}}
-
-{{--        <!-- Divider -->--}}
-{{--        <hr class="sidebar-divider">--}}
-
-{{--        <!-- Heading -->--}}
-{{--        <div class="sidebar-heading">--}}
-{{--            Addons--}}
-{{--        </div>--}}
-
-{{--        <!-- Nav Item - Pages Collapse Menu -->--}}
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"--}}
-{{--               aria-expanded="true" aria-controls="collapsePages">--}}
-{{--                <i class="fas fa-fw fa-folder"></i>--}}
-{{--                <span>Pages</span>--}}
-{{--            </a>--}}
-{{--            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">--}}
-{{--                <div class="bg-white py-2 collapse-inner rounded">--}}
-{{--                    <h6 class="collapse-header">Login Screens:</h6>--}}
-{{--                    <a class="collapse-item" href="login.html">Login</a>--}}
-{{--                    <a class="collapse-item" href="register.html">Register</a>--}}
-{{--                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>--}}
-{{--                    <div class="collapse-divider"></div>--}}
-{{--                    <h6 class="collapse-header">Other Pages:</h6>--}}
-{{--                    <a class="collapse-item" href="404.html">404 Page</a>--}}
-{{--                    <a class="collapse-item" href="blank.html">Blank Page</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </li>--}}
-
-{{--        <!-- Nav Item - Charts -->--}}
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link" href="charts.html">--}}
-{{--                <i class="fas fa-fw fa-chart-area"></i>--}}
-{{--                <span>Charts</span></a>--}}
-{{--        </li>--}}
-
-{{--        <!-- Nav Item - Tables -->--}}
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link" href="tables.html">--}}
-{{--                <i class="fas fa-fw fa-table"></i>--}}
-{{--                <span>Tables</span></a>--}}
-{{--        </li>--}}
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
@@ -354,6 +267,11 @@
 <!-- Page level custom scripts -->
 <script src="{{url('templateResources/js/demo/chart-area-demo.js')}}"></script>
 <script src="{{url('templateResources/js/demo/chart-pie-demo.js')}}"></script>
+<script src="{{url('templateResources/js/demo/datatables-demo.js')}}"></script>
+
+<!-- Page level plugins -->
+<script src="{{url('templateResources/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{url('templateResources/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
 </body>
 
