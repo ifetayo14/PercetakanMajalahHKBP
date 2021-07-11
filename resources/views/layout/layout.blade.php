@@ -61,6 +61,11 @@
                     <i class="fa fa-info"></i><span>Pengumuman</span>
                 </a>
             </li>
+            <li class="nav-item  {{(request()->is('periode*') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('periode')}}"> 
+                    <i class="fa fa-date"></i><span>Periode</span>
+                </a>
+            </li>
 
             <li class="nav-item {{(request()->is('akunPage') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('akunPage')}}">

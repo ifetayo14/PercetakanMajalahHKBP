@@ -72,7 +72,9 @@ class PengumumanController extends Controller
      */
     public function show($id)
     {
-        //
+        $pengumuman = DB::table('pengumuman')->where(['pengumuman_id' => $id])->get(); 
+        // var_dump($pengumuman);die();
+        return view('pengumuman.view',compact('pengumuman'));
     }
 
     /**
