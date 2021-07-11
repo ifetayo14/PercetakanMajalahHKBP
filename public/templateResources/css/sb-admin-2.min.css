@@ -10292,9 +10292,6 @@ body.sidebar-toggled footer.sticky-footer {
 .mainIcon{
     width: 50px;
 }
-.nav-icon{
-    width: 28px;
-    height: 28px;
-    margin-top: -5px;
-    margin-right: 10px;
+.nav-link span{
+    margin-left: 3px;
 }
