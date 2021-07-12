@@ -31,7 +31,15 @@ Route::post('registerProcess', [RegisterAccountController::class, 'store']);
 
 Route::middleware(['adminPage'])->group(function (){
     Route::get('dashAdmin', [PageController::class, 'toAdmin']);
-    Route::get('akunPage', [AccountController::class, 'index']);
+
+    //akun
+    Route::get('akun', [AccountController::class, 'index']);
+    Route::get('akun/add', [AccountController::class, 'create']);
+    Route::post('akun/addProcess', [AccountController::class, 'store']);
+    Route::get('akun/edit/{id}', [AccountController::class, 'edit']);
+    Route::post('akun/updateProcess/{id}', [AccountController::class, 'update']);
+    Route::get('akun/delete/{id}', [AccountController::class, 'destroy']);
+
     //pengumuman
     Route::get('pengumuman', [PengumumanController::class, 'index']);
     Route::get('pengumuman/add', [PengumumanController::class, 'create']);

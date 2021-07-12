@@ -39,7 +39,6 @@ class RegisterAccountController extends Controller
     {
         $getID = DB::table('user')->select('user_id')->max('user_id');
         $newID = (int)$getID + 1;
-        $curDate = Carbon::now();
 
         if ($request->input('role') == 'jemaat'){
             $role = 2;
@@ -77,9 +76,9 @@ class RegisterAccountController extends Controller
             'status' => '0',
             'role_id' => $role,
             'created_by' => $request->input('username'),
-            'created_date' => $curDate,
+            'created_date' => Carbon::now(),
             'update_by' => $request->input('username'),
-            'updated_date' => $curDate,
+            'updated_date' => Carbon::now(),
         ]);
 
         if ($queryInsert){
