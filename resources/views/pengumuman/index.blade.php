@@ -5,16 +5,17 @@
 @endsection
 
 @section('main-content')
-<!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <div class="container">
-        <div class="container-fluid bg-white m-2 p-2">
-            <div class="row d-flex justify-content-between">
-                <h1 class="h3">Pengumuman</h1>
-                <a href="/pengumuman/add" class="btn btn-success"><i class="fa fa-plus"></i> Pengumuman</a>
-            </div>
-            <br>
-            <table style="width:100%" class="table table-striped">
+<!-- Page Heading --> 
+<div class="row d-flex justify-content-between">
+    <h1 class="h3">Pengumuman</h1>
+    <a href="/pengumuman/add" class="btn btn-success"><i class="fa fa-plus"></i> Pengumuman</a>
+</div>
+<br>
+            
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table style="width:100%" id="dataTable"  class="table table-striped">
                 <thead>
                     <tr>
                         <th>No</th>

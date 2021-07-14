@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('title')
-    Pengumuman
+    Periode
 @endsection
 
 @section('main-content')
@@ -11,7 +11,7 @@
         <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h3>Detail Pengumuman</h3>
+                <h3>Detail Periode</h3>
             </div>
         </div>
             <form>

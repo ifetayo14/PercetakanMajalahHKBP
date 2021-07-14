@@ -68,7 +68,7 @@
             </li>
             <li class="nav-item  {{(request()->is('pengumuman*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('pengumuman')}}">
-                    <i class="fa fa-info"
+                    <i class="fa fa-bullhorn"
                        style="
                             margin-left: 5px;
                             color: {{(request()->is('pengumuman*') ? '#0500FE' : '#FFFFFF')}}">
@@ -78,7 +78,12 @@
             </li>
             <li class="nav-item  {{(request()->is('periode*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('periode')}}"> 
-                    <i class="fa fa-date"></i><span>Periode</span>
+                    <i class="fa fa-book" style="color: {{(request()->is('periode*') ? '#0500FE' : '#FFFFFF')}}"></i><span>Periode</span>
+                </a>
+            </li>
+            <li class="nav-item  {{(request()->is('majalah*') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('majalah')}}"> 
+                    <i class="fa fa-database" style="color: {{(request()->is('majalah*') ? '#0500FE' : '#FFFFFF')}}"></i><span>Majalah</span>
                 </a>
             </li>
 
