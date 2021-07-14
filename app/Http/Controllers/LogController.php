@@ -18,23 +18,10 @@ class LogController extends Controller
         if ($data){
             $request->session()->put('username', $data->username);
             $request->session()->put('role', $data->role_id);
+            $request->session()->put('nama', $data->nama);
             $request->session()->put('user_id', $data->user_id);
 
-            if ($data->role_id == '1'){
-                return redirect('dashAdmin');
-            }
-            elseif ($data->role_id == '2'){
-                return redirect('dashJemaat');
-            }
-            elseif ($data->role_id == '5'){
-                return redirect('dashPendeta');
-            }
-            elseif ($data->role_id == '3'){
-                return redirect('dashSekjen');
-            }
-            else{
-                return redirect('dashTimMajalah');
-            }
+            return redirect('index');
         }
 
         return redirect('/')->with('error', 'Username atau Password Anda Salah');

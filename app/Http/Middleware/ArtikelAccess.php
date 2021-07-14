@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class TimMajalahMiddleware
+class ArtikelAccess
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,9 @@ class TimMajalahMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->session()->get('role') != '5'){
-            return redirect()->back();
+        if ($request->session()->get('role') == '1' || $request->session()->get('role') == '4'){
+            return $next($request);
         }
-        return $next($request);
+        return redirect()->back();
     }
 }

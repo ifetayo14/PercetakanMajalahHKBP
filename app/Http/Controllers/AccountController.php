@@ -77,7 +77,7 @@ class AccountController extends Controller
         ]);
 
         if ($queryInsert){
-            return view('akun.index')->with('success', 'Daftar Akun Berhasil');
+            return redirect('/akun')->with('success', 'Daftar Akun Berhasil');
         }
     }
 

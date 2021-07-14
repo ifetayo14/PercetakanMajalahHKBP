@@ -55,17 +55,41 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item {{(request()->is('index') ? 'active' : '')}}">
+            <a class="nav-link" href="{{url('index')}}">
+                <i class="fa fa-tachometer-alt"
+                   style="color: {{(request()->is('index') ? '#0500FE' : '#FFFFFF')}} ">
+                </i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li class="nav-item {{(request()->is('artikel*') ? 'active' : '')}}">
+            <a class="{{(request()->is('artikel*') ? 'nav-linkDrop' : 'nav-link')}} collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fa fa-clipboard"
+                   style="
+                    margin-left: 5px;
+                    color: {{(request()->is('artikel*') ? '#0500FE' : '#FFFFFF')}}">
+                </i>
+                <span style="margin-left: 10px;">Artikel</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{url('/artikel')}}">Daftar Artikel</a>
+                    <a class="collapse-item" href="{{url('/artikel/pengajuan')}}">Pengajuan Artikel</a>
+                    @if(\Illuminate\Support\Facades\Session::get('role') == '1')
+                        <a class="collapse-item" href="{{url('/artikel/review')}}">Review Artikel</a>
+                    @elseif(\Illuminate\Support\Facades\Session::get('role') == '4')
+                        <a class="collapse-item" href="{{url('/artikel/review')}}">Review Artikel</a>
+                    @endif
+                </div>
+            </div>
+        </li>
+
         @if(\Illuminate\Support\Facades\Session::get('role') == '1')
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item {{(request()->is('dashAdmin') ? 'active' : '')}}">
-                <a class="nav-link" href="{{url('dashAdmin')}}">
-                    <i class="fa fa-tachometer-alt"
-                       style="color: {{(request()->is('dashAdmin') ? '#0500FE' : '#FFFFFF')}} ">
-                    </i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
             <li class="nav-item  {{(request()->is('pengumuman*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('pengumuman')}}">
                     <i class="fa fa-info"
@@ -86,45 +110,6 @@
                 </a>
             </li>
 
-        @elseif(\Illuminate\Support\Facades\Session::get('role') == '2')
-            <li class="nav-item {{(request()->is('dashJemaat') ? 'active' : '')}}">
-                <a class="nav-link" href="{{url('dashJemaat')}}">
-                    <i class="fa fa-tachometer-alt"
-                       style="color: {{(request()->is('dashJemaat') ? '#0500FE' : '#FFFFFF')}} ">
-                    </i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-
-        @elseif(\Illuminate\Support\Facades\Session::get('role') == '3')
-            <li class="nav-item {{(request()->is('dashSekjen') ? 'active' : '')}}">
-                <a class="nav-link" href="{{url('dashSekjen')}}">
-                    <i class="fa fa-tachometer-alt"
-                       style="color: {{(request()->is('dashSekjen') ? '#0500FE' : '#FFFFFF')}} ">
-                    </i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-
-        @elseif(\Illuminate\Support\Facades\Session::get('role') == '4')
-            <li class="nav-item {{(request()->is('dashTimMajalah') ? 'active' : '')}}">
-                <a class="nav-link" href="{{url('dashTimMajalah')}}">
-                    <i class="fa fa-tachometer-alt"
-                       style="color: {{(request()->is('dashTimMajalah') ? '#0500FE' : '#FFFFFF')}} ">
-                    </i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-
-        @elseif(\Illuminate\Support\Facades\Session::get('role') == '5')
-            <li class="nav-item {{(request()->is('dashPendeta') ? 'active' : '')}}">
-                <a class="nav-link" href="{{url('dashPendeta')}}">
-                    <i class="fa fa-tachometer-alt"
-                       style="color: {{(request()->is('dashPendeta') ? '#0500FE' : '#FFFFFF')}} ">
-                    </i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
         @endif
 
         <!-- Divider -->
@@ -180,7 +165,7 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ \Illuminate\Support\Facades\Session::get('username') }}</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ \Illuminate\Support\Facades\Session::get('nama') }}</span>
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

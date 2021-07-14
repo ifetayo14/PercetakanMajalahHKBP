@@ -6,6 +6,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterAccountController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\ArtikelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +29,26 @@ Route::get('logout', [LogController::class, 'logout']);
 Route::get('registerForm', [RegisterAccountController::class, 'create']);
 Route::post('registerProcess', [RegisterAccountController::class, 'store']);
 
+Route::get('index', [PageController::class, 'dashboard']);
+
+//Artikel
+Route::get('artikel', [ArtikelController::class, 'index']);
+Route::get('artikel/pengajuan', [ArtikelController::class, 'indexPengajuan']);
+Route::get('artikel/add', [ArtikelController::class, 'create']);
+Route::post('artikel/addProcess', [ArtikelController::class, 'store']);
+Route::get('artikel/edit/{id}', [ArtikelController::class, 'edit']);
+Route::post('artikel/editProcess/{id}', [ArtikelController::class, 'update']);
+Route::get('artikel/upload/{id}', [ArtikelController::class, 'upload']);
+Route::get('artikel/delete/{id}', [ArtikelController::class, 'destroy']);
+Route::get('artikel/detail/{id}', [ArtikelController::class, 'show']);
+
+Route::middleware(['artikelAccess'])->group(function (){
+    Route::get('artikel/review', [ArtikelController::class, 'indexReview']);
+    Route::get('artikel/accept/{id}', [ArtikelController::class, 'acceptArtikel']);
+    Route::post('artikel/refuse/{id}', [ArtikelController::class, 'refuseArtikel']);
+});
+
 Route::middleware(['adminPage'])->group(function (){
-    Route::get('dashAdmin', [PageController::class, 'toAdmin']);
 
     //akun
     Route::get('akun', [AccountController::class, 'index']);
@@ -47,21 +66,5 @@ Route::middleware(['adminPage'])->group(function (){
     Route::get('pengumuman/edit/{id}', [PengumumanController::class, 'edit']);
     Route::post('pengumuman/edit/{id}', [PengumumanController::class, 'update']);
     Route::get('pengumuman/delete/{id}', [PengumumanController::class, 'update']);
-});
-
-Route::middleware(['jemaatPage'])->group(function (){
-    Route::get('dashJemaat', [PageController::class, 'toJemaat']);
-});
-
-Route::middleware(['pendetaPage'])->group(function (){
-    Route::get('dashPendeta', [PageController::class, 'toPendeta']);
-});
-
-Route::middleware(['sekjenPage'])->group(function (){
-    Route::get('dashSekjen', [PageController::class, 'toSekjen']);
-});
-
-Route::middleware(['timMajalahPage'])->group(function (){
-    Route::get('dashTimMajalah', [PageController::class, 'toTimMajalah']);
 });
 

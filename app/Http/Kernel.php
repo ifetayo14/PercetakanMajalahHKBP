@@ -48,21 +48,9 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\AdminMiddleware::class,
         ],
 
-        'jemaatPage'=>[
-            \App\Http\Middleware\JemaatMiddleware::class,
+        'artikelAccess'=>[
+            \App\Http\Middleware\ArtikelAccess::class,
         ],
-
-        'pendetaPage'=>[
-            \App\Http\Middleware\PendetaMiddleware::class,
-        ],
-
-        'sekjenPage'=>[
-            \App\Http\Middleware\SekjenMiddleware::class,
-        ],
-
-        'timMajalahPage'=>[
-            \App\Http\Middleware\TimMajalahMiddleware::class,
-        ]
     ];
 
     /**
