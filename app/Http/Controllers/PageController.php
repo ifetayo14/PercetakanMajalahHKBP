@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
-    public function dashboard()
-    {
+    public function dashboard(){
         if (Session::get('user_id') == '1') {
             $periode = DB::table('periode')->where(['status' => 'Aktif'])->get();
             //artikel

@@ -9753,7 +9753,7 @@ a:focus {
     color: #fff;
 }
 .sidebar-dark .nav-item .nav-link[data-toggle="collapse"]::after {
-    color: rgba(255, 255, 255, 0.5);
+    color: #ffffff;
 }
 .sidebar-dark .nav-item.active .nav-link {
     color: #fff;
@@ -10294,4 +10294,88 @@ body.sidebar-toggled footer.sticky-footer {
 }
 .nav-link span{
     margin-left: 3px;
+}
+.nav-linkDrop {
+    display: block;
+    padding: 0.5rem 1rem;
+}
+.nav-linkDrop:focus,
+.nav-linkDrop:hover {
+    text-decoration: none;
+}
+.nav-linkDrop.disabled {
+    color: #858796;
+    pointer-events: none;
+    cursor: default;
+}
+.sidebar-dark .nav-item .nav-linkDrop {
+    color: #ffffff;
+}
+.sidebar-dark .nav-item .nav-linkDrop i {
+    color: #ffffff;
+}
+.sidebar-dark .nav-item .nav-linkDrop:active,
+.sidebar-dark .nav-item .nav-linkDrop:focus,
+.sidebar-dark .nav-item .nav-linkDrop:hover {
+    color: #fff;
+}
+.sidebar-dark .nav-item .nav-linkDrop:active i,
+.sidebar-dark .nav-item .nav-linkDrop:focus i,
+.sidebar-dark .nav-item .nav-linkDrop:hover i {
+    color: #fff;
+}
+.sidebar-dark .nav-item .nav-linkDrop[data-toggle="collapse"]::after {
+    color: #000000;
+}
+.sidebar-dark .nav-item.active .nav-linkDrop {
+    color: #0500FE;
+    background-color: #ffffff;
+}
+.sidebar-dark .nav-item.active .nav-linkDrop i {
+    color: #0500FE;
+}
+.sidebar .nav-item .nav-linkDrop {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 1rem;
+    width: 14rem;
+}
+.sidebar .nav-item .nav-linkDrop i {
+    font-size: 13pt;
+    margin-right: 0.25rem;
+}
+.sidebar .nav-item .nav-linkDrop span {
+    margin-left: 5px;
+    font-size: 12pt;
+    display: inline;
+}
+.sidebar .nav-item .nav-linkDrop[data-toggle="collapse"]::after {
+    width: 1rem;
+    text-align: center;
+    float: right;
+    vertical-align: 0;
+    border: 0;
+    font-weight: 900;
+    content: "\f107";
+    color: #0500FE;
+    font-family: "Font Awesome 5 Free";
+}
+.sidebar .nav-item .nav-linkDrop[data-toggle="collapse"].collapsed::after {
+    content: "\f105";
+    color: #0500FE;
+}
+.sidebar .nav-item.active .nav-linkDrop {
+    font-weight: 600;
+}
+.artikelContent{
+    margin-top: 15pt;
+    margin-left: 20pt;
+    font-size: 12pt;
+}
+.artikelPeriode{
+    margin-top: 15pt;
+    margin-left: 20pt;
+    margin-bottom: 15pt;
+    font-size: 10pt;
 }
