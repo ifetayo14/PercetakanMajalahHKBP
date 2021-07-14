@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Periode extends Model
+{
+    protected $fillable = ['bulan', 'tahun', 'tema', 'deskripsi', 'status'];
+    protected $table = 'periode';
+
+    use HasFactory;
+}
