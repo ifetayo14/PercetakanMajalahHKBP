@@ -1,3 +1,9 @@
+@if(Session::has('username'))
+
+@else
+    <script>window.location = "/";</script>
+@endif
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -101,12 +107,12 @@
                 </a>
             </li>
             <li class="nav-item  {{(request()->is('periode*') ? 'active' : '')}}">
-                <a class="nav-link" href="{{url('periode')}}"> 
+                <a class="nav-link" href="{{url('periode')}}">
                     <i class="fa fa-book" style="color: {{(request()->is('periode*') ? '#0500FE' : '#FFFFFF')}}"></i><span>Periode</span>
                 </a>
             </li>
             <li class="nav-item  {{(request()->is('majalah*') ? 'active' : '')}}">
-                <a class="nav-link" href="{{url('majalah')}}"> 
+                <a class="nav-link" href="{{url('majalah')}}">
                     <i class="fa fa-database" style="color: {{(request()->is('majalah*') ? '#0500FE' : '#FFFFFF')}}"></i><span>Majalah</span>
                 </a>
             </li>
