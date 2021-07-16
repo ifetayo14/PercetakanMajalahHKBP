@@ -9,7 +9,6 @@ use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\MajalahController;
-use Illuminate\Support\Facades\Session;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Session;
 class PageController extends Controller
 {
     public function dashboard(){
-
         if (Session::get('role') == '1') {
             $periode = DB::table('periode')->where(['status' => 'Aktif'])->get();
             //artikel

@@ -10,12 +10,15 @@
     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
 </div>
 {{--<div class="card shadow mb-4">--}}
+{{--    <div class="card-body">--}}
+{{--        <div class="row">--}}
 {{--            <h4>Periode Aktif</h4>--}}
 {{--            <div class="col-12">--}}
 {{--                <h5>{{$periode[0]->tahun}} {{$periode[0]->bulan}} - {{$periode[0]->tema}}</h5>--}}
 {{--                <p>{{$periode[0]->deskripsi}}</p>--}}
 {{--            </div>--}}
-
+{{--        </div>--}}
+{{--    </div>--}}
 {{--</div>--}}
 {{--<div class="row">--}}
 {{--    <div class="col-4">--}}
