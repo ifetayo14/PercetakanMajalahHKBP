@@ -14,7 +14,7 @@
                 <h3>Tambah Majalah</h3>
             </div>
         </div>
-            <form method="post" action="{{url('majalah/add')}}">
+            <form method="post" enctype="multipart/form-data" action="{{url('majalah/add')}}">
                 @csrf
                 <div class="form-group row">
                     <label for="staticjudul" class="col-sm-2 col-form-label">Judul</label>
@@ -26,6 +26,12 @@
                     <label for="inputDeskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="deskripsi" value="{{$majalah['deskripsi']}}" id="inputDeskripsi" placeholder="Deskripsi">
+                    </div>
+                </div> 
+                <div class="form-group row">
+                    <label for="inputDeskripsi" class="col-sm-2 col-form-label">File</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" name="file" id="inputFile">
                     </div>
                 </div> 
                 

@@ -37,6 +37,14 @@
                         </select>
                     </div>
                 </div>
+                @if($majalah[0]->file !=null)
+                <div class="form-group row">
+                    <label for="inputFile" class="col-sm-2 col-form-label">File</label>
+                    <div class="col-sm-10">
+                        <a href="/public/uploads/{{$majalah[0]->file}}" target=”_blank”  >Download File</a>
+                    </div>
+                </div>
+                @endif
                 <a href="/majalah" class="btn btn-outline-success"><i class="fa fa-return"></i> Kembali</a> 
                 <br> 
             </form>
