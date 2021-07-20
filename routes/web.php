@@ -9,6 +9,7 @@ use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\MajalahController;
+use App\Http\Controllers\BeritaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,8 @@ Route::post('artikel/editProcess/{id}', [ArtikelController::class, 'update']);
 Route::get('artikel/upload/{id}', [ArtikelController::class, 'upload']);
 Route::get('artikel/delete/{id}', [ArtikelController::class, 'destroy']);
 Route::get('artikel/detail/{id}', [ArtikelController::class, 'show']);
+//berita
+Route::get('berita', [BeritaController::class, 'index']);
 
 Route::middleware(['artikelAccess'])->group(function (){
     Route::get('artikel/review', [ArtikelController::class, 'indexReview']);
