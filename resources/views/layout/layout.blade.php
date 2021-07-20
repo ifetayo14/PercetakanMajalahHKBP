@@ -106,6 +106,7 @@
                     <span style="margin-left: 10px;">Pengumuman</span>
                 </a>
             </li>
+
             <li class="nav-item  {{(request()->is('periode*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('periode')}}">
                     <i class="fa fa-book" style="color: {{(request()->is('periode*') ? '#0500FE' : '#FFFFFF')}}"></i><span>Periode</span>
