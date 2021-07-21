@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('title')
-    Artikel
+    Berita
 @endsection
 
 @section('main-content')
@@ -68,10 +68,10 @@
                             </td>
                             @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
                                 <td style="white-space: nowrap">
-                                    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->artikel_id}}">
+                                    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->berita_id}}">
                                         <i class="fas fa-trash"></i>
                                     </a>
-                                    <a href="artikel/edit/{{$row->artikel_id}}" class="btn btn-info">
+                                    <a href="artikel/edit/{{$row->berita_id}}" class="btn btn-info">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </td>
