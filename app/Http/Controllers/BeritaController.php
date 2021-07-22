@@ -18,4 +18,92 @@ class BeritaController extends Controller
         return view('berita.index', compact('dataBerita'));
 
     }
+    public function  indexPengajuan(){
+        $dataBerita = DB::table('berita')->where('user_id', '=', Session::get('user_id'))->get();
+        return view('berita.pengajuanBerita', compact('dataBerita'));
+    }
+    public function create()
+    {
+        return view('berita.add');
+    }
+    public function store(Request $request)
+    {
+        $periode = DB::table('periode')->where('status', '=', 'Aktif')->first();
+        $request->validate([
+            'judul'=>'required',
+            'isi'=>'required',
+        ],
+            [
+                'judul.required'=>'Judul tidak boleh kosong',
+                'isi.required'=>'Isi tidak boleh kosong',
+            ]);
+
+        $queryInsert = DB::table('berita')->insert([
+            'judul' => $request->input('judul'),
+            'isi' => $request->input('isi'),
+            'file' => '0',
+            'status' => '1',
+            'approved1_by' => '0',
+            'approved2_by' => '2',
+            'periode_id' => $periode->periode_id,
+            'user_id' => Session::get('user_id'),
+            'created_by' => Session::get('nama'),
+            'created_date' => Carbon::now(),
+            'updated_by' => '0',
+            'updated_date' => Carbon::now()
+        ]);
+
+        if ($queryInsert){
+            return redirect('/berita/pengajuan')->with('success', 'berita berhasil disimpan. Anda masih dapat mengedit artikel. Atau anda dapat mengirim artikel tersebut untuk direview dengan klik tombol upload di kolom aksi.');
+        }
+    }
+    public function upload($id)
+    {
+        $uploadBerita = DB::table('berita')->where('berita_id', $id)
+            ->update([
+                'status' => '2'
+            ]);
+
+        return redirect()->back()->with('success', 'Berita Dikirim');
+    }
+
+    public function edit($id)
+    {
+        $data = DB::table('berita')->where('berita_id', $id)->first();
+        $dataBerita = [
+            'dataBerita' => $data
+        ];
+        return view('berita.edit', $dataBerita);
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'judul'=>'required',
+            'isi'=>'required',
+        ],
+            [
+                'judul.required'=>'Judul tidak boleh kosong',
+                'isi.required'=>'Isi tidak boleh kosong',
+            ]);
+
+        $queryUpdate = DB::table('berita')->where('berita_id', $id)
+            ->update([
+                'judul' => $request->input('judul'),
+                'isi' => $request->input('isi'),
+                'updated_by' => Session::get('nama'),
+                'updated_date' => Carbon::now(),
+            ]);
+
+        if ($request->input('status') == '1'){
+            return redirect('berita/pengajuan')->with('success', 'Data Diubah');
+        }
+        else{
+            return redirect('berita')->with('success', 'Data Diubah');
+        }
+    }
+    public function destroy($id)
+    {
+        $query = DB::table('berita')->where('berita_id', $id)->delete();
+        return redirect()->back()->with('success', 'Data Dihapus');
+    }
 }
