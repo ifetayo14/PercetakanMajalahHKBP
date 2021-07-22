@@ -17,10 +17,11 @@ class PageController extends Controller
             $berita = DB::table('berita')->where(['periode_id' => $periode[0]->periode_id])->get();
             //kotbah
             $kotbah = DB::table('kotbah')->where(['periode_id' => $periode[0]->periode_id])->get();
-            return view('index', compact(['periode', 'artikel', 'berita', 'kotbah']));
+            return view('indexAdmin', compact(['periode', 'artikel', 'berita', 'kotbah']));
         }
         else{
-            return view('index');
+            $periode = DB::table('periode')->where(['status' => 'Aktif'])->get();
+            return view('index', compact('periode'));
         }
     }
 }
