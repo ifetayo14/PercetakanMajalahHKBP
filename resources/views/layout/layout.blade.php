@@ -81,7 +81,7 @@
                 </i>
                 <span style="margin-left: 10px;">Artikel</span>
             </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div id="collapsePages" class="collapse mt-1" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{url('/artikel')}}">Daftar Artikel</a>
                     <a class="collapse-item" href="{{url('/artikel/pengajuan')}}">Pengajuan Artikel</a>
@@ -103,7 +103,7 @@
                 </i>
                 <span style="margin-left: 10px;">Berita</span>
             </a>
-            <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div id="collapsePages1" class="collapse mt-1" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{url('/berita')}}">Daftar Berita</a>
                     <a class="collapse-item" href="{{url('/berita/pengajuan')}}">Pengajuan Berita</a>
