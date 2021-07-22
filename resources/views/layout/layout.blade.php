@@ -93,7 +93,28 @@
                 </div>
             </div>
         </li>
-
+        <li class="nav-item {{(request()->is('berita*') ? 'active' : '')}}">
+            <a class="{{(request()->is('berita*') ? 'nav-linkDrop' : 'nav-link')}} collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fa fa-clipboard"
+                   style="
+                    margin-left: 5px;
+                    color: {{(request()->is('berita*') ? '#0500FE' : '#FFFFFF')}}">
+                </i>
+                <span style="margin-left: 10px;">Berita</span>
+            </a>
+            <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{url('/berita')}}">Daftar Berita</a>
+                    <a class="collapse-item" href="{{url('/berita/pengajuan')}}">Pengajuan Berita</a>
+                    @if(\Illuminate\Support\Facades\Session::get('role') == '1')
+                        <a class="collapse-item" href="{{url('/berita/review')}}">Review Berita</a>
+                    @elseif(\Illuminate\Support\Facades\Session::get('role') == '4')
+                        <a class="collapse-item" href="{{url('/berita/review')}}">Review Berita</a>
+                    @endif
+                </div>
+            </div>
+        </li>
         @if(\Illuminate\Support\Facades\Session::get('role') == '1')
 
             <li class="nav-item  {{(request()->is('pengumuman*') ? 'active' : '')}}">
