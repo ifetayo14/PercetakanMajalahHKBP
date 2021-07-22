@@ -22,35 +22,5 @@
         </div>
     </div>
 </div>
-<!--
-<div class="row">
-    <div class="col-4">
-        <div class="card shadow mb-4">
-            <div class="card-body text-center">
-                <h5>Kotbah</h5>
-                <h3 class="text-primary">{{count($kotbah)}}</h3>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-4">
-        <div class="card shadow mb-4">
-            <div class="card-body text-center">
-                <h5>Artikel</h5>
-                <h3 class="text-primary">{{count($artikel)}}</h3>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-4">
-        <div class="card shadow mb-4">
-            <div class="card-body text-center">
-                <h5>Berita</h5>
-                <h3 class="text-primary">{{count($berita)}}</h3>
-            </div>
-        </div>
-    </div>
-</div>
--->
 
 @endsection
