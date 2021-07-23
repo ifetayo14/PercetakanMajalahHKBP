@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('title')
-    Edit Berita
+    Edit Khotbah
 @endsection
 
 @section('main-content')
@@ -22,20 +22,20 @@
                 <div class="col-lg-8">
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 page-head-title mb-4">Edit Berita</h1>
+                            <h1 class="h4 page-head-title mb-4">Edit Khotbah</h1>
                         </div>
-                        <form class="user" method="post" action="/berita/editProcess/{{$dataBerita->berita_id}}" enctype="multipart/form-data">
+                        <form class="user" method="post" action="/khotbah/editProcess/{{$dataKhotbah->kotbah_id}}" enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" name="status" value="{{$dataBerita->status}}">
+                            <input type="hidden" name="status" value="{{$dataKhotbah->status}}">
                             <div class="form-group">
-                                <input type="text" name="judul" class="form-control form-control-user" id="exampleFirstName" placeholder="Judul" value="{{$dataBerita->judul}}">
+                                <input type="text" name="judul" class="form-control form-control-user" id="exampleFirstName" placeholder="Judul" value="{{$dataKhotbah->judul}}">
                                 <span style="color: red">
                                     @error('judul'){{$message}}@enderror
                                 </span>
                             </div>
                             <div class="form-group">
-                                <textarea type="" name="isi" class="form-control" id="" placeholder="Isi Berita" style="height: 200px">
-                                    {{$dataBerita->isi}}
+                                <textarea type="" name="isi" class="form-control" id="" placeholder="Isi Khotbah" style="height: 200px">
+                                    {{$dataKhotbah->isi}}
                                 </textarea>
                                 <span style="color: red">
                                     @error('isi'){{$message}}@enderror
