@@ -10,6 +10,8 @@ use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\MajalahController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\KhotbahController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +55,16 @@ Route::get('berita/edit/{id}', [BeritaController::class, 'edit']);
 Route::post('berita/editProcess/{id}', [BeritaController::class, 'update']);
 Route::get('berita/upload/{id}', [BeritaController::class, 'upload']);
 Route::get('berita/delete/{id}', [BeritaController::class, 'destroy']);
+
+
+Route::get('khotbah', [KhotbahController::class, 'index']);
+Route::get('khotbah/pengajuan', [KhotbahController::class, 'indexPengajuan']);
+Route::get('khotbah/add', [KhotbahController::class, 'create']);
+Route::post('khotbah/addProcess', [KhotbahController::class, 'store']);
+Route::get('khotbah/edit/{id}', [KhotbahController::class, 'edit']);
+Route::post('khotbah/editProcess/{id}', [KhotbahController::class, 'update']);
+Route::get('khotbah/upload/{id}', [KhotbahController::class, 'upload']);
+Route::get('khotbah/delete/{id}', [KhotbahController::class, 'destroy']);
 
 
 
