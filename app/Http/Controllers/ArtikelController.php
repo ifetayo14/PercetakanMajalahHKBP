@@ -56,7 +56,7 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
-        $periode = DB::table('periode')->where('status', '=', '1')->first();
+        $periode = DB::table('periode')->where('status', '=', 'Aktif')->first();
         $request->validate([
             'judul'=>'required',
             'isi'=>'required',

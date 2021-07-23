@@ -96,7 +96,7 @@
         <li class="nav-item {{(request()->is('berita*') ? 'active' : '')}}">
             <a class="{{(request()->is('berita*') ? 'nav-linkDrop' : 'nav-link')}} collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1"
                aria-expanded="true" aria-controls="collapsePages">
-                <i class="fa fa-clipboard"
+                <i class="fa fa-newspaper"
                    style="
                     margin-left: 5px;
                     color: {{(request()->is('berita*') ? '#0500FE' : '#FFFFFF')}}">

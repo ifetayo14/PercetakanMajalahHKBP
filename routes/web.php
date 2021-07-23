@@ -46,6 +46,16 @@ Route::get('artikel/delete/{id}', [ArtikelController::class, 'destroy']);
 Route::get('artikel/detail/{id}', [ArtikelController::class, 'show']);
 //berita
 Route::get('berita', [BeritaController::class, 'index']);
+Route::get('berita/pengajuan', [BeritaController::class, 'indexPengajuan']);
+Route::get('berita/add', [BeritaController::class, 'create']);
+Route::post('berita/addProcess', [BeritaController::class, 'store']);
+Route::get('berita/edit/{id}', [BeritaController::class, 'edit']);
+Route::post('berita/editProcess/{id}', [BeritaController::class, 'update']);
+Route::get('berita/upload/{id}', [BeritaController::class, 'upload']);
+Route::get('berita/delete/{id}', [BeritaController::class, 'destroy']);
+
+
+
 
 Route::middleware(['artikelAccess'])->group(function (){
     Route::get('artikel/review', [ArtikelController::class, 'indexReview']);
