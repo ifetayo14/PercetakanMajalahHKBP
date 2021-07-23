@@ -115,7 +115,30 @@
                 </div>
             </div>
         </li>
-        @if(\Illuminate\Support\Facades\Session::get('role') == '1')
+        <li class="nav-item {{(request()->is('khotbah*') ? 'active' : '')}}">
+            <a class="{{(request()->is('khotbah*') ? 'nav-linkDrop' : 'nav-link')}} collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fa fa-bible"
+                   style="
+                    margin-left: 5px;
+                    color: {{(request()->is('khotbah*') ? '#0500FE' : '#FFFFFF')}}">
+                </i>
+                <span style="margin-left: 10px;">Khotbah</span>
+            </a>
+            <div id="collapsePages2" class="collapse mt-1" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{url('/khotbah')}}">Daftar Khotbah</a>
+                    <a class="collapse-item" href="{{url('/khotbah/pengajuan')}}">Pengajuan Khotbah</a>
+                    @if(\Illuminate\Support\Facades\Session::get('role') == '1')
+                        <a class="collapse-item" href="{{url('/khotbah/review')}}">Review Khotbah</a>
+                    @elseif(\Illuminate\Support\Facades\Session::get('role') == '4')
+                        <a class="collapse-item" href="{{url('/khotbah/review')}}">Review Khotbah</a>
+                    @endif
+                </div>
+            </div>
+        </li>
+
+    @if(\Illuminate\Support\Facades\Session::get('role') == '1')
 
             <li class="nav-item  {{(request()->is('pengumuman*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('pengumuman')}}">

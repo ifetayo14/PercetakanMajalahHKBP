@@ -1,13 +1,13 @@
 @extends('layout.layout')
 
 @section('title')
-    Berita
+    Khotbah
 @endsection
 
 @section('main-content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Berita</h1>
+        <h1 class="h3 mb-0 text-gray-800">Khotbah</h1>
     </div>
 
     <div class="card shadow mb-4">
@@ -33,10 +33,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($dataBerita as $row)
+                    @foreach($dataKhotbah as $row)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td><a href="berita/detail/{{$row->berita_id}}">{{ $row->judul }}</a></td>
+                            <td><a href="khotbah/detail/{{$row->kotbah_id}}">{{ $row->judul }}</a></td>
                             <td>{{ $row->created_by }}</td>
                             <td>
                                 @if($row->bulan == '1')
@@ -68,17 +68,17 @@
                             </td>
                             @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
                                 <td style="white-space: nowrap">
-                                    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->berita_id}}">
+                                    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->kotbah_id}}">
                                         <i class="fas fa-trash"></i>
                                     </a>
-                                    <a href="berita/edit/{{$row->berita_id}}" class="btn btn-info">
+                                    <a href="artikel/edit/{{$row->kotbah_id}}" class="btn btn-info">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </td>
                             @endif
                         </tr>
 
-                        <div class="modal fade" id="deleteModal-{{$row->berita_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade" id="deleteModal-{{$row->kotbah_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                              aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -91,7 +91,7 @@
                                     <div class="modal-body">Hapus {{$row->judul}} ?</div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                                        <a href="khotbah/delete/{{ $row->berita_id }}" class="btn btn-primary">Hapus</a>
+                                        <a href="khotbah/delete/{{ $row->kotbah_id }}" class="btn btn-primary">Hapus</a>
                                     </div>
                                 </div>
                             </div>
