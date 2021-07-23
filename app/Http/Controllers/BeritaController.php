@@ -54,7 +54,7 @@ class BeritaController extends Controller
         ]);
 
         if ($queryInsert){
-            return redirect('/berita/pengajuan')->with('success', 'berita berhasil disimpan. Anda masih dapat mengedit artikel. Atau anda dapat mengirim artikel tersebut untuk direview dengan klik tombol upload di kolom aksi.');
+            return redirect('/berita/pengajuan')->with('success', 'berita berhasil disimpan. Anda masih dapat mengedit Berita. Atau anda dapat mengirim artikel tersebut untuk direview dengan klik tombol upload di kolom aksi.');
         }
     }
     public function upload($id)
@@ -101,6 +101,23 @@ class BeritaController extends Controller
             return redirect('berita')->with('success', 'Data Diubah');
         }
     }
+    public function show($id)
+    {
+        $dataBerita= DB::table('berita')
+            ->where('berita_id', $id)
+            ->join('periode', 'berita.periode_id', '=', 'berita.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.isi', 'berita.status', 'berita.created_by')
+            ->first();
+        if (Session::get('role') == '1' || Session::get('role') == '4'){
+            if ($dataBerita->status == '2'){
+                $updateStatus = DB::table('berita')->where('berita_id', $id)->update([
+                    'status' => '3'
+                ]);
+            }
+        }
+        return view('berita.detail', compact('dataBerita'));
+    }
+
     public function destroy($id)
     {
         $query = DB::table('berita')->where('berita_id', $id)->delete();

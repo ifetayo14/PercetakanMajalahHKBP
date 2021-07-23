@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('title')
-    Pengajuan Berita
+    Pengajuan Khotbah
 @endsection
 
 @section('main-content')
@@ -22,9 +22,9 @@
                 <div class="col-lg-8">
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 page-head-title mb-4">Pengajuan Berita</h1>
+                            <h1 class="h4 page-head-title mb-4">Pengajuan Khotbah</h1>
                         </div>
-                        <form class="user" method="post" action="/berita/addProcess" enctype="multipart/form-data">
+                        <form class="user" method="post" action="/khotbah/addProcess" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <input type="text" name="judul" class="form-control form-control-user" id="exampleFirstName" placeholder="Judul">
