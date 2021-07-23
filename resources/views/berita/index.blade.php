@@ -91,7 +91,7 @@
                                     <div class="modal-body">Hapus {{$row->judul}} ?</div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                                        <a href="khotbah/delete/{{ $row->berita_id }}" class="btn btn-primary">Hapus</a>
+                                        <a href="berita/delete/{{ $row->berita_id }}" class="btn btn-primary">Hapus</a>
                                     </div>
                                 </div>
                             </div>
