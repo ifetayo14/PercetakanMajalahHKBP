@@ -29,9 +29,14 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <br>
+            <div class="khotbahNats">
+                Nats Alkitab : {!! $dataKhotbah->nats_alkitab !!}
+            </div>
             <div class="artikelContent">
                 {!! $dataKhotbah->isi !!}
             </div>
+            <br>
+
             <br>
             <div class="artikelPeriode">
                 Periode
