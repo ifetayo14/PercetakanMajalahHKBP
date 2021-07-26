@@ -10369,7 +10369,11 @@ body.sidebar-toggled footer.sticky-footer {
     font-weight: 600;
 }
 .artikelContent{
-    margin-top: 15pt;
+    margin-top: 5pt;
+    margin-left: 20pt;
+    font-size: 12pt;
+}
+.khotbahNats{
     margin-left: 20pt;
     font-size: 12pt;
 }

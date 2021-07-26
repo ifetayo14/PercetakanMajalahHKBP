@@ -33,16 +33,19 @@ class KhotbahController extends Controller
         $request->validate([
             'judul'=>'required',
             'isi'=>'required',
+            'nats'=>'required',
         ],
             [
                 'judul.required'=>'Judul tidak boleh kosong',
                 'isi.required'=>'Isi tidak boleh kosong',
+                'nats.required'=>'Nats tidak boleh kosong',
+
             ]);
 
         $queryInsert = DB::table('kotbah')->insert([
             'judul' => $request->input('judul'),
             'isi' => $request->input('isi'),
-            'nats_alkitab' => 'ada',
+            'nats_alkitab' =>  $request->input('nats'),
             'file' => '0',
             'status' => '1',
             'approved1_by' => '0',
@@ -81,16 +84,19 @@ class KhotbahController extends Controller
         $request->validate([
             'judul'=>'required',
             'isi'=>'required',
+            'nats'=>'required',
         ],
             [
                 'judul.required'=>'Judul tidak boleh kosong',
                 'isi.required'=>'Isi tidak boleh kosong',
+                'nats.required'=>'Nats tidak boleh kosong',
             ]);
 
         $queryUpdate = DB::table('kotbah')->where('kotbah_id', $id)
             ->update([
                 'judul' => $request->input('judul'),
                 'isi' => $request->input('isi'),
+                'nats_alkitab' =>  $request->input('nats'),
                 'updated_by' => Session::get('nama'),
                 'updated_date' => Carbon::now(),
             ]);
@@ -107,7 +113,7 @@ class KhotbahController extends Controller
         $dataKhotbah = DB::table('kotbah')
             ->where('kotbah_id', $id)
             ->join('periode', 'kotbah.periode_id', '=', 'kotbah.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul', 'kotbah.isi', 'kotbah.status', 'kotbah.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul', 'kotbah.nats_alkitab', 'kotbah.isi', 'kotbah.status', 'kotbah.created_by')
             ->first();
         if (Session::get('role') == '1' || Session::get('role') == '4'){
             if ($dataKhotbah->status == '2'){
