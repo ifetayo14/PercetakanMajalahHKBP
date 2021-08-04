@@ -117,7 +117,8 @@
                 </div>
             </div>
         </li>
-        <li class="nav-item {{(request()->is('khotbah*') ? 'active' : '')}}">
+        @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '5')
+            <li class="nav-item {{(request()->is('khotbah*') ? 'active' : '')}}">
             <a class="{{(request()->is('khotbah*') ? 'nav-linkDrop' : 'nav-link')}} collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
                aria-expanded="true" aria-controls="collapsePages">
                 <i class="fa fa-bible"
@@ -138,6 +139,7 @@
                 </div>
             </div>
         </li>
+        @endif
 
     @if(\Illuminate\Support\Facades\Session::get('role') == '1')
 
@@ -176,17 +178,16 @@
     @endif
 
     @if(\Illuminate\Support\Facades\Session::get('role') == '3')
-
-            <li class="nav-item  {{(request()->is('periode*') ? 'active' : '')}}">
-                <a class="nav-link" href="{{url('periode')}}">
+            <li>
+                <a class="nav-link" href="{{url('periodeSekjen')}}">
                     <i class="fa fa-book" style="color: {{(request()->is('periode*') ? '#0500FE' : '#FFFFFF')}}"></i>
-                    <span style="margin-left: 9px">Periode</span>
+                    <span style="margin-left: 9px;">Periode</span>
                 </a>
             </li>
             <li class="nav-item  {{(request()->is('majalah*') ? 'active' : '')}}">
-                <a class="nav-link" href="{{url('majalah')}}">
+                <a class="nav-link" href="{{url('majalahSekjen')}}">
                     <i class="fa fa-database" style="color: {{(request()->is('majalah*') ? '#0500FE' : '#FFFFFF')}}"></i>
-                    <span style="margin-left: 9px;">Majalah</span>
+                    <span  style="margin-left: 9px;">Majalah</span>
                 </a>
             </li>
     @endif

@@ -18,7 +18,7 @@ class MajalahController extends Controller
     {
         $majalah =  DB::table('majalah')
                         ->join('status', 'status.id','=','majalah.status')
-                        ->select('judul', 'status.deskripsi as status','majalah_id','majalah.deskripsi as deskripsi')
+                        ->select('judul', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi')
                         ->get();
         return view('majalah.index',compact('majalah'));
     }
@@ -104,6 +104,19 @@ class MajalahController extends Controller
         $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get(); 
         // var_dump($majalah);die();
         return view('majalah.view',compact('majalah'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showSekjen($id)
+    {
+        $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get(); 
+        // var_dump($majalah);die();
+        return view('majalah.viewSekjen',compact('majalah'));
     }
 
     /**

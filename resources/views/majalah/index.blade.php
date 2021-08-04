@@ -33,7 +33,7 @@
                                 <td>{{ $p->status}}</td>
                                 <td>
                                 <a href="/majalah/view/{{$p->majalah_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> View</a>
-                                @if($p->status == 1)
+                                @if($p->status_id == 1)
                                     <a href="/majalah/edit/{{$p->majalah_id}}" class="btn btn-outline-primary"><i class="fa fa-edit"></i> Edit</a>
                                     <a href="/majalah/ajukan/{{$p->majalah_id}}" class="btn btn-outline-success"><i class="fa fa-paper-plane"></i> Ajukan</a>
                                 @endif
