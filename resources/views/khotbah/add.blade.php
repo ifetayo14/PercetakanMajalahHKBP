@@ -5,7 +5,6 @@
 @endsection
 
 @section('main-content')
-
     <!-- DataTales Example -->
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
@@ -39,11 +38,33 @@
                                 </span>
                             </div>
                             <div class="form-group">
+                                <input type="text" name="nama_minggu" class="form-control form-control-user" id="exampleFirstName" placeholder="Nama Minggu">
+                                <span style="color: red">
+                                    @error('namaMinggu'){{$message}}@enderror
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="topik" class="form-control form-control-user" id="exampleFirstName" placeholder="Topik">
+                                <span style="color: red">
+                                    @error('topik'){{$message}}@enderror
+                                </span>
+                            </div>
+                            <div class="form-group">
                                 <textarea type="" name="isi" class="form-control" id="" placeholder="Isi Berita" style="height: 200px"></textarea>
                                 <span style="color: red">
                                     @error('isi'){{$message}}@enderror
                                 </span>
                             </div>
+                            <div class="form-group">
+                                <div class="file-loading">
+                                    <input id="file-5" name="file-pelengkap" class="file form-control" type="file" multiple data-theme="fas">
+
+                                </div>
+                                <span style="color: red">
+                                    @error('file-pelengkap'){{$message}}@enderror
+                                </span>
+                            </div>
+
                             <br><br><br>
                             <button type="submit" href="#" class="btn btn-primary btn-user btn-block">
                                 Simpan
@@ -59,6 +80,8 @@
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace( 'isi' );
+
     </script>
+
 
 @endsection

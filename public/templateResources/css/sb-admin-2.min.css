@@ -10377,6 +10377,11 @@ body.sidebar-toggled footer.sticky-footer {
     margin-left: 20pt;
     font-size: 12pt;
 }
+#drop_zone {
+    border: 5px solid blue;
+    width:  200px;
+    height: 100px;
+}
 .artikelPeriode{
     margin-top: 15pt;
     margin-left: 20pt;

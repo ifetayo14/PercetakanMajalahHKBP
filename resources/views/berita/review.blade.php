@@ -1,13 +1,13 @@
 @extends('layout.layout')
 
 @section('title')
-    Review Artikel
+    Review Berita
 @endsection
 
 @section('main-content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Review Artikel</h1>
+        <h1 class="h3 mb-0 text-gray-800">Review Berita</h1>
     </div>
 
     <div class="card shadow mb-4">
@@ -32,10 +32,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($dataArtikel as $row)
+                    @foreach($dataBerita as $row)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td><a href="detail/{{$row->artikel_id}}">{{ $row->judul }}</a></td>
+                            <td><a href="detail/{{$row->berita_id}}">{{ $row->judul }}</a></td>
                             <td>{{ $row->created_by }}</td>
                             <td>
                                 @if($row->bulan == '1')
@@ -90,11 +90,11 @@
                             </td>
                             @if($row->status == '2' || $row->status == '3')
                                 <td style="white-space: nowrap">
-                                    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->artikel_id}}">
+                                    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->berita_id}}">
                                         <i class="fas fa-times"></i>
                                         Tolak
                                     </a>
-                                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#acceptModal-{{$row->artikel_id}}">
+                                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#acceptModal-{{$row->berita_id}}">
                                         <i class="fas fa-check"></i>
                                         Terima
                                     </a>
@@ -102,18 +102,18 @@
                             @endif
                         </tr>
 
-                        <div class="modal fade" id="deleteModal-{{$row->artikel_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade" id="deleteModal-{{$row->berita_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                              aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tolak Artikel?</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Tolak Berita?</h5>
                                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">Harap tinggalkan catatan penolakan artikel</div>
-                                    <form action="/artikel/refuse/{{ $row->artikel_id }}" class="user" method="post" enctype="multipart/form-data">
+                                    <div class="modal-body">Harap tinggalkan catatan penolakan Berita</div>
+                                    <form action="/berita/refuse/{{ $row->berita_id }}" class="user" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <textarea style="width: 400px; margin-left: 20px" name="catatan" id="exampleFirstName" placeholder="Catatan" required></textarea>
                                         <div class="modal-footer">
@@ -125,12 +125,12 @@
                             </div>
                         </div>
 
-                        <div class="modal fade" id="acceptModal-{{$row->artikel_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade" id="acceptModal-{{$row->berita_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                              aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Terima Artikel?</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Terima Berita?</h5>
                                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
@@ -138,7 +138,7 @@
                                     <div class="modal-body">Terima {{$row->judul}} ?</div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                                        <a href="/artikel/accept/{{ $row->artikel_id }}" class="btn btn-success">Terima</a>
+                                        <a href="/berita/accept/{{ $row->artikel_id }}" class="btn btn-success">Terima</a>
                                     </div>
                                 </div>
                             </div>
