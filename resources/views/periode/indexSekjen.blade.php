@@ -33,7 +33,7 @@
                                 <td>{{ $p->bulan}}</td>
                                 <td>{{$p->tema}}</td>
                                 <td>{{ $p->status}}</td>
-                                <td><a href="/periode/view/{{$p->periode_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> View</a></td>
+                                <td><a href="/periodeSekjen/view/{{$p->periode_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> View</a></td>
                             </tr>
                             <?php $i++; ?>
                             @endforeach 
