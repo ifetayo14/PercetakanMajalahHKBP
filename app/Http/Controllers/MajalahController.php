@@ -18,7 +18,7 @@ class MajalahController extends Controller
     {
         $majalah =  DB::table('majalah')
                         ->join('status', 'status.id','=','majalah.status')
-                        ->select('judul', 'status.deskripsi as status','majalah_id','majalah.deskripsi as deskripsi')
+                        ->select('judul', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi')
                         ->get();
         return view('majalah.index',compact('majalah'));
     }
