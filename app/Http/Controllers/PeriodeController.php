@@ -115,6 +115,18 @@ class PeriodeController extends Controller
         // var_dump($periode);die();
         return view('periode.view',compact('periode'));
     }
+ /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showSekjen($id)
+    {
+        $periode = DB::table('periode')->where(['periode_id' => $id])->get(); 
+        // var_dump($periode);die();
+        return view('periode.viewSekjen',compact('periode'));
+    }
 
     /**
      * Show the form for editing the specified resource.

@@ -107,6 +107,19 @@ class MajalahController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showSekjen($id)
+    {
+        $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get(); 
+        // var_dump($majalah);die();
+        return view('majalah.viewSekjen',compact('majalah'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
