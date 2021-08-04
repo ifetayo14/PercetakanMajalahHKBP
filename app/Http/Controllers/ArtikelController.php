@@ -60,16 +60,19 @@ class ArtikelController extends Controller
         $request->validate([
             'judul'=>'required',
             'isi'=>'required',
+            'file-pelengkap' => 'required',
+
         ],
         [
             'judul.required'=>'Judul tidak boleh kosong',
             'isi.required'=>'Isi tidak boleh kosong',
+            'file-pelengkap.required' => 'File tidak boleh kosong'
         ]);
-
+        $fileName = time().$request->file('file-pelengkap')->getClientOriginalName();
         $queryInsert = DB::table('artikel')->insert([
             'judul' => $request->input('judul'),
             'isi' => $request->input('isi'),
-            'file' => '0',
+            'file' => $fileName,
             'status' => '1',
             'approved1_by' => '0',
             'approved2_by' => '2',
@@ -83,6 +86,7 @@ class ArtikelController extends Controller
         ]);
 
         if ($queryInsert){
+            $request->file('file-pelengkap')->move(public_path('uploads'), $fileName);
             return redirect('/artikel/pengajuan')->with('success', 'Artikel berhasil disimpan. Anda masih dapat mengedit artikel. Atau anda dapat mengirim artikel tersebut untuk direview dengan klik tombol upload di kolom aksi.');
         }
     }
@@ -98,7 +102,7 @@ class ArtikelController extends Controller
         $dataArtikel = DB::table('artikel')
             ->where('artikel_id', $id)
             ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.isi', 'artikel.status', 'artikel.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.isi', 'artikel.file', 'artikel.status', 'artikel.created_by')
             ->first();
         if (Session::get('role') == '1' || Session::get('role') == '4'){
             if ($dataArtikel->status == '2'){
@@ -182,20 +186,38 @@ class ArtikelController extends Controller
             'judul.required'=>'Judul tidak boleh kosong',
             'isi.required'=>'Isi tidak boleh kosong',
         ]);
+        if(is_null($request->file('file-pelengkap'))) {
+            $queryUpdate = DB::table('artikel')->where('artikel_id', $id)
+                ->update([
+                    'judul' => $request->input('judul'),
+                    'isi' => $request->input('isi'),
+                    'updated_by' => Session::get('nama'),
+                    'updated_date' => Carbon::now(),
+                ]);
 
-        $queryUpdate = DB::table('artikel')->where('artikel_id', $id)
-            ->update([
-                'judul' => $request->input('judul'),
-                'isi' => $request->input('isi'),
-                'updated_by' => Session::get('nama'),
-                'updated_date' => Carbon::now(),
-            ]);
-
-        if ($request->input('status') == '1'){
-            return redirect('artikel/pengajuan')->with('success', 'Data Diubah');
+            if ($request->input('status') == '1') {
+                return redirect('artikel/pengajuan')->with('success', 'Data Diubah');
+            } else {
+                return redirect('artikel')->with('success', 'Data Diubah');
+            }
         }
         else{
-            return redirect('artikel')->with('success', 'Data Diubah');
+            $fileName = time().$request->file('file-pelengkap')->getClientOriginalName();
+            $queryUpdate = DB::table('artikel')->where('artikel_id', $id)
+                ->update([
+                    'judul' => $request->input('judul'),
+                    'isi' => $request->input('isi'),
+                    'updated_by' => Session::get('nama'),
+                    'updated_date' => Carbon::now(),
+                ]);
+
+            if ($request->input('status') == '1') {
+                $request->file('file-pelengkap')->move(public_path('uploads'), $fileName);
+                return redirect('artikel/pengajuan')->with('success', 'Data Diubah');
+            } else {
+                $request->file('file-pelengkap')->move(public_path('uploads'), $fileName);
+                return redirect('artikel')->with('success', 'Data Diubah');
+            }
         }
     }
 
