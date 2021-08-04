@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-9">{{$periode[0]->status}}</div>
             </div>
-            <a href="/periode" class="btn btn-outline-success"><i class="fa fa-return"></i> Kembali</a> 
+            <a href="/periodeSekjen" class="btn btn-outline-success"><i class="fa fa-return"></i> Kembali</a> 
             <br>
     </div>
 </div>
