@@ -60,18 +60,24 @@ class ArtikelController extends Controller
         $request->validate([
             'judul'=>'required',
             'isi'=>'required',
+            'nats_alkitab' => 'required',
+            'isi_alkitab' => 'required',
             'file-pelengkap' => 'required',
 
         ],
         [
             'judul.required'=>'Judul tidak boleh kosong',
             'isi.required'=>'Isi tidak boleh kosong',
+            'nats_alkitab.required' => 'Nats alkitab tidak boleh kosong',
+            'isi_alkitab.required' => 'Isi nats alkitab tidak boleh kosong',
             'file-pelengkap.required' => 'File tidak boleh kosong'
         ]);
         $fileName = time().$request->file('file-pelengkap')->getClientOriginalName();
         $queryInsert = DB::table('artikel')->insert([
             'judul' => $request->input('judul'),
             'isi' => $request->input('isi'),
+            'nats_alkitab' => $request->input('nats_alkitab'),
+            'isi_alkitab' => $request->input('isi_alkitab'),
             'file' => $fileName,
             'status' => '1',
             'approved1_by' => '0',
@@ -102,7 +108,7 @@ class ArtikelController extends Controller
         $dataArtikel = DB::table('artikel')
             ->where('artikel_id', $id)
             ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.isi', 'artikel.file', 'artikel.status', 'artikel.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.isi','artikel.nats_alkitab','artikel.isi_alkitab', 'artikel.file', 'artikel.status', 'artikel.created_by')
             ->first();
         if (Session::get('role') == '1' || Session::get('role') == '4'){
             if ($dataArtikel->status == '2'){
@@ -181,18 +187,25 @@ class ArtikelController extends Controller
         $request->validate([
             'judul'=>'required',
             'isi'=>'required',
+            'nats_alkitab' => 'required',
+            'isi_alkitab' => 'required',
         ],
         [
             'judul.required'=>'Judul tidak boleh kosong',
             'isi.required'=>'Isi tidak boleh kosong',
+            'nats_alkitab.required' => 'Nats alkitab tidak boleh kosong',
+            'isi_alkitab.required' => 'Isi nats alkitab tidak boleh kosong',
         ]);
         if(is_null($request->file('file-pelengkap'))) {
             $queryUpdate = DB::table('artikel')->where('artikel_id', $id)
                 ->update([
                     'judul' => $request->input('judul'),
                     'isi' => $request->input('isi'),
+                    'nats_alkitab' => $request->input('nats_alkitab'),
+                    'isi_alkitab' => $request->input('isi_alkitab'),
                     'updated_by' => Session::get('nama'),
                     'updated_date' => Carbon::now(),
+
                 ]);
 
             if ($request->input('status') == '1') {
@@ -207,6 +220,8 @@ class ArtikelController extends Controller
                 ->update([
                     'judul' => $request->input('judul'),
                     'isi' => $request->input('isi'),
+                    'nats_alkitab' => $request->input('nats_alkitab'),
+                    'isi_alkitab' => $request->input('isi_alkitab'),
                     'updated_by' => Session::get('nama'),
                     'updated_date' => Carbon::now(),
                 ]);
