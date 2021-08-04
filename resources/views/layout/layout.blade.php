@@ -117,6 +117,17 @@
                 </div>
             </div>
         </li>
+
+        <li class="nav-item  {{(request()->is('pengumuman*') ? 'active' : '')}}">
+            <a class="nav-link" href="{{url('pengumuman')}}">
+                <i class="fa fa-bullhorn"
+                   style="
+                            color: {{(request()->is('pengumuman*') ? '#0500FE' : '#FFFFFF')}}">
+                </i>
+                <span style="margin-left: 5px;">Pengumuman</span>
+            </a>
+        </li>
+
         @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '5')
             <li class="nav-item {{(request()->is('khotbah*') ? 'active' : '')}}">
             <a class="{{(request()->is('khotbah*') ? 'nav-linkDrop' : 'nav-link')}} collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
@@ -143,16 +154,6 @@
 
     @if(\Illuminate\Support\Facades\Session::get('role') == '1')
 
-            <li class="nav-item  {{(request()->is('pengumuman*') ? 'active' : '')}}">
-                <a class="nav-link" href="{{url('pengumuman')}}">
-                    <i class="fa fa-bullhorn"
-                       style="
-                            color: {{(request()->is('pengumuman*') ? '#0500FE' : '#FFFFFF')}}">
-                    </i>
-                    <span style="margin-left: 5px;">Pengumuman</span>
-                </a>
-            </li>
-
             <li class="nav-item  {{(request()->is('periode*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('periode')}}">
                     <i class="fa fa-book" style="color: {{(request()->is('periode*') ? '#0500FE' : '#FFFFFF')}}"></i>
@@ -178,9 +179,9 @@
     @endif
 
     @if(\Illuminate\Support\Facades\Session::get('role') == '3')
-            <li>
+            <li class="nav-item  {{(request()->is('periodeSekjen*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('periodeSekjen')}}">
-                    <i class="fa fa-book" style="color: {{(request()->is('periode*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                    <i class="fa fa-book" style="color: {{(request()->is('periodeSekjen*') ? '#0500FE' : '#FFFFFF')}}"></i>
                     <span style="margin-left: 9px;">Periode</span>
                 </a>
             </li>
