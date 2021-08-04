@@ -29,6 +29,17 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <br>
+            <div class="khotbahNats">
+                <table>
+
+                    <tr>
+                        <td>Nats Alkitab</td>
+                        <td>&nbsp;:&nbsp;</td>
+                        <td> {!! $dataArtikel->nats_alkitab !!}</td>
+                    </tr>
+                </table>
+            "<i>{{ $dataArtikel->isi_alkitab}}</i>"
+            </div>
             <div class="artikelContent">
                 {!! $dataArtikel->isi !!}
             </div>
