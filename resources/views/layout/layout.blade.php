@@ -29,6 +29,10 @@
     <link href="{{url('templateResources/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{url('templateResources/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 
+{{--    dropfile--}}
+    <link href="{{url('dropfile/css/fileinput.css')}}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{url('dropfile/themes/explorer-fas/theme.css')}}" media="all" rel="stylesheet" type="text/css"/>
+
 </head>
 
 <body id="page-top">
@@ -332,6 +336,27 @@
 <!-- Page level plugins -->
 <script src="{{url('templateResources/vendor/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{url('templateResources/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="{{url('dropfile/js/plugins/piexif.js')}}" type="text/javascript"></script>
+<script src="{{url('dropfile/js/plugins/sortable.js')}}" type="text/javascript"></script>
+<script src="{{url('dropfile/js/fileinput.js')}}" type="text/javascript"></script>
+<script src="{{url('dropfile/js/locales/fr.js')}}" type="text/javascript"></script>
+<script src="{{url('dropfile/js/locales/es.js')}}" type="text/javascript"></script>
+<script src="{{url('dropfile/themes/fas/theme.js')}}" type="text/javascript"></script>
+<script src="{{url('dropfile/themes/explorer-fas/theme.js')}}" type="text/javascript"></script>
+<script>
+    $("#file-5").fileinput({
+        theme: 'fas',
+        showUpload: false,
+        showClose : false
+
+    });
+
+
+
+</script>
+
 
 </body>
 

@@ -41,6 +41,10 @@
                                     @error('isi'){{$message}}@enderror
                                 </span>
                             </div>
+                            <div class="form-group">
+                                <input id="file-5-edit" name="file-pelengkap" class="file form-control" type="file" multiple data-theme="fas">
+
+                            </div>
                             <br><br><br>
                             <button type="submit" href="#" class="btn btn-primary btn-user btn-block">
                                 Simpan
@@ -57,5 +61,38 @@
     <script>
         CKEDITOR.replace( 'isi' );
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            $("#file-5-edit").fileinput({
+                theme: 'fas',
+                showUpload: false,
+                showClose:false,
+                showCaption: true,
+                <?php if(!file_exists(public_path('uploads/' . $dataBerita->file))){
+                    ?>
+
+                <?php
+                }
+                    else{
+                    ?>
+                initialPreview: [
+                    "{{ URL::to('uploads/' . $dataBerita->file) }}"
+                ],
+
+                initialPreviewAsData: true,
+                initialPreviewConfig: [
+                    {type: "pdf", description: "Lampiran terkait kotbah", size: "{{File::size(public_path('uploads/' . $dataBerita->file))}}", caption: "{{$dataBerita->file}}", downloadUrl: "{{URL::to('uploads/' . $dataBerita->file)}}"},
+                ]
+                <?php
+                }
+                ?>
+
+            });
+        });
+
+
+
+    </script>
+
 
 @endsection

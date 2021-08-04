@@ -56,7 +56,8 @@ Route::post('berita/editProcess/{id}', [BeritaController::class, 'update']);
 Route::get('berita/upload/{id}', [BeritaController::class, 'upload']);
 Route::get('berita/delete/{id}', [BeritaController::class, 'destroy']);
 Route::get('berita/detail/{id}', [BeritaController::class, 'show']);
-
+Route::get('berita/accept/{id}', [BeritaController::class, 'acceptBerita']);
+Route::post('berita/refuse/{id}', [BeritaController::class, 'refuseBerita']);
 
 Route::get('khotbah', [KhotbahController::class, 'index']);
 Route::get('khotbah/pengajuan', [KhotbahController::class, 'indexPengajuan']);
@@ -67,6 +68,10 @@ Route::post('khotbah/editProcess/{id}', [KhotbahController::class, 'update']);
 Route::get('khotbah/upload/{id}', [KhotbahController::class, 'upload']);
 Route::get('khotbah/delete/{id}', [KhotbahController::class, 'destroy']);
 Route::get('khotbah/detail/{id}', [KhotbahController::class, 'show']);
+Route::get('khotbah/review', [KhotbahController::class, 'indexReview']);
+Route::get('khotbah/accept/{id}', [KhotbahController::class, 'acceptKhotbah']);
+Route::post('khotbah/refuse/{id}', [KhotbahController::class, 'refuseKhotbah']);
+
 
 
 

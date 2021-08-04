@@ -32,6 +32,13 @@
             <div class="artikelContent">
                 {!! $dataArtikel->isi !!}
             </div>
+            <div class="artikelContent">
+                <?php if(!is_null($dataArtikel->file) && $dataArtikel->file != "" && file_exists(public_path('uploads/' . $dataArtikel->file))){  ?>
+                File Terlampir
+                <br>
+                <a href="{{URL::to('uploads/' . $dataArtikel->file)}}" target="#">{!! $dataArtikel->file !!}</a>
+                <?php }?>
+            </div>
             <br>
             <div class="artikelPeriode">
                 Periode
