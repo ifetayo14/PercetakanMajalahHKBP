@@ -46,6 +46,7 @@ Route::post('artikel/editProcess/{id}', [ArtikelController::class, 'update']);
 Route::get('artikel/upload/{id}', [ArtikelController::class, 'upload']);
 Route::get('artikel/delete/{id}', [ArtikelController::class, 'destroy']);
 Route::get('artikel/detail/{id}', [ArtikelController::class, 'show']);
+
 //berita
 Route::get('berita', [BeritaController::class, 'index']);
 Route::get('berita/pengajuan', [BeritaController::class, 'indexPengajuan']);
@@ -56,6 +57,7 @@ Route::post('berita/editProcess/{id}', [BeritaController::class, 'update']);
 Route::get('berita/upload/{id}', [BeritaController::class, 'upload']);
 Route::get('berita/delete/{id}', [BeritaController::class, 'destroy']);
 Route::get('berita/detail/{id}', [BeritaController::class, 'show']);
+Route::get('berita/review', [BeritaController::class, 'indexReview']);
 Route::get('berita/accept/{id}', [BeritaController::class, 'acceptBerita']);
 Route::post('berita/refuse/{id}', [BeritaController::class, 'refuseBerita']);
 

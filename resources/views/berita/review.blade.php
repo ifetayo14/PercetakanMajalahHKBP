@@ -138,7 +138,7 @@
                                     <div class="modal-body">Terima {{$row->judul}} ?</div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                                        <a href="/berita/accept/{{ $row->artikel_id }}" class="btn btn-success">Terima</a>
+                                        <a href="/berita/accept/{{ $row->berita_id }}" class="btn btn-success">Terima</a>
                                     </div>
                                 </div>
                             </div>
