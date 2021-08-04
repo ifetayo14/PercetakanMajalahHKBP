@@ -26,9 +26,9 @@ class BeritaController extends Controller
     {
         $dataBerita = DB::table('berita')->where('berita.status', '!=', '1')
             ->join('periode', 'berita.periode_id', '=', 'periode.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.kotbah_id', 'berita.judul', 'berita.user_id', 'berita.status', 'berita.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.user_id', 'berita.status', 'berita.created_by')
             ->get();
-        return view('khotbah.review', compact('dataBerita'));
+        return view('berita.review', compact('dataBerita'));
     }
     public function create()
     {
