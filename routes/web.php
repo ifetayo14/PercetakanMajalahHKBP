@@ -114,4 +114,13 @@ Route::middleware(['adminPage'])->group(function (){
     Route::get('majalah/delete/{id}', [MajalahController::class, 'delete']);
     Route::get('majalah/ajukan/{id}', [MajalahController::class, 'ajukan']);
 });
+Route::middleware(['sekjenPage'])->group(function (){
 
+
+    //periode
+    Route::get('periode', [PeriodeController::class, 'indexSekjen']);
+    Route::get('periode/view/{id}', [PeriodeController::class, 'showSekjen']); 
+    //majalah
+    Route::get('majalah', [MajalahController::class, 'indexSekjen']);
+    Route::get('majalah/view/{id}', [MajalahController::class, 'showSekjen']);
+});

@@ -24,6 +24,20 @@ class MajalahController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexSekjen()
+    {
+        $majalah =  DB::table('majalah')
+                        ->join('status', 'status.id','=','majalah.status')
+                        ->select('judul', 'status.deskripsi as status','majalah_id','majalah.deskripsi as deskripsi')
+                        ->get();
+        return view('majalah.indexSekjen',compact('majalah'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

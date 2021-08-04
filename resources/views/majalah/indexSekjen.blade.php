@@ -8,7 +8,6 @@
 <!-- Page Heading --> 
             <div class="row d-flex justify-content-between">
                 <h1 class="h3">Majalah</h1>
-                <a href="/majalah/add" class="btn btn-success"><i class="fa fa-plus"></i> Majalah</a>
             </div>
             <br>
     

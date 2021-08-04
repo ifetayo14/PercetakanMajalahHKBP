@@ -23,6 +23,16 @@ class PeriodeController extends Controller
         return view('periode.index',compact('periode'));
     }
 
+ /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexSekjen()
+    {
+        $periode = Periode::all(); 
+        return view('periode.indexSekjen',compact('periode'));
+    }
     /**
      * Show the form for creating a new resource.
      *
