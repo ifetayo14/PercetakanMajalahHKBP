@@ -80,10 +80,9 @@
                aria-expanded="true" aria-controls="collapsePages">
                 <i class="fa fa-clipboard"
                    style="
-                    margin-left: 5px;
                     color: {{(request()->is('artikel*') ? '#0500FE' : '#FFFFFF')}}">
                 </i>
-                <span style="margin-left: 10px;">Artikel</span>
+                <span style="margin-left: 11px;">Artikel</span>
             </a>
             <div id="collapsePages" class="collapse mt-1" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -102,10 +101,9 @@
                aria-expanded="true" aria-controls="collapsePages">
                 <i class="fa fa-newspaper"
                    style="
-                    margin-left: 5px;
                     color: {{(request()->is('berita*') ? '#0500FE' : '#FFFFFF')}}">
                 </i>
-                <span style="margin-left: 10px;">Berita</span>
+                <span style="margin-left: 5px;">Berita</span>
             </a>
             <div id="collapsePages1" class="collapse mt-1" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -119,16 +117,26 @@
                 </div>
             </div>
         </li>
+
+        <li class="nav-item  {{(request()->is('pengumuman*') ? 'active' : '')}}">
+            <a class="nav-link" href="{{url('pengumuman')}}">
+                <i class="fa fa-bullhorn"
+                   style="
+                            color: {{(request()->is('pengumuman*') ? '#0500FE' : '#FFFFFF')}}">
+                </i>
+                <span style="margin-left: 5px;">Pengumuman</span>
+            </a>
+        </li>
+
         @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '5')
             <li class="nav-item {{(request()->is('khotbah*') ? 'active' : '')}}">
             <a class="{{(request()->is('khotbah*') ? 'nav-linkDrop' : 'nav-link')}} collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
                aria-expanded="true" aria-controls="collapsePages">
                 <i class="fa fa-bible"
                    style="
-                    margin-left: 5px;
                     color: {{(request()->is('khotbah*') ? '#0500FE' : '#FFFFFF')}}">
                 </i>
-                <span style="margin-left: 10px;">Khotbah</span>
+                <span style="margin-left: 9px;">Khotbah</span>
             </a>
             <div id="collapsePages2" class="collapse mt-1" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -146,25 +154,16 @@
 
     @if(\Illuminate\Support\Facades\Session::get('role') == '1')
 
-            <li class="nav-item  {{(request()->is('pengumuman*') ? 'active' : '')}}">
-                <a class="nav-link" href="{{url('pengumuman')}}">
-                    <i class="fa fa-bullhorn"
-                       style="
-                            margin-left: 5px;
-                            color: {{(request()->is('pengumuman*') ? '#0500FE' : '#FFFFFF')}}">
-                    </i>
-                    <span style="margin-left: 10px;">Pengumuman</span>
-                </a>
-            </li>
-
             <li class="nav-item  {{(request()->is('periode*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('periode')}}">
-                    <i class="fa fa-book" style="color: {{(request()->is('periode*') ? '#0500FE' : '#FFFFFF')}}"></i><span>Periode</span>
+                    <i class="fa fa-book" style="color: {{(request()->is('periode*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                    <span style="margin-left: 9px">Periode</span>
                 </a>
             </li>
             <li class="nav-item  {{(request()->is('majalah*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('majalah')}}">
-                    <i class="fa fa-database" style="color: {{(request()->is('majalah*') ? '#0500FE' : '#FFFFFF')}}"></i><span>Majalah</span>
+                    <i class="fa fa-database" style="color: {{(request()->is('majalah*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                    <span style="margin-left: 9px;">Majalah</span>
                 </a>
             </li>
 
@@ -180,15 +179,16 @@
     @endif
 
     @if(\Illuminate\Support\Facades\Session::get('role') == '3')
-
-            <li class="nav-item  {{(request()->is('periode*') ? 'active' : '')}}">
+            <li class="nav-item  {{(request()->is('periodeSekjen*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('periodeSekjen')}}">
-                    <i class="fa fa-book" style="color: {{(request()->is('periode*') ? '#0500FE' : '#FFFFFF')}}"></i><span>Periode</span>
+                    <i class="fa fa-book" style="color: {{(request()->is('periodeSekjen*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                    <span style="margin-left: 9px;">Periode</span>
                 </a>
             </li>
             <li class="nav-item  {{(request()->is('majalah*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('majalahSekjen')}}">
-                    <i class="fa fa-database" style="color: {{(request()->is('majalah*') ? '#0500FE' : '#FFFFFF')}}"></i><span>Majalah</span>
+                    <i class="fa fa-database" style="color: {{(request()->is('majalah*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                    <span  style="margin-left: 9px;">Majalah</span>
                 </a>
             </li>
     @endif

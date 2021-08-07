@@ -34,6 +34,18 @@
                                 </span>
                             </div>
                             <div class="form-group">
+                                <input type="text" name="nats_alkitab" class="form-control form-control-user" id="exampleFirstName" placeholder="Nats Alkitab"  value="{{$dataArtikel->nats_alkitab}}">
+                                <span style="color: red">
+                                    @error('nats_alkitab'){{$message}}@enderror
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="isi_alkitab" class="form-control form-control-user" id="exampleFirstName" placeholder="Isi Nats Alkitab" value="{{$dataArtikel->isi_alkitab}}">
+                                <span style="color: red">
+                                    @error('isi_alkitab'){{$message}}@enderror
+                                </span>
+                            </div>
+                            <div class="form-group">
                                 <textarea type="" name="isi" class="form-control" id="" placeholder="Isi Artikel" style="height: 200px">
                                     {{$dataArtikel->isi}}
                                 </textarea>
