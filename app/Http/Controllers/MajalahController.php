@@ -101,7 +101,11 @@ class MajalahController extends Controller
      */
     public function show($id)
     {
-        $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get(); 
+        $majalah =  DB::table('majalah')
+        ->join('status', 'status.id','=','majalah.status')
+        ->join('periode', 'periode.periode_id','=','majalah.periode_id')
+        ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+        ->get();
         // var_dump($majalah);die();
         return view('majalah.view',compact('majalah'));
     }
@@ -115,8 +119,43 @@ class MajalahController extends Controller
     public function showSekjen($id)
     {
         $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get(); 
+        if($majalah[0]->status == 2 ){
+            DB::table('majalah')->where(['majalah_id'=>$id])->update([
+                'status' => 3,
+                'updated_by' =>Session::get('username'),
+                'updated_date' => Carbon::now(),
+            ]);
+        }
+        $artikel = DB::table('artikel')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $berita = DB::table('berita')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $kotbah = DB::table('kotbah')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $majalah =  DB::table('majalah')
+                        ->join('status', 'status.id','=','majalah.status')
+                        ->join('periode', 'periode.periode_id','=','majalah.periode_id')
+                        ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+                        ->get();
         // var_dump($majalah);die();
-        return view('majalah.viewSekjen',compact('majalah'));
+        return view('majalah.viewSekjen',compact('majalah','artikel','berita','kotbah'));
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showSekjenByPeriode($id)
+    {
+        $majalah = DB::table('majalah')->where(['periode_id' => $id])->get(); 
+        $artikel = DB::table('artikel')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $berita = DB::table('berita')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $kotbah = DB::table('kotbah')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $majalah =  DB::table('majalah')
+                        ->join('status', 'status.id','=','majalah.status')
+                        ->join('periode', 'periode.periode_id','=','majalah.periode_id')
+                        ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+                        ->get();
+        // var_dump($majalah);die();
+        return view('majalah.viewSekjen',compact('majalah','artikel','berita','kotbah'));
     }
 
     /**
@@ -171,6 +210,92 @@ class MajalahController extends Controller
             'updated_date' => Carbon::now(),
         ]);
         return redirect('/majalah');
+    }
+    
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function terima($id)
+    {
+        //
+        $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get(); 
+        if($majalah[0]->status != 3){
+            return redirect('/majalahSekjen/view/'.$id)->with('error', 'Akses langsung melalui URL tidak diizinkan!');
+        }
+        // var_dump($majalah);die();
+        return view('majalah.terima',compact('majalah'));
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function terimaUpdate(Request $request, $id)
+    {
+        $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get(); 
+        if($majalah[0]->status != 3){
+            return redirect('/majalahSekjen/view/'.$id)->with('error', 'Akses langsung melalui URL tidak diizinkan!');
+        }
+        $queryInsert = DB::table('majalah')->where(['majalah_id'=>$id])
+        ->update([
+            'status' => 5,
+            'catatan' => $request->input('catatan'),
+            'updated_by' =>Session::get('username'),
+            'updated_date' => Carbon::now(),
+        ]);
+
+        if ($queryInsert){
+            // echo 'berhasil';die();
+            return redirect('/majalahSekjen/view/'.$id)->with('success', 'Majalah Berhasil Disetujui!');
+        }
+    }
+    
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function tolak($id)
+    {
+        $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get(); 
+        if($majalah[0]->status != 3){
+            return redirect('/majalahSekjen/view/'.$id)->with('error', 'Akses langsung melalui URL tidak diizinkan!');
+        }
+        //
+        $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get(); 
+        // var_dump($majalah);die();
+        return view('majalah.tolak',compact('majalah'));
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function tolakUpdate(Request $request, $id)
+    {
+        $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get(); 
+        if($majalah[0]->status != 3){
+            return redirect('/majalahSekjen/view/'.$id)->with('error', 'Akses langsung melalui URL tidak diizinkan!');
+        }
+        $queryInsert = DB::table('majalah')->where(['majalah_id'=>$id])
+        ->update([
+            'status' => 4,
+            'catatan' => $request->input('catatan'),
+            'updated_by' =>Session::get('username'),
+            'updated_date' => Carbon::now(),
+        ]);
+
+        if ($queryInsert){
+            // echo 'berhasil';die();
+            return redirect('/majalahSekjen/view/'.$id)->with('success', 'Majalah Berhasil Ditolak!');
+        }
     }
 
     /**

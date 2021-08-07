@@ -177,6 +177,16 @@ class KhotbahController extends Controller
 
         return view('khotbah.detail', compact('dataKhotbah'));
     }
+    public function showSekjen($id)
+    {
+        $dataKhotbah = DB::table('kotbah')
+            ->where('kotbah_id', $id)
+            ->join('periode', 'kotbah.periode_id', '=', 'kotbah.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul','kotbah.nama_minggu','kotbah.topik', 'kotbah.file', 'kotbah.nats_alkitab', 'kotbah.isi', 'kotbah.status', 'kotbah.created_by', 'kotbah.periode_id')
+            ->first();
+
+        return view('khotbah.detailSekjen', compact('dataKhotbah'));
+    }
     public function acceptKhotbah($id)
     {
         $acceptArtikel = DB::table('kotbah')->where('kotbah_id', $id)

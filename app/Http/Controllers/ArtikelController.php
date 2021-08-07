@@ -114,6 +114,16 @@ class ArtikelController extends Controller
         return view('artikel.detail', compact('dataArtikel'));
     }
 
+    public function showSekjen($id)
+    {
+        $dataArtikel = DB::table('artikel')
+            ->where('artikel_id', $id)
+            ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.isi', 'artikel.file', 'artikel.status', 'artikel.periode_id', 'artikel.created_by')
+            ->first();
+        return view('artikel.detailSekjen', compact('dataArtikel'));
+    }
+
     public function acceptArtikel($id)
     {
         $acceptArtikel = DB::table('artikel')->where('artikel_id', $id)

@@ -130,4 +130,12 @@ Route::middleware(['sekjenPage'])->group(function (){
     //majalah
     Route::get('majalahSekjen', [MajalahController::class, 'indexSekjen']);
     Route::get('majalahSekjen/view/{id}', [MajalahController::class, 'showSekjen']);
+    Route::get('majalahSekjen/terima/{id}', [MajalahController::class, 'terima']);
+    Route::post('majalahSekjen/terima/{id}', [MajalahController::class, 'terimaUpdate']);
+    Route::get('majalahSekjen/tolak/{id}', [MajalahController::class, 'tolak']);
+    Route::get('/majalahSekjen/viewByPeriode/{id}', [MajalahController::class, 'showSekjenByPeriode']);
+    Route::post('majalahSekjen/tolak/{id}', [MajalahController::class, 'tolakUpdate']);
+    Route::get('artikelSekjen/view/{id}', [ArtikelController::class, 'showSekjen']);
+    Route::get('beritaSekjen/view/{id}', [BeritaController::class, 'showSekjen']);
+    Route::get('kotbahSekjen/view/{id}', [KhotbahController::class, 'showSekjen']);
 });
