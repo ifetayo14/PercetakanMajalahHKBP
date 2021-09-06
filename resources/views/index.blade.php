@@ -16,7 +16,7 @@
             @if($periode !=null)
             <div class="col-12">
                 <h5>{{$periode[0]->tahun}} {{$periode[0]->bulan}} - {{$periode[0]->tema}}</h5>
-                <p>{{$periode[0]->deskripsi}}</p>
+                <p>{!!$periode[0]->deskripsi!!}</p>
             </div>
             @endif
         </div>

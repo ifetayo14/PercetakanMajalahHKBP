@@ -33,7 +33,7 @@
                 <div class="col-3">
                     <label for="inputDeskripsi">Deskripsi</label>
                 </div>
-                <div class="col-9">{{$periode[0]->deskripsi}}</div>
+                <div class="col-9">{!!$periode[0]->deskripsi!!}</div>
             </div>
             <div class="row">
                 <div class="col-3">

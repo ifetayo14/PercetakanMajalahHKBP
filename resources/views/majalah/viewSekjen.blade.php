@@ -57,7 +57,7 @@
     </div>
     <br>
     <dib class="card-body">
-        <h5>Kotbah</h5>
+        <h3 style="background-color: #bdf7ba; justify-content:center;">Kotbah</h3>
         <table class="table">
             <tr>
                 <th>No</th>
@@ -75,7 +75,7 @@
         </table>
     </dib>
     <dib class="card-body">
-        <h5>Artikel</h5>
+        <h3 style="background-color: #ecf7ba; justify-content:center;">Artikel</h3>
         <table class="table ">
             <tr>
                 <th>No</th>
@@ -93,7 +93,7 @@
         </table>
     </dib>
     <dib class="card-body">
-        <h5>Berita</h5>
+        <h3 style="background-color: #baf7e9; justify-content:center;">Berita</h3>
         <table class="table">
             <tr>
                 <th>No</th>

@@ -120,10 +120,11 @@ Route::middleware(['adminPage'])->group(function (){
     Route::post('majalah/edit/{id}', [MajalahController::class, 'update']);
     Route::get('majalah/delete/{id}', [MajalahController::class, 'delete']);
     Route::get('majalah/ajukan/{id}', [MajalahController::class, 'ajukan']);
+    Route::get('majalah/berita/detail/{id}', [BeritaController::class, 'showAdmin']);
+    Route::get('majalah/artikel/detail/{id}', [ArtikelController::class, 'showAdmin']);
+    Route::get('majalah/khotbah/detail/{id}', [KhotbahController::class, 'showAdmin']);
 });
 Route::middleware(['sekjenPage'])->group(function (){
-
-
     //periode
     Route::get('periodeSekjen', [PeriodeController::class, 'indexSekjen']);
     Route::get('periodeSekjen/view/{id}', [PeriodeController::class, 'showSekjen']); 

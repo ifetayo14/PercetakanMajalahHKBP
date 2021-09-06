@@ -19,10 +19,12 @@ class KhotbahController extends Controller
         return view('khotbah.index', compact('dataKhotbah'));
 
     }
+
     public function  indexPengajuan(){
         $dataKhotbah = DB::table('kotbah')->where('user_id', '=', Session::get('user_id'))->get();
         return view('khotbah.pengajuanKhotbah', compact('dataKhotbah'));
     }
+
     public function indexReview()
     {
         $dataKhotbah = DB::table('kotbah')->where('kotbah.status', '!=', '1')
@@ -31,10 +33,12 @@ class KhotbahController extends Controller
             ->get();
         return view('khotbah.review', compact('dataKhotbah'));
     }
+
     public function create()
     {
         return view('khotbah.add');
     }
+
     public function store(Request $request)
     {
         $periode = DB::table('periode')->where('status', '=', 'Aktif')->first();
@@ -88,6 +92,7 @@ class KhotbahController extends Controller
 
         return redirect()->back()->with('success', 'Khotbah Dikirim');
     }
+
     public function edit($id)
     {
         $data = DB::table('kotbah')->where('kotbah_id', $id)->first();
@@ -96,6 +101,7 @@ class KhotbahController extends Controller
         ];
         return view('khotbah.edit', $dataKhotbah);
     }
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -160,6 +166,7 @@ class KhotbahController extends Controller
         }
 
     }
+
     public function show($id)
     {
         $dataKhotbah = DB::table('kotbah')
@@ -177,6 +184,7 @@ class KhotbahController extends Controller
 
         return view('khotbah.detail', compact('dataKhotbah'));
     }
+
     public function showSekjen($id)
     {
         $dataKhotbah = DB::table('kotbah')
@@ -187,6 +195,18 @@ class KhotbahController extends Controller
 
         return view('khotbah.detailSekjen', compact('dataKhotbah'));
     }
+
+    public function showAdmin($id)
+    {
+        $dataKhotbah = DB::table('kotbah')
+            ->where('kotbah_id', $id)
+            ->join('periode', 'kotbah.periode_id', '=', 'kotbah.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul','kotbah.nama_minggu','kotbah.topik', 'kotbah.file', 'kotbah.nats_alkitab', 'kotbah.isi', 'kotbah.status', 'kotbah.created_by', 'kotbah.periode_id')
+            ->first();
+
+        return view('khotbah.detailAdmin', compact('dataKhotbah'));
+    }
+
     public function acceptKhotbah($id)
     {
         $acceptArtikel = DB::table('kotbah')->where('kotbah_id', $id)

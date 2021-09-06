@@ -86,7 +86,7 @@
         </div>
         <div class="card-footer">
             <div class="row d-flex justify-content-end">
-                    <a href="/majalahSekjen/viewByPeriode/{{$dataKhotbah->periode_id}}" class="btn btn-outline-danger"><i class="fa fa-back"></i> Kembali</a>
+                    <a href="/majalah/view/{{$dataKhotbah->periode_id}}" class="btn btn-outline-danger"><i class="fa fa-back"></i> Kembali</a>
             </div>
         </div>
     </div>

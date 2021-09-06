@@ -105,9 +105,22 @@ class MajalahController extends Controller
         ->join('status', 'status.id','=','majalah.status')
         ->join('periode', 'periode.periode_id','=','majalah.periode_id')
         ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+        ->where(['majalah.periode_id' => $id])
         ->get();
+        // var_dump($majalah);die(); 
+        $artikel = DB::table('artikel')->where(['periode_id' => $id])->whereIn('status',[2,3,5])
+        ->join('status', 'status.id','=','artikel.status')->select('artikel.*', 'status.deskripsi as status_des')->get();
+        $berita = DB::table('berita')->where(['periode_id' => $id])->whereIn('status',[2,3,5])
+        ->join('status', 'status.id','=','berita.status')->select('berita.*', 'status.deskripsi as status_des')->get();
+        $kotbah = DB::table('kotbah')->where(['periode_id' => $id])->whereIn('status',[2,3,5])
+        ->join('status', 'status.id','=','kotbah.status')->select('kotbah.*', 'status.deskripsi as status_des')->get();
+        $majalah =  DB::table('majalah')
+                        ->join('status', 'status.id','=','majalah.status')
+                        ->join('periode', 'periode.periode_id','=','majalah.periode_id')
+                        ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+                        ->get();
         // var_dump($majalah);die();
-        return view('majalah.view',compact('majalah'));
+        return view('majalah.view',compact('majalah','artikel','berita','kotbah'));
     }
 
     /**
