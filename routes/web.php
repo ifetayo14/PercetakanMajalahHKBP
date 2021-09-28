@@ -11,6 +11,7 @@ use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\MajalahController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KhotbahController;
+use App\Http\Controllers\MemberController;
 
 
 /*
@@ -61,6 +62,7 @@ Route::get('berita/review', [BeritaController::class, 'indexReview']);
 Route::get('berita/accept/{id}', [BeritaController::class, 'acceptBerita']);
 Route::post('berita/refuse/{id}', [BeritaController::class, 'refuseBerita']);
 
+//khotbah
 Route::get('khotbah', [KhotbahController::class, 'index']);
 Route::get('khotbah/pengajuan', [KhotbahController::class, 'indexPengajuan']);
 Route::get('khotbah/add', [KhotbahController::class, 'create']);
@@ -74,9 +76,15 @@ Route::get('khotbah/review', [KhotbahController::class, 'indexReview']);
 Route::get('khotbah/accept/{id}', [KhotbahController::class, 'acceptKhotbah']);
 Route::post('khotbah/refuse/{id}', [KhotbahController::class, 'refuseKhotbah']);
 
-
-
-
+//member
+Route::get('member', [MemberController::class, 'index']);
+Route::get('member/add', [MemberController::class, 'create']);
+Route::post('member/addProcess', [MemberController::class, 'store']);
+Route::middleware(['memberAccess'])->group(function (){
+    Route::get('member/insert', [MemberController::class, 'create']);
+    Route::get('member/edit/{id}', [MemberController::class, 'edit']);
+    Route::post('member/updateProcess/{id}', [MemberController::class, 'update']);
+});
 
 Route::middleware(['artikelAccess'])->group(function (){
     Route::get('artikel/review', [ArtikelController::class, 'indexReview']);
@@ -126,7 +134,7 @@ Route::middleware(['sekjenPage'])->group(function (){
 
     //periode
     Route::get('periodeSekjen', [PeriodeController::class, 'indexSekjen']);
-    Route::get('periodeSekjen/view/{id}', [PeriodeController::class, 'showSekjen']); 
+    Route::get('periodeSekjen/view/{id}', [PeriodeController::class, 'showSekjen']);
     //majalah
     Route::get('majalahSekjen', [MajalahController::class, 'indexSekjen']);
     Route::get('majalahSekjen/view/{id}', [MajalahController::class, 'showSekjen']);

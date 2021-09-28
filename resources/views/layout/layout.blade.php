@@ -128,6 +128,26 @@
             </a>
         </li>
 
+        @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
+            <li class="nav-item {{(request()->is('member*') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('member')}}">
+                    <i class="fa fa-user-tag"
+                       style="color: {{(request()->is('member*') ? '#0500FE' : '#FFFFFF')}}">
+                    </i>
+                    <span>Member</span>
+                </a>
+            </li>
+        @else
+            <li class="nav-item {{(request()->is('member*') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('member')}}">
+                    <i class="fa fa-user-tag"
+                       style="color: {{(request()->is('member*') ? '#0500FE' : '#FFFFFF')}}">
+                    </i>
+                    <span>Membership</span>
+                </a>
+            </li>
+        @endif
+
         @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '5')
             <li class="nav-item {{(request()->is('khotbah*') ? 'active' : '')}}">
             <a class="{{(request()->is('khotbah*') ? 'nav-linkDrop' : 'nav-link')}} collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
@@ -169,7 +189,7 @@
 
             <li class="nav-item {{(request()->is('akun*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('akun')}}">
-                    <i class="fa fa-users"
+                    <i class="fa fa-user-cog"
                        style="color: {{(request()->is('akun*') ? '#0500FE' : '#FFFFFF')}}">
                     </i>
                     <span>Kelola Akun</span>
