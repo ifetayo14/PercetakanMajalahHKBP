@@ -50,9 +50,11 @@ class Kernel extends HttpKernel
         'sekjenPage'=>[
             \App\Http\Middleware\SekjenMiddleware::class,
         ],
-
         'artikelAccess'=>[
             \App\Http\Middleware\ArtikelAccess::class,
+        ],
+        'memberAccess'=>[
+            \App\Http\Middleware\MemberMiddleware::class,
         ],
     ];
 

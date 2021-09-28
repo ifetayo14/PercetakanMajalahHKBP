@@ -63,7 +63,6 @@ class ArtikelController extends Controller
             'nats_alkitab' => 'required',
             'isi_alkitab' => 'required',
             'file-pelengkap' => 'required',
-
         ],
         [
             'judul.required'=>'Judul tidak boleh kosong',
