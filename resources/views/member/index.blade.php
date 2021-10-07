@@ -188,34 +188,7 @@
                                 <td></td>
                             </tr>
 
-                            <div class="modal fade" id="sendFileRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Upload Bukti Pembayaran</h5>
-                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form class="user" method="post" action="/member/addBukti" enctype="multipart/form-data">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <label style="margin-left: 15px" for="buktiFile">Bukti Pembayaran</label>
-                                                    <div class="file-loading">
-                                                        <input id="file-5" name="buktiFile" class="file form-control" type="file" multiple data-theme="fas">
-                                                    </div>
-                                                </div>
-                                                <br><br><br>
-                                                <button type="submit" href="#" class="btn btn-primary btn-user btn-block">
-                                                    Simpan
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                             <tr>
                                 <td>
@@ -248,23 +221,47 @@
                     <tr>
                         <td>Lama Berlangganan</td>
                         <td>:</td>
-                        <td>{{$dataMember->lama_member}} bulan</td>
+                        <td> bulan</td>
                     </tr>
                     <tr>
                         <td>Nominal</td>
                         <td>:</td>
-                        <td>Rp {{$dataMember->price}}</td>
+                        <td>Rp </td>
                     </tr>
                     <tr>
                         <td>No. Rekening</td>
                         <td>:</td>
-                        <td>{{$dataMember->deskripsi}}</td>
+                        <td></td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="sendFileRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Upload Bukti Pembayaran</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" enctype="multipart/form-data" action="/member/addBukti" >
+                        @csrf
+                        <div class="form-group">
+                            <label style="margin-left: 15px" for="buktiFile">Bukti Pembayaran</label>  
+                                <input name="buktiBayar" class="file form-control" type="file"/> 
+                            </div>
+                        </div>
+                        <br><br><br>
+                        <input type="submit" class="btn btn-primary btn-user btn-block" value="Upload">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
 @endsection

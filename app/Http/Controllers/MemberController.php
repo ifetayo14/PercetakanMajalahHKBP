@@ -103,33 +103,29 @@ class MemberController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function uploadBuktiPembayaran(Request $request){
-//        $request->validate([
-//            'buktiFile'=>'required',
-//        ],
-//        [
-//            'buktiFile.required'=>'File tidak boleh kosong',
-//        ]);
-//
-//        $getMemberID = DB::table('member')
-//            ->select('member_id')
-//            ->where('user_id', '=', Session::get('user_id'))
-//            ->first();
-//
-        $fileVar = time().$request->file('buktiFile')->getClientOriginalName();
-//        $queryInsert = DB::table('transaksimember')
-//            ->where('member_id', '=', $getMemberID)
-//            ->where('is_verified', '=', 'Pending')
-//            ->insert([
-//                'file' => $fileVar,
-//                ]
-//            );
-//        dd($queryInsert);
+   
+       if($request->file('buktiBayar')){
+                $getMemberID = DB::table('member')
+                   ->select('member_id')
+                   ->where('user_id', '=', Session::get('user_id'))
+                   ->first();
+        
+                   $fileName = time().$request->file('buktiBayar')->getClientOriginalName();
+                $queryInsert = DB::table('transaksimember')
+                   ->where('member_id', '=', $getMemberID->member_id)
+                   ->where('is_verified', '=', 'Pending')
+                   ->update([
+                       'file' => $fileName,
+                       ]
+                   );
+                if ($queryInsert){
+                    $request->file('buktiBayar')->move(public_path('uploads/bukti_bayar'), $fileName);
+                    return redirect('/member')->with('success', 'Upload Berhasil');
+                }
+       } 
+       dd('no file');
 
-        dd($request->file($fileVar));
-
-//        if ($queryInsert){
-//            return redirect('/member')->with('success', 'Upload Berhasil');
-//        }
+//        
     }
 
     /**
