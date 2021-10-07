@@ -25,7 +25,11 @@ class MemberController extends Controller
         }
         else{
             $dataMember = DB::table('member')
+                ->select('member.member_id', 'member.status', 'member.start_date', 'member.end_date', 'transaksimember.price', 'transaksimember.lama_member', 'product.deskripsi')
+                ->join('transaksimember', 'member.member_id', '=', 'transaksimember.member_id')
+                ->join('product', 'transaksimember.product_id', '=', 'product.product_id')
                 ->where('user_id', '=', Session::get('user_id'))
+                ->where('product.product_id', '=', '2')
                 ->first();
         }
 
@@ -52,25 +56,80 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'start_date'=>'required',
-            'end_date'=>'required',
+            'lama_member'=>'required',
         ],
         [
-            'start_date.required'=>'Tanggal Mulai Berlangganan tidak boleh kosong',
-            'end_date.required'=>'Tanggal Berakhir Berlangganan tidak boleh kosong',
+            'lama_member.required'=>'Lama Berlangganan tidak boleh kosong',
         ]);
 
-        $queryInsert = DB::table('member')->insert([
+        $queryInsertMember = DB::table('member')->insert([
             'user_id' => Session::get('user_id'),
-            'status' => '0',
-            'start_date' => $request->input('start_date'),
-            'end_date' => $request->input('end_date'),
+            'status' => 'Non Aktif',
             'created_date' => Carbon::now(),
         ]);
 
-        if ($queryInsert){
-            return redirect('/member');
+        if ($queryInsertMember){
+            $getProductPrice = DB::table('product')
+                ->select('price')
+                ->where('product_id', '=', '2')
+                ->first();
+
+            $price = (int)$request->input('lama_member') * (int)$getProductPrice->price;
+
+            $getMemberID = DB::table('member')
+                ->select('member_id')
+                ->where('user_id', '=', Session::get('user_id'))
+                ->first();
+
+            $queryInsertTransaksi = DB::table('transaksimember')->insert([
+                'member_id' => $getMemberID->member_id,
+                'product_id' => '2',
+                'price' => $price,
+                'payment_status' => 'Pending',
+                'lama_member' => $request->input('lama_member'),
+                'created_date' => Carbon::now(),
+                'is_verified' => 'Pending',
+            ]);
+            if ($queryInsertTransaksi){
+                return redirect('/member')->with('success', 'Daftar Berhasil');
+            }
         }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadBuktiPembayaran(Request $request){
+//        $request->validate([
+//            'buktiFile'=>'required',
+//        ],
+//        [
+//            'buktiFile.required'=>'File tidak boleh kosong',
+//        ]);
+//
+//        $getMemberID = DB::table('member')
+//            ->select('member_id')
+//            ->where('user_id', '=', Session::get('user_id'))
+//            ->first();
+//
+        $fileVar = time().$request->file('buktiFile')->getClientOriginalName();
+//        $queryInsert = DB::table('transaksimember')
+//            ->where('member_id', '=', $getMemberID)
+//            ->where('is_verified', '=', 'Pending')
+//            ->insert([
+//                'file' => $fileVar,
+//                ]
+//            );
+//        dd($queryInsert);
+
+        dd($request->file($fileVar));
+
+//        if ($queryInsert){
+//            return redirect('/member')->with('success', 'Upload Berhasil');
+//        }
     }
 
     /**
@@ -112,15 +171,6 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'start_date'=>'required',
-            'end_date'=>'required',
-        ],
-        [
-            'start_date.required'=>'Tanggal Mulai Berlangganan tidak boleh kosong',
-            'end_date.required'=>'Tanggal Berakhir Berlangganan tidak boleh kosong',
-        ]);
-
 //        dd($request->all());
 
         if ($request->input('status') == '1') {

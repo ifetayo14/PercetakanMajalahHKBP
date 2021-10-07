@@ -27,18 +27,27 @@
                         <form class="user" method="post" action="/member/addProcess" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="start_date">Tanggal Mulai Berlangganan</label>
-                                <input type="date" name="start_date" class="form-control form-control-user" id="exampleFirstName" placeholder="Tanggal Dimulai">
-                                <span style="color: red">
-                                    @error('start_date'){{$message}}@enderror
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label for="end_date">Tanggal Berakhir Berlangganan</label>
-                                <input type="date" name="end_date" class="form-control form-control-user" id="exampleFirstName" placeholder="Tanggal Berakhir">
-                                <span style="color: red">
-                                    @error('end_date'){{$message}}@enderror
-                                </span>
+                                <div class="row">
+                                    <label for="end_date">Lama Berlangganan (Bulan)</label>
+                                    <select name="lama_member" id="" class="form-control" style="width: 200px; margin-left: 10px">
+                                        <option value="0">...</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                    <span style="color: red">
+                                        @error('lama_member'){{$message}}@enderror
+                                    </span>
+                                </div>
                             </div>
 
                             <br><br><br>
