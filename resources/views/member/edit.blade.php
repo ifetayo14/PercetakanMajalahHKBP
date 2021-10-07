@@ -30,9 +30,6 @@
                             <div class="form-group">
                                 <label for="start_date">Nama</label>
                                 <input disabled type="text" name="nama" class="form-control form-control-user" id="exampleFirstName" placeholder="Judul" value="{{$dataMember->nama}}">
-                                <span style="color: red">
-                                    @error('nama'){{$message}}@enderror
-                                </span>
                             </div>
                             <div class="form-group">
                                 <label for="start_date">Tanggal Mulai Berlangganan</label>

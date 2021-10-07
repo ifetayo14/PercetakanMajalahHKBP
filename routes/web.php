@@ -80,6 +80,7 @@ Route::post('khotbah/refuse/{id}', [KhotbahController::class, 'refuseKhotbah']);
 Route::get('member', [MemberController::class, 'index']);
 Route::get('member/add', [MemberController::class, 'create']);
 Route::post('member/addProcess', [MemberController::class, 'store']);
+Route::post('member/addBukti', [MemberController::class, 'uploadBuktiPembayaran']);
 Route::middleware(['memberAccess'])->group(function (){
     Route::get('member/insert', [MemberController::class, 'create']);
     Route::get('member/edit/{id}', [MemberController::class, 'edit']);
