@@ -25,7 +25,7 @@ class MemberController extends Controller
         }
         else{
             $dataMember = DB::table('member')
-                ->select('member.member_id', 'member.status', 'member.start_date', 'member.end_date', 'transaksimember.price', 'transaksimember.lama_member', 'product.deskripsi')
+                ->select('member.member_id', 'member.status', 'member.start_date', 'member.end_date', 'transaksimember.price', 'transaksimember.payment_status','transaksimember.lama_member', 'product.deskripsi')
                 ->join('transaksimember', 'member.member_id', '=', 'transaksimember.member_id')
                 ->join('product', 'transaksimember.product_id', '=', 'product.product_id')
                 ->where('user_id', '=', Session::get('user_id'))
@@ -113,19 +113,19 @@ class MemberController extends Controller
                    $fileName = time().$request->file('buktiBayar')->getClientOriginalName();
                 $queryInsert = DB::table('transaksimember')
                    ->where('member_id', '=', $getMemberID->member_id)
-                   ->where('is_verified', '=', 'Pending')
+                   ->where('is_verified', '=', '0')
                    ->update([
                        'file' => $fileName,
+                       'payment_status' => 'Paid'
                        ]
                    );
-                if ($queryInsert){
+
+           if ($queryInsert){
                     $request->file('buktiBayar')->move(public_path('uploads/bukti_bayar'), $fileName);
                     return redirect('/member')->with('success', 'Upload Berhasil');
                 }
-       }
-       dd('no file');
 
-//
+       }
     }
 
     /**

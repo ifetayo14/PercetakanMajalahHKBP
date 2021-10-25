@@ -155,7 +155,7 @@
                                 @if($dataMember->status == 'Aktif')
                                     <div class="btn btn-success">Aktif</div>
                                 @else
-                                    <div class="btn btn-info">Pending</div>
+                                    <div class="btn btn-info">{{$dataMember->payment_status}}</div>
                                 @endif
                             </td>
                         </tr>
@@ -252,9 +252,8 @@
                     <form method="POST" enctype="multipart/form-data" action="/member/addBukti" >
                         @csrf
                         <div class="form-group">
-                            <label style="margin-left: 15px" for="buktiFile">Bukti Pembayaran</label>
-                                <input name="buktiBayar" class="file form-control" type="file"/>
-                            </div>
+
+                                <input id="file-5" name="buktiBayar" class="file form-control" type="file"/>
                         </div>
                         <br><br><br>
                         <input type="submit" class="btn btn-primary btn-user btn-block" value="Upload">
