@@ -88,7 +88,7 @@ class MemberController extends Controller
                 'payment_status' => 'Pending',
                 'lama_member' => $request->input('lama_member'),
                 'created_date' => Carbon::now(),
-                'is_verified' => '1',
+                'is_verified' => '0',
             ]);
             if ($queryInsertTransaksi){
                 return redirect('/member')->with('success', 'Daftar Berhasil');
