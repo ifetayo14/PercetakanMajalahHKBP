@@ -74,7 +74,7 @@ class MemberController extends Controller
                 ->where('product_id', '=', '2')
                 ->first();
 
-            $price = (int)$request->input('lama_member') * (int)$getProductPrice->price;
+            $price = (int)$getProductPrice->price;
 
             $getMemberID = DB::table('member')
                 ->select('member_id')
