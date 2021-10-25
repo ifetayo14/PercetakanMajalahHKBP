@@ -221,17 +221,17 @@
                     <tr>
                         <td>Lama Berlangganan</td>
                         <td>:</td>
-                        <td> bulan</td>
+                        <td>{{$dataMember->lama_member}} bulan</td>
                     </tr>
                     <tr>
                         <td>Nominal</td>
                         <td>:</td>
-                        <td>Rp </td>
+                        <td>Rp {{number_format($dataMember->price * $dataMember->lama_member,2)}}</td>
                     </tr>
                     <tr>
                         <td>No. Rekening</td>
                         <td>:</td>
-                        <td></td>
+                        <td>{{$dataMember->deskripsi}}</td>
                     </tr>
                 </table>
             </div>
