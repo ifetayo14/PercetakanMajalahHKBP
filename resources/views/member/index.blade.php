@@ -188,7 +188,7 @@
                                 <td></td>
                             </tr>
 
-                            
+
 
                             <tr>
                                 <td>
@@ -251,8 +251,8 @@
                     <form method="POST" enctype="multipart/form-data" action="/member/addBukti" >
                         @csrf
                         <div class="form-group">
-                            <label style="margin-left: 15px" for="buktiFile">Bukti Pembayaran</label>  
-                                <input name="buktiBayar" class="file form-control" type="file"/> 
+                            <label style="margin-left: 15px" for="buktiFile">Bukti Pembayaran</label>
+                                <input name="buktiBayar" class="file form-control" type="file"/>
                             </div>
                         </div>
                         <br><br><br>
