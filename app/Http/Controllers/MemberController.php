@@ -88,7 +88,7 @@ class MemberController extends Controller
                 'payment_status' => 'Pending',
                 'lama_member' => $request->input('lama_member'),
                 'created_date' => Carbon::now(),
-                'is_verified' => 'Pending',
+                'is_verified' => '1',
             ]);
             if ($queryInsertTransaksi){
                 return redirect('/member')->with('success', 'Daftar Berhasil');
@@ -103,13 +103,13 @@ class MemberController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function uploadBuktiPembayaran(Request $request){
-   
+
        if($request->file('buktiBayar')){
                 $getMemberID = DB::table('member')
                    ->select('member_id')
                    ->where('user_id', '=', Session::get('user_id'))
                    ->first();
-        
+
                    $fileName = time().$request->file('buktiBayar')->getClientOriginalName();
                 $queryInsert = DB::table('transaksimember')
                    ->where('member_id', '=', $getMemberID->member_id)
@@ -122,10 +122,10 @@ class MemberController extends Controller
                     $request->file('buktiBayar')->move(public_path('uploads/bukti_bayar'), $fileName);
                     return redirect('/member')->with('success', 'Upload Berhasil');
                 }
-       } 
+       }
        dd('no file');
 
-//        
+//
     }
 
     /**
