@@ -205,7 +205,7 @@
     </div>
 
 
-    @if($dataMember != null &&  Session::get('role') != '1' && ession::get('role') != '4')
+    @if($dataMember != null &&  Session::get('role') != '1' && Session::get('role') != '4')
     <div class="modal fade" id="tagihanRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
