@@ -51,7 +51,7 @@
                                     @if($row->status == '1')
                                         <div class="btn btn-success">Aktif</div>
                                     @else
-                                        <div class="btn btn-info">Pending</div>
+                                        <div class="btn btn-info">{{$row->payment_status}}</div>
                                     @endif
                                 </td>
                                 <td style="white-space: nowrap">
@@ -205,7 +205,7 @@
     </div>
 
 
-    @if($dataMember != null)
+    @if($dataMember != null &&  Session::get('role') != '1')
     <div class="modal fade" id="tagihanRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">

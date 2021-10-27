@@ -20,7 +20,8 @@ class MemberController extends Controller
         if (Session::get('role') == '1' || Session::get('role') == '4'){
             $dataMember = DB::table('member')
                 ->join('user', 'member.user_id', '=', 'user.user_id')
-                ->select('user.nama', 'member.member_id', 'member.status', 'member.start_date', 'member.end_date')
+                ->join('transaksimember', 'member.member_id', '=', 'transaksimember.member_id')
+                ->select('user.nama', 'member.member_id', 'member.status', 'member.start_date', 'member.end_date', 'transaksimember.payment_status')
                 ->get();
         }
         else{
