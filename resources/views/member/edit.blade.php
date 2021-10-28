@@ -33,11 +33,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="start_date">Tanggal Mulai Berlangganan</label>
-                                <input disabled type="text" name="start_date" class="form-control form-control-user" id="exampleFirstName" placeholder="Judul" value="{{$dataMember->start_date}}">
+                                <input  disabled type="datetime-local" name="start_date" class="form-control form-control-user" id="exampleFirstName" placeholder="Start Date" value="{{Carbon\Carbon::parse($dataMember->active_date)->format('Y-m-d\TH:i')}}">
                             </div>
                             <div class="form-group">
                                 <label for="end_date">Tanggal Berakhir Berlangganan</label>
-                                <input disabled type="text" name="end_date" class="form-control form-control-user" id="exampleFirstName" placeholder="Judul" value="{{$dataMember->end_date}}">
+                                <input disabled type="datetime-local" name="end_date" class="form-control form-control-user" id="exampleFirstName" placeholder="End Date" value="{{Carbon\Carbon::parse($dataMember->end_date)->format('Y-m-d\TH:i')}}">
                             </div>
                             <div class="form-group">
                                 <div class="row">
