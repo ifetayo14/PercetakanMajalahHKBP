@@ -374,6 +374,13 @@
         showClose : false
 
     });
+    function showBuktiBayar(file){
+        $('#tagihanModal').on('shown.bs.modal', function () {
+
+            $("#gambarBukti").attr('src', '{{URL::to('uploads/bukti_bayar')}}'+ '/' + file);
+            console.log( '{{URL::to('uploads/bukti_bayar')}}'+ '/' + file);
+        });
+    }
 
 
 

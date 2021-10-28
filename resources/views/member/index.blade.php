@@ -45,13 +45,13 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $row->nama }}</td>
-                                <td>{{ $row->start_date }}</td>
-                                <td>{{ $row->end_date }}</td>
+                                <td>{{Carbon\Carbon::parse($row->active_date)->format('H:m d-m-Y')}}</td>
+                                <td>{{ Carbon\Carbon::parse($row->end_date)->format('H:m d-m-Y') }}</td>
                                 <td>
                                     @if($row->status == '1')
                                         <div class="btn btn-success">Aktif</div>
                                     @else
-                                        <div class="btn btn-info">{{$row->payment_status}}</div>
+                                        <button class="btn btn-info" onclick="showBuktiBayar('{{$row->file}}')" data-toggle="modal" data-target="#tagihanModal">{{$row->payment_status}}</button>
                                     @endif
                                 </td>
                                 <td style="white-space: nowrap">
@@ -155,7 +155,7 @@
                                 @if($dataMember->status == 'Aktif')
                                     <div class="btn btn-success">Aktif</div>
                                 @else
-                                    <div class="btn btn-info">{{$dataMember->payment_status}}</div>
+                                    <div class="btn btn-info" >{{$dataMember->payment_status}}</div>
                                 @endif
                             </td>
                         </tr>
@@ -203,8 +203,26 @@
             </div>
         @endif
     </div>
-
-
+    //bukti pembayaran
+    @if(Session::get('role') == '1' || Session::get('role') == '4')
+    <div class="modal fade" id="tagihanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Bukti Bayar</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img class="img-fluid" id="gambarBukti"/>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    @endif
     @if($dataMember != null &&  Session::get('role') != '1' && Session::get('role') != '4')
     <div class="modal fade" id="tagihanRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">

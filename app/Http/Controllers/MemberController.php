@@ -21,7 +21,7 @@ class MemberController extends Controller
             $dataMember = DB::table('member')
                 ->join('user', 'member.user_id', '=', 'user.user_id')
                 ->join('transaksimember', 'member.member_id', '=', 'transaksimember.member_id')
-                ->select('user.nama', 'member.member_id', 'member.status', 'member.start_date', 'member.end_date', 'transaksimember.payment_status')
+                ->select('user.nama', 'member.member_id', 'member.status', 'member.active_date', 'member.end_date', 'transaksimember.payment_status', 'transaksimember.file')
                 ->get();
         }
         else{
@@ -150,7 +150,7 @@ class MemberController extends Controller
     {
         $data = DB::table('member')
             ->join('user', 'member.user_id', '=', 'user.user_id')
-            ->select('user.nama', 'member.member_id', 'member.status', 'member.start_date', 'member.end_date')
+            ->select('user.nama', 'member.member_id', 'member.status', 'member.active_date', 'member.end_date')
             ->where('member.member_id', '=', $id)
             ->first();
         $dataMember = [
@@ -171,10 +171,18 @@ class MemberController extends Controller
 //        dd($request->all());
 
         if ($request->input('status') == '1') {
+            $current = Carbon::now();
+            $lamaMember = DB::table('transaksimember')
+                ->select('lama_member')
+                ->where('member_id', '=', $id)
+                ->first();
+            $expires = $current->addMonth($lamaMember->lama_member);
             $queryUpdate = DB::table('member')->where('member_id', $id)
                 ->update([
                     'status' => $request->input('status'),
                     'active_date' => Carbon::now(),
+                    'end_Date' => $expires,
+
                 ]);
         }
         else{
