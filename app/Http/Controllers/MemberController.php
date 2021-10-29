@@ -177,18 +177,28 @@ class MemberController extends Controller
                 ->where('member_id', '=', $id)
                 ->first();
             $expires = $current->addMonth($lamaMember->lama_member);
-            $queryUpdate = DB::table('member')->where('member_id', $id)
+            $queryUpdate1 = DB::table('member')->where('member_id', $id)
                 ->update([
                     'status' => $request->input('status'),
                     'active_date' => Carbon::now(),
                     'end_Date' => $expires,
 
+
+                ]);
+            $queryUpdate2 = DB::table('transaksimember')->where('member_id', $id)
+                ->update([
+                    'is_verified' =>'1',
+                    'verified_date' => Carbon::now(),
                 ]);
         }
         else{
-            $queryUpdate = DB::table('member')->where('member_id', $id)
+            $queryUpdate1 = DB::table('member')->where('member_id', $id)
                 ->update([
                     'status' => $request->input('status'),
+                ]);
+            $queryUpdate2 = DB::table('transaksimember')->where('member_id', $id)
+                ->update([
+                    'is_verified' =>'0',
                 ]);
         }
 
