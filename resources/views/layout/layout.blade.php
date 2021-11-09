@@ -212,6 +212,14 @@
                 </a>
             </li>
     @endif
+    @if(\Illuminate\Support\Facades\Session::get('role') == '2')
+            <li class="nav-item  {{(request()->is('majalahJemaat*') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('majalahJemaat')}}">
+                    <i class="fa fa-book" style="color: {{(request()->is('majalahJemaat*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                    <span style="margin-left: 9px;">Majalah</span>
+                </a>
+            </li>
+    @endif
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
