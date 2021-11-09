@@ -75,6 +75,9 @@ Route::get('khotbah/detail/{id}', [KhotbahController::class, 'show']);
 Route::get('khotbah/review', [KhotbahController::class, 'indexReview']);
 Route::get('khotbah/accept/{id}', [KhotbahController::class, 'acceptKhotbah']);
 Route::post('khotbah/refuse/{id}', [KhotbahController::class, 'refuseKhotbah']);
+//majalah jemaat
+Route::get('majalahJemaat', [MajalahController::class, 'indexJemaat']);
+Route::get('majalahJemaat/view/{id}', [MajalahController::class, 'showJemaat']);
 
 //member
 Route::get('member', [MemberController::class, 'index']);
@@ -92,6 +95,8 @@ Route::middleware(['artikelAccess'])->group(function (){
     Route::get('artikel/accept/{id}', [ArtikelController::class, 'acceptArtikel']);
     Route::post('artikel/refuse/{id}', [ArtikelController::class, 'refuseArtikel']);
 });
+Route::get('pengumuman', [PengumumanController::class, 'index']);
+Route::get('majalah', [MajalahController::class, 'index']);
 
 Route::middleware(['adminPage'])->group(function (){
 
@@ -104,7 +109,7 @@ Route::middleware(['adminPage'])->group(function (){
     Route::get('akun/delete/{id}', [AccountController::class, 'destroy']);
 
     //pengumuman
-    Route::get('pengumuman', [PengumumanController::class, 'index']);
+
     Route::get('pengumuman/add', [PengumumanController::class, 'create']);
     Route::post('pengumuman/add', [PengumumanController::class, 'store']);
     Route::get('pengumuman/view/{id}', [PengumumanController::class, 'show']);
@@ -121,7 +126,6 @@ Route::middleware(['adminPage'])->group(function (){
     Route::post('periode/edit/{id}', [PeriodeController::class, 'update']);
     Route::get('periode/delete/{id}', [PeriodeController::class, 'update']);
     //majalah
-    Route::get('majalah', [MajalahController::class, 'index']);
     Route::get('majalah/add', [MajalahController::class, 'create']);
     Route::post('majalah/add', [MajalahController::class, 'store']);
     Route::get('majalah/view/{id}', [MajalahController::class, 'show']);
