@@ -39,14 +39,15 @@ class MajalahController extends Controller
     public function indexJemaat(){
         $majalah =  DB::table('majalah')
             ->join('status', 'status.id','=','majalah.status')
-            ->select('judul', 'status.deskripsi as status','majalah_id','majalah.deskripsi as deskripsi')
+            ->join('periode','majalah.periode_id','=','periode.periode_id')
+            ->select('judul', 'status.deskripsi as status','majalah_id','majalah.deskripsi as deskripsi','periode.bulan', 'periode.tahun')
+            ->where('majalah.status','=','5')
             ->get();
         return view('majalah.indexJemaat', compact('majalah'));
     }
     public function showJemaat($id)
     {
         $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get();
-
         $artikel = DB::table('artikel')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
         $berita = DB::table('berita')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
         $kotbah = DB::table('kotbah')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();

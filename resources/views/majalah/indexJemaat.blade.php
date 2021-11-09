@@ -17,7 +17,8 @@
                     <tr>
                         <th>No</th>
                         <th>Judul</th>
-                        <th>Status</th>
+                        <th>Periode</th>
+
                         <th>Aksi</th>
                     </tr>
                     </thead>
@@ -27,7 +28,7 @@
                         <tr>
                             <td>{{$i}}</td>
                             <td>{{$p->judul}}</td>
-                            <td>{{ $p->status}}</td>
+                            <td>{{ $p->bulan . ' '. $p->tahun}}</td>
                             <td>
                                 <a href="/majalahJemaat/view/{{$p->majalah_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> View</a>
                             </td>

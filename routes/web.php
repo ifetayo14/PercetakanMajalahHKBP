@@ -78,6 +78,10 @@ Route::post('khotbah/refuse/{id}', [KhotbahController::class, 'refuseKhotbah']);
 //majalah jemaat
 Route::get('majalahJemaat', [MajalahController::class, 'indexJemaat']);
 Route::get('majalahJemaat/view/{id}', [MajalahController::class, 'showJemaat']);
+Route::get('artikelJemaat/view/{id}', [ArtikelController::class, 'showSekjen']);
+Route::get('beritaJemaat/view/{id}', [BeritaController::class, 'showSekjen']);
+Route::get('kotbahJemaat/view/{id}', [KhotbahController::class, 'showSekjen']);
+
 
 //member
 Route::get('member', [MemberController::class, 'index']);
