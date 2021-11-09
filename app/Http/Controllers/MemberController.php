@@ -17,25 +17,40 @@ class MemberController extends Controller
      */
     public function index()
     {
+        $transaksiMember =[];
         if (Session::get('role') == '1' || Session::get('role') == '4'){
             $dataMember = DB::table('member')
                 ->join('user', 'member.user_id', '=', 'user.user_id')
-                ->join('transaksimember', 'member.member_id', '=', 'transaksimember.member_id')
-                ->select('user.nama', 'member.member_id', 'member.status', 'member.active_date', 'member.end_date', 'transaksimember.payment_status', 'transaksimember.file')
+                ->select('user.nama', 'member.member_id', 'member.status', 'member.active_date', 'member.end_date')
+                ->get();
+            $transaksiMember =DB::table('transaksimember')
+                ->join('member', 'member.member_id', '=', 'transaksimember.member_id')
+                ->join('user', 'member.user_id', '=', 'user.user_id')
+                ->select('transaksimember.*', 'member.*', 'user.*')
+                ->where('product_id', '=', '2')
                 ->get();
         }
         else{
             $dataMember = DB::table('member')
-                ->select('member.member_id', 'member.status', 'member.start_date', 'member.end_date', 'transaksimember.price', 'transaksimember.payment_status','transaksimember.lama_member', 'product.deskripsi')
+                ->select('member.member_id', 'member.status', 'member.active_date', 'member.start_date', 'member.end_date', 'transaksimember.price', 'transaksimember.payment_status','transaksimember.lama_member', 'product.deskripsi')
                 ->join('transaksimember', 'member.member_id', '=', 'transaksimember.member_id')
                 ->join('product', 'transaksimember.product_id', '=', 'product.product_id')
                 ->where('user_id', '=', Session::get('user_id'))
                 ->where('product.product_id', '=', '2')
                 ->first();
+                if($dataMember){
+                    $transaksiMember =DB::table('transaksimember')
+                                ->where('member_id', '=', $dataMember->member_id)
+                                ->where('product_id', '=', '2')
+                                ->get();
+                }
+                
         }
 
+        
+
 //        dd($dataMember);
-        return view('member.index', compact('dataMember'));
+        return view('member.index', compact('dataMember', 'transaksiMember'));
     }
 
     /**
@@ -97,6 +112,46 @@ class MemberController extends Controller
         }
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function perpanjang(Request $request)
+    {
+        $request->validate([
+            'lama_member'=>'required',
+        ],
+        [
+            'lama_member.required'=>'Lama Berlangganan tidak boleh kosong',
+        ]);
+
+        $dataMember = DB::table('member') 
+            ->where('user_id', '=', Session::get('user_id'))
+            ->first();
+        if ($dataMember){
+            $getProductPrice = DB::table('product')
+                ->select('price')
+                ->where('product_id', '=', '2')
+                ->first();
+
+            $price = (int)$getProductPrice->price;
+
+            $queryInsertTransaksi = DB::table('transaksimember')->insert([
+                'member_id' => $dataMember->member_id,
+                'product_id' => '2',
+                'price' => $price,
+                'payment_status' => 'Pending',
+                'lama_member' => $request->input('lama_member'),
+                'created_date' => Carbon::now(),
+                'is_verified' => '0',
+            ]);
+            if ($queryInsertTransaksi){
+                return redirect('/member')->with('success', 'Daftar Berhasil');
+            }
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -203,6 +258,91 @@ class MemberController extends Controller
         }
 
         return redirect('member')->with('success', 'Data Diubah');
+    }
+
+    public function approve($id)
+    {
+    //        dd($request->all());
+        $transaksiMember = DB::table('transaksimember')
+                    ->where('transaksimember_id', '=', $id)
+                    ->first();
+        if($transaksiMember){
+            $data = DB::table('member')
+            ->join('user', 'member.user_id', '=', 'user.user_id')
+            ->select('user.nama', 'member.member_id', 'member.status', 'member.active_date', 'member.end_date')
+            ->where('member.member_id', '=', $transaksiMember->member_id)
+            ->first();
+            
+            if ($data) {
+                $datenow = Carbon::now();
+                if($data->end_date == null){
+                    $current = Carbon::now();
+                    $expires = $current->addMonth($transaksiMember->lama_member);
+                    DB::table('member')->where('member_id', $transaksiMember->member_id)
+                        ->update([
+                            'status' => 'Aktif',
+                            'active_date' => Carbon::now(),
+                            'end_date' => $expires,
+                            'start_Date' => Carbon::now()
+                        ]);
+                }else if($data->end_date >= $datenow){
+                    $current = Carbon::parse($data->end_date);
+                    $expires = $current->addMonth($transaksiMember->lama_member);
+                    DB::table('member')->where('member_id', $transaksiMember->member_id)
+                        ->update([
+                            'status' => 'Aktif',
+                            'end_date' => $expires
+                        ]);
+                }else{
+                    $current = Carbon::now();
+                    $expires = $current->addMonth($transaksiMember->lama_member);
+                    DB::table('member')->where('member_id', $transaksiMember->member_id)
+                        ->update([
+                            'status' => 'Aktif',
+                            'active_date' => Carbon::now(),
+                            'end_date' => $expires,
+                            'start_date' => Carbon::now()
+                        ]);
+                }
+                $queryUpdate2 = DB::table('transaksimember')
+                    ->where('transaksimember_id', '=', $id)
+                    ->update([
+                        'is_verified' =>'1',
+                        'payment_status' =>'Paid',
+                        'verified_date' => Carbon::now()
+                    ]);
+                if($queryUpdate2){
+                    return redirect('member')->with('success', 'Aktivasi Member berhasil!');
+                }
+                
+            }
+        }else{
+            return redirect('member')->with('warning', 'Data transaksi tidak ditemukan.');
+        }
+
+    }
+
+    public function reject($id)
+    {
+    //        dd($request->all());
+        $transaksiMember = DB::table('transaksimember')
+                    ->where('transaksimember_id', '=', $id)
+                    ->first();
+        if($transaksiMember){
+            $queryUpdate2 = DB::table('transaksimember')
+                ->where('transaksimember_id', '=', $id)
+                ->update([
+                    'is_verified' =>'1',
+                    'payment_status' =>'Ditolak',
+                    'verified_date' => Carbon::now()
+                ]);
+            if($queryUpdate2){
+                return redirect('member')->with('success', 'Aktivasi Member berhasil ditolak!');
+            }
+        }else{
+            return redirect('member')->with('warning', 'Data transaksi tidak ditemukan.');
+        }
+
     }
 
     /**
