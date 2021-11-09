@@ -82,6 +82,7 @@ Route::get('artikelJemaat/view/{id}', [ArtikelController::class, 'showSekjen']);
 Route::get('beritaJemaat/view/{id}', [BeritaController::class, 'showSekjen']);
 Route::get('kotbahJemaat/view/{id}', [KhotbahController::class, 'showSekjen']);
 
+
 //member
 Route::get('member', [MemberController::class, 'index']);
 Route::get('member/add', [MemberController::class, 'create']);
