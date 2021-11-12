@@ -140,6 +140,7 @@ Route::middleware(['adminPage'])->group(function (){
     Route::post('majalah/edit/{id}', [MajalahController::class, 'update']);
     Route::get('majalah/delete/{id}', [MajalahController::class, 'delete']);
     Route::get('majalah/ajukan/{id}', [MajalahController::class, 'ajukan']);
+    Route::get('majalah/ajukanDewanRedaksi/{id}', [MajalahController::class, 'ajukanDewanRedaksi']);
     Route::get('majalah/berita/detail/{id}', [BeritaController::class, 'showAdmin']);
     Route::get('majalah/artikel/detail/{id}', [ArtikelController::class, 'showAdmin']);
     Route::get('majalah/khotbah/detail/{id}', [KhotbahController::class, 'showAdmin']);
@@ -159,4 +160,20 @@ Route::middleware(['sekjenPage'])->group(function (){
     Route::get('artikelSekjen/view/{id}', [ArtikelController::class, 'showSekjen']);
     Route::get('beritaSekjen/view/{id}', [BeritaController::class, 'showSekjen']);
     Route::get('kotbahSekjen/view/{id}', [KhotbahController::class, 'showSekjen']);
+});
+Route::middleware(['dewanRedaksiPage'])->group(function (){
+    //periode
+    Route::get('periodeDewanRedaksi', [PeriodeController::class, 'indexDewanRedaksi']);
+    Route::get('periodeDewanRedaksi/view/{id}', [PeriodeController::class, 'showDewanRedaksi']);
+    //majalah
+    Route::get('majalahDewanRedaksi', [MajalahController::class, 'indexDewanRedaksi']);
+    Route::get('majalahDewanRedaksi/view/{id}', [MajalahController::class, 'showDewanRedaksi']);
+    Route::get('majalahDewanRedaksi/terima/{id}', [MajalahController::class, 'terimaDewanRedaksi']);
+    Route::post('majalahDewanRedaksi/terima/{id}', [MajalahController::class, 'terimaUpdateDewanRedaksi']);
+    Route::get('majalahDewanRedaksi/tolak/{id}', [MajalahController::class, 'tolakDewanRedaksi']);
+    Route::get('/majalahDewanRedaksi/viewByPeriode/{id}', [MajalahController::class, 'showDewanRedaksiByPeriode']);
+    Route::post('majalahDewanRedaksi/tolak/{id}', [MajalahController::class, 'tolakUpdateDewanRedaksi']);
+    Route::get('artikelDewanRedaksi/view/{id}', [ArtikelController::class, 'showDewanRedaksi']);
+    Route::get('beritaDewanRedaksi/view/{id}', [BeritaController::class, 'showDewanRedaksi']);
+    Route::get('kotbahDewanRedaksi/view/{id}', [KhotbahController::class, 'showDewanRedaksi']);
 });

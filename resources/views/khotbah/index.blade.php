@@ -38,40 +38,13 @@
                             <td>{{ $loop->iteration }}</td>
                             <td><a href="khotbah/detail/{{$row->kotbah_id}}">{{ $row->judul }}</a></td>
                             <td>{{ $row->created_by }}</td>
-                            <td>
-                                @if($row->bulan == '1')
-                                    Januari
-                                @elseif($row->bulan == '2')
-                                    Februari
-                                @elseif($row->bulan == '3')
-                                    Maret
-                                @elseif($row->bulan == '4')
-                                    April
-                                @elseif($row->bulan == '5')
-                                    Mei
-                                @elseif($row->bulan == '6')
-                                    Juni
-                                @elseif($row->bulan == '7')
-                                    Juli
-                                @elseif($row->bulan == '8')
-                                    Agustus
-                                @elseif($row->bulan == '9')
-                                    September
-                                @elseif($row->bulan == '10')
-                                    Oktober
-                                @elseif($row->bulan == '11')
-                                    November
-                                @else
-                                    Desember
-                                @endif
-                                {{ $row->tahun }}
-                            </td>
+                            <td>{{$row->bulan }} {{ $row->tahun }}</td>
                             @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
                                 <td style="white-space: nowrap">
                                     <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->kotbah_id}}">
                                         <i class="fas fa-trash"></i>
                                     </a>
-                                    <a href="artikel/edit/{{$row->kotbah_id}}" class="btn btn-info">
+                                    <a href="khotbah/edit/{{$row->kotbah_id}}" class="btn btn-info">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </td>

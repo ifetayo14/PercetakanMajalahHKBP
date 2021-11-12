@@ -21,7 +21,9 @@ class KhotbahController extends Controller
     }
 
     public function  indexPengajuan(){
-        $dataKhotbah = DB::table('kotbah')->where('user_id', '=', Session::get('user_id'))->get();
+        $dataKhotbah = DB::table('kotbah')
+        ->join('periode', 'kotbah.periode_id', '=', 'periode.periode_id')
+        ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul', 'kotbah.user_id', 'kotbah.status', 'kotbah.created_by')->where('user_id', '=', Session::get('user_id'))->get();
         return view('khotbah.pengajuanKhotbah', compact('dataKhotbah'));
     }
 
@@ -172,7 +174,7 @@ class KhotbahController extends Controller
         $dataKhotbah = DB::table('kotbah')
             ->where('kotbah_id', $id)
             ->join('periode', 'kotbah.periode_id', '=', 'kotbah.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul','kotbah.nama_minggu','kotbah.topik', 'kotbah.file', 'kotbah.nats_alkitab', 'kotbah.isi', 'kotbah.status', 'kotbah.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul','kotbah.nama_minggu','kotbah.topik', 'kotbah.file', 'kotbah.nats_alkitab', 'kotbah.isi', 'kotbah.status','kotbah.catatan', 'kotbah.created_by')
             ->first();
         if (Session::get('role') == '1' || Session::get('role') == '4'){
             if ($dataKhotbah->status == '2'){

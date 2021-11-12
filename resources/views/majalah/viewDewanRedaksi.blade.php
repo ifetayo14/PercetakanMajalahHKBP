@@ -32,15 +32,19 @@
                 {!! $majalah[0]->deskripsi !!}
             </div>
             <div class="col-12">
-            Catatan : <i>{!! $majalah[0]->catatan !!}</i>
+            Catatan SEKJEN: <i>{!! $majalah[0]->catatan !!}</i>
+            <br>
+            Catatan Dewan Redaksi: <i>{!! $majalah[0]->catatan_dewan !!}</i>
             </div>
             <div class="col-12">
                 <div class="row d-flex justify-content-between">
                     <div class="col-12 col-sm-6">
-                        <label for="status" class="badge badge-pill badge-info p-2 m-2">{{$majalah[0]->status}}</label>
+                        Status SEKJEN <label for="status" class="badge badge-pill badge-info p-2 m-2">{{$majalah[0]->status}}</label>
+                        <br>
+                        Status Dewan Redaksi     <label for="status" class="badge badge-pill badge-primary p-2 m-2">{{$majalah[0]->approval_dewan}}</label>
                     </div>
                     <div class="col-12 col-sm-6">
-                        @if($majalah[0]->file !=null)
+                        @if($majalah[0]->file !=Null)
                             <a href="{{URL::to('uploads/'.$majalah[0]->file)}}" target="_blank" class="btn btn-primary" >Download File</a>
                         @endif
                     </div>
@@ -48,11 +52,11 @@
             </div>
         </div>
         <div class="row p-2 m-2 d-flex justify-content-end">
-            @if($majalah[0]->status_id == 3)
-                <a href="/majalahSekjen/terima/{{$majalah[0]->majalah_id}}" class="btn btn-success p-2 m-2" ><i class="fa fa-check"></i> Setujui</a>
-                <a href="/majalahSekjen/tolak/{{$majalah[0]->majalah_id}}" class="btn btn-primary p-2 m-2" ><i class="fa fa-times"></i> Tolak</a>
+            @if($majalah[0]->approval_dewan == 'Review')
+                <a href="/majalahDewanRedaksi/terima/{{$majalah[0]->majalah_id}}" class="btn btn-success p-2 m-2" ><i class="fa fa-check"></i> Setujui</a>
+                <a href="/majalahDewanRedaksi/tolak/{{$majalah[0]->majalah_id}}" class="btn btn-primary p-2 m-2" ><i class="fa fa-times"></i> Tolak</a>
             @endif
-                <a href="/majalahSekjen/terima" class="btn btn-danger p-2 m-2" ><i class="fa fa-arrow-left"></i>  Kembali</a>
+                <a href="/majalahDewanRedaksi" class="btn btn-danger p-2 m-2" ><i class="fa fa-arrow-left"></i>  Kembali</a>
         </div>
     </div>
     <br>
@@ -68,7 +72,7 @@
                 <tr>
                     <td>{{$i}}</td>
                     <td>{{$k->judul}}</td>
-                    <td><a href="/kotbahSekjen/view/{{$k->kotbah_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> Baca</a></td>
+                    <td><a href="/kotbahDewanRedaksi/view/{{$k->kotbah_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> Baca</a></td>
                 </tr>
                <?php $i++;
             }?>
@@ -86,7 +90,7 @@
                 <tr>
                     <td>{{$i}}</td>
                     <td>{{$a->judul}}</td>
-                    <td><a href="/artikelSekjen/view/{{$a->artikel_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> Baca</a></td>
+                    <td><a href="/artikelDewanRedaksi/view/{{$a->artikel_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> Baca</a></td>
                 </tr>
                <?php $i++;
             }?>
@@ -104,7 +108,7 @@
                 <tr>
                     <td>{{$i}}</td>
                     <td>{{$b->judul}}</td>
-                    <td><a href="/beritaSekjen/view/{{$b->berita_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> Baca</a></td>
+                    <td><a href="/beritaDewanRedaksi/view/{{$b->berita_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> Baca</a></td>
                 </tr>
                <?php $i++;
             }?>

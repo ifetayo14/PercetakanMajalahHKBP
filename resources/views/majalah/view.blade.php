@@ -19,17 +19,19 @@
                 {!! $majalah[0]->deskripsi !!}
             </div>
             <div class="col-12">
-            Catatan : <i>{!! $majalah[0]->catatan !!}</i>
+            Catatan SEKJEN: <i>{!! $majalah[0]->catatan !!}</i>
+            <br>
+            Catatan Dewan Redaksi: <i>{!! $majalah[0]->catatan_dewan !!}</i>
             </div>
             <div class="col-12 d-flex justify-content-end">
                 <label for="status" class="badge badge-info p-2 m-2">{{$majalah[0]->status}}</label> 
-                @if($majalah[0]->file !=null)
-                    <a href="/public/uploads/{{$majalah[0]->file}}" target=”_blank” class="btn btn-primary" >Download File</a>
+                @if($majalah[0]->file !=Null)
+                    <a href="{{URL::to('uploads/'.$majalah[0]->file)}}" target="_blank" class="btn btn-primary" >Download File</a>
                 @endif
             </div>
             
             <div class="row p-2 m-2 d-flex justify-content-end">
-                @if($majalah[0]->status_id == 5)
+                @if($majalah[0]->status_id != 5 && $majalah[0]->status_id !=2 && $majalah[0]->approval_dewan != 'Setuju')
                     <a href="majalah/edit/{{$majalah[0]->majalah_id}}" class="btn btn-success p-2 m-2" ><i class="fa fa-edit"></i> Edit</a>
                 @endif
                     <a href="/majalah" class="btn btn-danger p-2 m-2" ><i class="fa fa-arrow-left"></i>  Kembali</a>

@@ -148,7 +148,7 @@
             </li>
         @endif
 
-        @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '5')
+        @if(\Illuminate\Support\Facades\Session::get('role') != '2')
             <li class="nav-item {{(request()->is('khotbah*') ? 'active' : '')}}">
             <a class="{{(request()->is('khotbah*') ? 'nav-linkDrop' : 'nav-link')}} collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
                aria-expanded="true" aria-controls="collapsePages">
@@ -207,6 +207,20 @@
             </li>
             <li class="nav-item  {{(request()->is('majalah*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('majalahSekjen')}}">
+                    <i class="fa fa-database" style="color: {{(request()->is('majalah*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                    <span  style="margin-left: 9px;">Majalah</span>
+                </a>
+            </li>
+    @endif
+    @if(\Illuminate\Support\Facades\Session::get('role') == '6')
+            <li class="nav-item  {{(request()->is('periodeSekjen*') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('periodeDewanRedaksi')}}">
+                    <i class="fa fa-book" style="color: {{(request()->is('periodeDewanRedaksi*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                    <span style="margin-left: 9px;">Periode</span>
+                </a>
+            </li>
+            <li class="nav-item  {{(request()->is('majalah*') ? 'active' : '')}}">
+                <a class="nav-link" href="{{url('majalahDewanRedaksi')}}">
                     <i class="fa fa-database" style="color: {{(request()->is('majalah*') ? '#0500FE' : '#FFFFFF')}}"></i>
                     <span  style="margin-left: 9px;">Majalah</span>
                 </a>
