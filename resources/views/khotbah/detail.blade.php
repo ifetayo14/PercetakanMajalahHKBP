@@ -29,6 +29,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <br>
+            
             <div class="khotbahNats">
                 <table>
                     <tr>
@@ -48,50 +49,52 @@
                 {!! $dataKhotbah->isi !!}
             </div>
             <div class="artikelContent">
-                <?php if(!is_null($dataKhotbah->file) && $dataKhotbah->file != ""){  ?>
+                <?php if($dataKhotbah->file != null && $dataKhotbah->file != ""){  ?>
                 File Terlampir
                 <br>
-                <a href="{{URL::to('uploads/' . $dataKhotbah->file)}}" target="#">{!! $dataKhotbah->file !!}</a>
+                <a href="{{URL::to('uploads/' . $dataKhotbah->file)}}" target="#">Download</a>
                 <?php }?>
             </div>
-
             <br>
-
             <br>
             <div class="artikelPeriode">
-                Periode
-                @if($dataKhotbah->bulan == '1')
-                    Januari
-                @elseif($dataKhotbah->bulan == '2')
-                    Februari
-                @elseif($dataKhotbah->bulan == '3')
-                    Maret
-                @elseif($dataKhotbah->bulan == '4')
-                    April
-                @elseif($dataKhotbah->bulan == '5')
-                    Mei
-                @elseif($dataKhotbah->bulan == '6')
-                    Juni
-                @elseif($dataKhotbah->bulan == '7')
-                    Juli
-                @elseif($dataKhotbah->bulan == '8')
-                    Agustus
-                @elseif($dataKhotbah->bulan == '9')
-                    September
-                @elseif($dataKhotbah->bulan == '10')
-                    Oktober
-                @elseif($dataKhotbah->bulan == '11')
-                    November
-                @else
-                    Desember
-                @endif
-                {{ $dataKhotbah->tahun }}
+                Periode {{$dataKhotbah->bulan }} {{ $dataKhotbah->tahun }}
             </div>
             <div class="artikelPeriode">
                 Oleh {{ $dataKhotbah->created_by }}
             </div>
             <br>
-            <div class="" style="margin-left: 385px">
+            <div class="">
+                <label for="">Status :  
+                    @if($dataKhotbah->status == '1')
+                        <div href="" class="btn btn-dark" style="pointer-events: none">
+                            <i class="">Belum Diajukan</i>
+                        </div>
+                    @elseif($dataKhotbah->status == '2')
+                        <div href="" class="btn btn-primary" style="pointer-events: none">
+                            <i class="">Diajukan</i>
+                        </div>
+                    @elseif($dataKhotbah->status == '3')
+                        <div href="" class="btn btn-info" style="pointer-events: none">
+                            <i class="">Diproses</i>
+                        </div>
+                    @elseif($dataKhotbah->status == '4')
+                        <div href="" class="btn btn-danger" style="pointer-events: none">
+                            <i class="">Ditolak</i>
+                        </div>
+                    @elseif($dataKhotbah->status == '5')
+                        <div href="" class="btn btn-success" style="pointer-events: none">
+                            <i class="">Diterima</i>
+                        </div>
+                    @endif
+                </label>
+            </div>
+            <br>
+            <div class="">
+                <label for="">Catatan :</label>
+                <br>
+                {{$dataKhotbah->catatan}}
+
             </div>
             <br>
         </div>

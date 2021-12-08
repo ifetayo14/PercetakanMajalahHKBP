@@ -7,7 +7,7 @@
 @section('main-content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Review b</h1>
+        <h1 class="h3 mb-0 text-gray-800">Review Kotbah</h1>
     </div>
 
     <div class="card shadow mb-4">
@@ -37,34 +37,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td><a href="detail/{{$row->kotbah_id}}">{{ $row->judul }}</a></td>
                             <td>{{ $row->created_by }}</td>
-                            <td>
-                                @if($row->bulan == '1')
-                                    Januari
-                                @elseif($row->bulan == '2')
-                                    Februari
-                                @elseif($row->bulan == '3')
-                                    Maret
-                                @elseif($row->bulan == '4')
-                                    April
-                                @elseif($row->bulan == '5')
-                                    Mei
-                                @elseif($row->bulan == '6')
-                                    Juni
-                                @elseif($row->bulan == '7')
-                                    Juli
-                                @elseif($row->bulan == '8')
-                                    Agustus
-                                @elseif($row->bulan == '9')
-                                    September
-                                @elseif($row->bulan == '10')
-                                    Oktober
-                                @elseif($row->bulan == '11')
-                                    November
-                                @else
-                                    Desember
-                                @endif
-                                {{ $row->tahun }}
-                            </td>
+                            <td>{{ $row->bulan }} {{ $row->tahun }}</td>
                             <td>
                                 @if($row->status == '1')
                                     <div href="" class="btn btn-dark" style="pointer-events: none">

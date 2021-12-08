@@ -41,7 +41,7 @@
                             <div class="form-group row">
                                 <label for="inputDeskripsi" class="col-sm-2 col-form-label">File</label>
                                 <div class="col-sm-10">
-                                    <input type="file" class="form-control" name="file" id="inputFile">
+                                    <input type="file" class="form-control" name="file-pelengkap" id="inputFile">
                                 </div>
                             </div> 
                         

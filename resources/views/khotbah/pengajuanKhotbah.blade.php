@@ -38,11 +38,11 @@
                             <td>{{ $loop->iteration }}</td>
                             <td><a href="detail/{{$row->kotbah_id}}">{{ $row->judul }}</td>
                             <td>
-                            <td>
                                 {{$row->bulan}}
                                 {{ $row->tahun }}
                             </td>
-                            </td>
+                   
+
                             <td>
                                 @if($row->status == '1')
                                     <div href="" class="btn btn-dark" style="pointer-events: none">

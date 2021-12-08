@@ -42,12 +42,13 @@
                                 {{$row->bulan}}
                                 {{ $row->tahun }}
                             </td>
+
                             @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
                                 <td style="white-space: nowrap">
                                     <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->kotbah_id}}">
                                         <i class="fas fa-trash"></i>
                                     </a>
-                                    <a href="artikel/edit/{{$row->kotbah_id}}" class="btn btn-info">
+                                    <a href="khotbah/edit/{{$row->kotbah_id}}" class="btn btn-info">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </td>

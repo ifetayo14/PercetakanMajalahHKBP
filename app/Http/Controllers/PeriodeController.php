@@ -33,6 +33,11 @@ class PeriodeController extends Controller
         $periode = Periode::all(); 
         return view('periode.indexSekjen',compact('periode'));
     }
+    public function indexDewanRedaksi()
+    {
+        $periode = Periode::all(); 
+        return view('periode.indexDewanRedaksi',compact('periode'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -127,7 +132,18 @@ class PeriodeController extends Controller
         // var_dump($periode);die();
         return view('periode.viewSekjen',compact('periode'));
     }
-
+/**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showDewanRedaksi($id)
+    {
+        $periode = DB::table('periode')->where(['periode_id' => $id])->get(); 
+        // var_dump($periode);die();
+        return view('periode.viewDewanRedaksi',compact('periode'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
