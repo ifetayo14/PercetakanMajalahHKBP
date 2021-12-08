@@ -65,6 +65,7 @@
                     <td>{{$i}}</td>
                     <td>{{$a->judul}}</td>
                     <td><a href="/artikelJemaat/view/{{$a->artikel_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> Baca</a></td>
+
                 </tr>
                 <?php $i++;
                 }?>
@@ -83,6 +84,7 @@
                     <td>{{$i}}</td>
                     <td>{{$b->judul}}</td>
                     <td><a href="/beritaJemaat/view/{{$b->berita_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> Baca</a></td>
+
                 </tr>
                 <?php $i++;
                 }?>
