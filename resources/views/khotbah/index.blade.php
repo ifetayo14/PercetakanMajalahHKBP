@@ -39,31 +39,7 @@
                             <td><a href="khotbah/detail/{{$row->kotbah_id}}">{{ $row->judul }}</a></td>
                             <td>{{ $row->created_by }}</td>
                             <td>
-                                @if($row->bulan == '1')
-                                    Januari
-                                @elseif($row->bulan == '2')
-                                    Februari
-                                @elseif($row->bulan == '3')
-                                    Maret
-                                @elseif($row->bulan == '4')
-                                    April
-                                @elseif($row->bulan == '5')
-                                    Mei
-                                @elseif($row->bulan == '6')
-                                    Juni
-                                @elseif($row->bulan == '7')
-                                    Juli
-                                @elseif($row->bulan == '8')
-                                    Agustus
-                                @elseif($row->bulan == '9')
-                                    September
-                                @elseif($row->bulan == '10')
-                                    Oktober
-                                @elseif($row->bulan == '11')
-                                    November
-                                @else
-                                    Desember
-                                @endif
+                                {{$row->bulan}}
                                 {{ $row->tahun }}
                             </td>
                             @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')

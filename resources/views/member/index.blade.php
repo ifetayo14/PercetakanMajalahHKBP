@@ -79,7 +79,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    
+
                 </div>
             </div>
             <div class="card shadow mb-4">
@@ -289,7 +289,7 @@
                             </tr>
                             <?php $i++; } ?>
                         </tbody>
-                       
+
                         <!-- @if($dataMember->status == 'Aktif')
                         <tr>
                             <td>
@@ -373,7 +373,6 @@
             </div>
         @endif
     </div>
-    //bukti pembayaran
     @if(Session::get('role') == '1' || Session::get('role') == '4')
     <div class="modal fade" id="tagihanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">

@@ -26,7 +26,10 @@ class ArtikelController extends Controller
 
     public function indexPengajuan()
     {
-        $dataArtikel = DB::table('artikel')->where('user_id', '=', Session::get('user_id'))->get();
+        $dataArtikel = DB::table('artikel')->where('user_id', '=', Session::get('user_id'))
+            ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.created_by', 'artikel.judul', 'artikel.artikel_id','artikel.status')
+            ->get();
         return view('artikel.pengajuanArtikel', compact('dataArtikel'));
     }
 
