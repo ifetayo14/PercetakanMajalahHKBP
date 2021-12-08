@@ -25,7 +25,7 @@
                     <tr>
                         <th>#</th>
                         <th>Judul</th>
-                        <th>Pengaju</th>
+                        <th>Dibuat Oleh</th>
                         <th>Periode</th>
                         <th>Status</th>
                         <th>Aksi</th>

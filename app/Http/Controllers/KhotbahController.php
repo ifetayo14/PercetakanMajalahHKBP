@@ -22,8 +22,10 @@ class KhotbahController extends Controller
 
     public function  indexPengajuan(){
         $dataKhotbah = DB::table('kotbah')
-        ->join('periode', 'kotbah.periode_id', '=', 'periode.periode_id')
-        ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul', 'kotbah.user_id', 'kotbah.status', 'kotbah.created_by')->where('user_id', '=', Session::get('user_id'))->get();
+            ->join('periode', 'kotbah.periode_id', '=', 'periode.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul', 'kotbah.user_id', 'kotbah.status', 'kotbah.created_by','kotbah.catatan')
+            ->where('user_id', '=', Session::get('user_id'))->get();
+
         return view('khotbah.pengajuanKhotbah', compact('dataKhotbah'));
     }
 

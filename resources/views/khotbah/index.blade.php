@@ -38,7 +38,11 @@
                             <td>{{ $loop->iteration }}</td>
                             <td><a href="khotbah/detail/{{$row->kotbah_id}}">{{ $row->judul }}</a></td>
                             <td>{{ $row->created_by }}</td>
-                            <td>{{$row->bulan }} {{ $row->tahun }}</td>
+                            <td>
+                                {{$row->bulan}}
+                                {{ $row->tahun }}
+                            </td>
+
                             @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
                                 <td style="white-space: nowrap">
                                     <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->kotbah_id}}">

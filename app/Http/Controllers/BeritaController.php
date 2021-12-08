@@ -19,7 +19,10 @@ class BeritaController extends Controller
 
     }
     public function  indexPengajuan(){
-        $dataBerita = DB::table('berita')->where('user_id', '=', Session::get('user_id'))->get();
+        $dataBerita = DB::table('berita')->where('user_id', '=', Session::get('user_id'))
+            ->join('periode', 'berita.periode_id', '=', 'periode.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.user_id', 'berita.status', 'berita.created_by')
+            ->get();
         return view('berita.pengajuanBerita', compact('dataBerita'));
     }
     public function indexReview()
@@ -165,7 +168,7 @@ class BeritaController extends Controller
             ->first();
         return view('berita.detailSekjen', compact('dataBerita'));
     }
-    
+
     public function showAdmin($id)
     {
         $dataBerita= DB::table('berita')

@@ -29,6 +29,8 @@
                         <th>Periode</th>
                         <th>Status</th>
                         <th>Aksi</th>
+                        <th>Feedback</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -36,7 +38,10 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td><a href="detail/{{$row->artikel_id}}">{{ $row->judul }}</td>
-                            <td>{{ $row->periode_id }}</td>
+                            <td>
+                                {{$row->bulan}}
+                                {{ $row->tahun }}
+                            </td>
                             <td>
                                 @if($row->status == '1')
                                     <div href="" class="btn btn-dark" style="pointer-events: none">
@@ -85,6 +90,12 @@
                                     </a>
                                 </td>
                             @endif
+                            @if($row->catatan != null)
+                                <td>{{$row->catatan}}</td>
+                            @else
+                                <td>Belum ada Feedback</td>
+                            @endif
+
                         </tr>
 
                         <div class="modal fade" id="deleteModal-{{$row->artikel_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

@@ -148,7 +148,8 @@
             </li>
         @endif
 
-        @if(\Illuminate\Support\Facades\Session::get('role') != '2')
+        @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4' || \Illuminate\Support\Facades\Session::get('role') == '5')
+
             <li class="nav-item {{(request()->is('khotbah*') ? 'active' : '')}}">
             <a class="{{(request()->is('khotbah*') ? 'nav-linkDrop' : 'nav-link')}} collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
                aria-expanded="true" aria-controls="collapsePages">
