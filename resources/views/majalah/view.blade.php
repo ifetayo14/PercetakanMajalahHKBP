@@ -32,7 +32,7 @@
             
             <div class="row p-2 m-2 d-flex justify-content-end">
                 @if($majalah[0]->status_id != 5 && $majalah[0]->status_id !=2 && $majalah[0]->approval_dewan != 'Setuju')
-                    <a href="majalah/edit/{{$majalah[0]->majalah_id}}" class="btn btn-success p-2 m-2" ><i class="fa fa-edit"></i> Edit</a>
+                    <a href="/majalah/edit/{{$majalah[0]->majalah_id}}" class="btn btn-success p-2 m-2" ><i class="fa fa-edit"></i> Edit</a>
                 @endif
                     <a href="/majalah" class="btn btn-danger p-2 m-2" ><i class="fa fa-arrow-left"></i>  Kembali</a>
             </div>
