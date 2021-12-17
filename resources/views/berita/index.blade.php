@@ -25,7 +25,7 @@
                     <tr>
                         <th>#</th>
                         <th>Judul</th>
-                        <th>Pengaju</th>
+                        <th>Dibuat Oleh</th>
                         <th>Periode</th>
                         @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
                             <th>Aksi</th>
