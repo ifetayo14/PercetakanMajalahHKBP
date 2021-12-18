@@ -34,7 +34,7 @@
                 Periode {{$dataBerita->bula}} {{ $dataBerita->tahun }}
             </div>
             <div class="artikelPeriode">
-                Oleh {{ $dataBerita->created_by }}
+                Oleh <b>{{ $dataBerita->created_by }}</b>
             </div>
             <div class="artikelPeriode">
                 Catatan : <b>{{ $dataBerita->catatan }}</b>
