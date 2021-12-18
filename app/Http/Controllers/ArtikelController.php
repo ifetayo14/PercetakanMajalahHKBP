@@ -28,7 +28,7 @@ class ArtikelController extends Controller
     {
         $dataArtikel = DB::table('artikel')->where('user_id', '=', Session::get('user_id'))
             ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.created_by', 'artikel.judul', 'artikel.artikel_id','artikel.status')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.created_by', 'artikel.judul', 'artikel.artikel_id','artikel.status', 'artikel.catatan')
             ->get();
         return view('artikel.pengajuanArtikel', compact('dataArtikel'));
     }
@@ -37,7 +37,7 @@ class ArtikelController extends Controller
     {
         $dataArtikel = DB::table('artikel')->where('artikel.status', '!=', '1')
             ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.user_id', 'artikel.status', 'artikel.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.user_id', 'artikel.status', 'artikel.created_by', 'artikel.catatan')
             ->get();
         return view('artikel.review', compact('dataArtikel'));
     }
@@ -110,7 +110,7 @@ class ArtikelController extends Controller
         $dataArtikel = DB::table('artikel')
             ->where('artikel_id', $id)
             ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.isi','artikel.nats_alkitab','artikel.isi_alkitab', 'artikel.file', 'artikel.status', 'artikel.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.isi','artikel.nats_alkitab','artikel.isi_alkitab', 'artikel.file', 'artikel.status', 'artikel.created_by', 'artikel.catatan')
             ->first();
         if (Session::get('role') == '1' || Session::get('role') == '4'){
             if ($dataArtikel->status == '2'){
@@ -127,7 +127,7 @@ class ArtikelController extends Controller
         $dataArtikel = DB::table('artikel')
             ->where('artikel_id', $id)
             ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.isi', 'artikel.file', 'artikel.status', 'artikel.periode_id', 'artikel.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.isi', 'artikel.file', 'artikel.status', 'artikel.periode_id', 'artikel.created_by', 'artikel.catatan')
             ->first();
         return view('artikel.detailSekjen', compact('dataArtikel'));
     }
@@ -137,7 +137,7 @@ class ArtikelController extends Controller
         $dataArtikel = DB::table('artikel')
             ->where('artikel_id', $id)
             ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.isi', 'artikel.file', 'artikel.status', 'artikel.periode_id', 'artikel.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.isi', 'artikel.file', 'artikel.status', 'artikel.periode_id', 'artikel.created_by', 'artikel.catatan')
             ->first();
         return view('artikel.detailAdmin', compact('dataArtikel'));
     }

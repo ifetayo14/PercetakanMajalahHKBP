@@ -38,9 +38,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td><a href="detail/{{$row->artikel_id}}">{{ $row->judul }}</td>
-                            <td>
-                                {{$row->bulan}}
-                                {{ $row->tahun }}
+                            <td>{{$row->bulan}} {{ $row->tahun }}
                             </td>
                             <td>
                                 @if($row->status == '1')

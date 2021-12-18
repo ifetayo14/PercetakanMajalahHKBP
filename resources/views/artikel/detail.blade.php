@@ -52,39 +52,14 @@
             </div>
             <br>
             <div class="artikelPeriode">
-                Periode
-                @if($dataArtikel->bulan == '1')
-                    Januari
-                @elseif($dataArtikel->bulan == '2')
-                    Februari
-                @elseif($dataArtikel->bulan == '3')
-                    Maret
-                @elseif($dataArtikel->bulan == '4')
-                    April
-                @elseif($dataArtikel->bulan == '5')
-                    Mei
-                @elseif($dataArtikel->bulan == '6')
-                    Juni
-                @elseif($dataArtikel->bulan == '7')
-                    Juli
-                @elseif($dataArtikel->bulan == '8')
-                    Agustus
-                @elseif($dataArtikel->bulan == '9')
-                    September
-                @elseif($dataArtikel->bulan == '10')
-                    Oktober
-                @elseif($dataArtikel->bulan == '11')
-                    November
-                @else
-                    Desember
-                @endif
-                {{ $dataArtikel->tahun }}
+                Periode {{$dataArtikel->bulan}} {{ $dataArtikel->tahun }}
             </div>
             <div class="artikelPeriode">
                 Oleh {{ $dataArtikel->created_by }}
             </div>
             <br>
-            <div class="" style="margin-left: 385px">
+            <div class="artikelPeriode">
+                    Catatan :<b>{{!!$dataArtikel->catatan}}
             </div>
             <br>
         </div>

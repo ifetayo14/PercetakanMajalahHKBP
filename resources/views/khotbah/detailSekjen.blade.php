@@ -48,39 +48,13 @@
 
             <br>
             <div class="artikelPeriode">
-                Periode
-                @if($dataKhotbah->bulan == '1')
-                    Januari
-                @elseif($dataKhotbah->bulan == '2')
-                    Februari
-                @elseif($dataKhotbah->bulan == '3')
-                    Maret
-                @elseif($dataKhotbah->bulan == '4')
-                    April
-                @elseif($dataKhotbah->bulan == '5')
-                    Mei
-                @elseif($dataKhotbah->bulan == '6')
-                    Juni
-                @elseif($dataKhotbah->bulan == '7')
-                    Juli
-                @elseif($dataKhotbah->bulan == '8')
-                    Agustus
-                @elseif($dataKhotbah->bulan == '9')
-                    September
-                @elseif($dataKhotbah->bulan == '10')
-                    Oktober
-                @elseif($dataKhotbah->bulan == '11')
-                    November
-                @else
-                    Desember
-                @endif
-                {{ $dataKhotbah->tahun }}
+                Periode {{$dataKhotbah->bulan}} {{ $dataKhotbah->tahun }}
             </div>
             <div class="artikelPeriode">
-                Oleh {{ $dataKhotbah->created_by }}
+                Oleh <b>{{ $dataKhotbah->created_by }}</b>
             </div>
-            <br>
-            <div class="" style="margin-left: 385px">
+            <div class="artikelPeriode">
+                Catatan : <b>{{ $dataKhotbah->catatan }}</b>
             </div>
             <br>
         </div>

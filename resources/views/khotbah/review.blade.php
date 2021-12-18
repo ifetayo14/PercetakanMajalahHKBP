@@ -60,6 +60,10 @@
                                         <i class="">Diterima</i>
                                     </div>
                                 @endif
+                                <br>
+                                <div class="artikelPeriode">
+                                    Catatan : <b>{{ $row->catatan }}</b>
+                                </div>
                             </td>
                             @if($row->status == '2' || $row->status == '3')
                                 <td style="white-space: nowrap">

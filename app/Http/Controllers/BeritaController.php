@@ -21,7 +21,7 @@ class BeritaController extends Controller
     public function  indexPengajuan(){
         $dataBerita = DB::table('berita')->where('user_id', '=', Session::get('user_id'))
             ->join('periode', 'berita.periode_id', '=', 'periode.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.user_id', 'berita.status', 'berita.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.user_id', 'berita.status', 'berita.created_by', 'berita.catatan')
             ->get();
         return view('berita.pengajuanBerita', compact('dataBerita'));
     }
@@ -29,7 +29,7 @@ class BeritaController extends Controller
     {
         $dataBerita = DB::table('berita')->where('berita.status', '!=', '1')
             ->join('periode', 'berita.periode_id', '=', 'periode.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.user_id', 'berita.status', 'berita.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.user_id', 'berita.status', 'berita.created_by', 'berita.catatan')
             ->get();
         return view('berita.review', compact('dataBerita'));
     }
@@ -148,7 +148,7 @@ class BeritaController extends Controller
         $dataBerita= DB::table('berita')
             ->where('berita_id', $id)
             ->join('periode', 'berita.periode_id', '=', 'berita.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.isi','berita.file', 'berita.status', 'berita.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.isi','berita.file', 'berita.status', 'berita.created_by', 'berita.catatan')
             ->first();
         if (Session::get('role') == '1' || Session::get('role') == '4'){
             if ($dataBerita->status == '2'){
@@ -164,7 +164,7 @@ class BeritaController extends Controller
         $dataBerita= DB::table('berita')
             ->where('berita_id', $id)
             ->join('periode', 'berita.periode_id', '=', 'berita.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.isi','berita.file', 'berita.status', 'berita.created_by', 'berita.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.isi','berita.file', 'berita.status', 'berita.created_by', 'berita.periode_id', 'berita.catatan')
             ->first();
         return view('berita.detailSekjen', compact('dataBerita'));
     }
@@ -174,7 +174,7 @@ class BeritaController extends Controller
         $dataBerita= DB::table('berita')
             ->where('berita_id', $id)
             ->join('periode', 'berita.periode_id', '=', 'berita.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.isi','berita.file', 'berita.status', 'berita.created_by', 'berita.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.isi','berita.file', 'berita.status', 'berita.created_by', 'berita.periode_id', 'berita.catatan')
             ->first();
         return view('berita.detailAdmin', compact('dataBerita'));
     }
