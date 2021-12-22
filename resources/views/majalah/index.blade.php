@@ -34,6 +34,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Judul</th>
+                                <th>Periode</th>
                                 <th>Status</th>
                                 <th>Persetujuan Dewan</th>
                                 <th>Aksi</th>
@@ -45,6 +46,7 @@
                             <tr>
                                 <td>{{$i}}</td> 
                                 <td>{{$p->judul}}</td>
+                                <td>{{ $p->bulan . ' '. $p->tahun}}</td>
                                 <td>{{$p->status}}</td>
                                 <td>{{$p->approval_dewan}}</td>
                                 <td>

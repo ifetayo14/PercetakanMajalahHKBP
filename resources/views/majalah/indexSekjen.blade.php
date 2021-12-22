@@ -19,6 +19,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Judul</th>
+                                <th>Periode</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -29,6 +30,7 @@
                             <tr>
                                 <td>{{$i}}</td> 
                                 <td>{{$p->judul}}</td>
+                                <td>{{ $p->bulan . ' '. $p->tahun}}</td>
                                 <td>{{ $p->status}}</td>
                                 <td>
                                 <a href="/majalahSekjen/view/{{$p->majalah_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> View</a>

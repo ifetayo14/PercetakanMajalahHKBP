@@ -19,7 +19,8 @@ class PeriodeController extends Controller
      */
     public function index()
     {
-        $periode = Periode::all(); 
+        $periode = Periode::all()
+        ->orderBy('periode.periode_id', 'desc'); 
         return view('periode.index',compact('periode'));
     }
 
@@ -30,12 +31,14 @@ class PeriodeController extends Controller
      */
     public function indexSekjen()
     {
-        $periode = Periode::all(); 
+        $periode = Periode::all()
+        ->orderBy('periode.periode_id', 'desc'); 
         return view('periode.indexSekjen',compact('periode'));
     }
     public function indexDewanRedaksi()
     {
-        $periode = Periode::all(); 
+        $periode = Periode::all()
+        ->orderBy('periode.periode_id', 'desc'); 
         return view('periode.indexDewanRedaksi',compact('periode'));
     }
     /**

@@ -213,6 +213,16 @@
                 </a>
             </li>
     @endif
+    @if(\Illuminate\Support\Facades\Session::get('role') == '4')
+
+    <li class="nav-item  {{(request()->is('majalah*') ? 'active' : '')}}">
+        <a class="nav-link" href="{{url('majalah')}}">
+            <i class="fa fa-database" style="color: {{(request()->is('majalah*') ? '#0500FE' : '#FFFFFF')}}"></i>
+            <span style="margin-left: 9px;">Majalah</span>
+        </a>
+    </li>
+
+    @endif
     @if(\Illuminate\Support\Facades\Session::get('role') == '6')
             <li class="nav-item  {{(request()->is('periodeSekjen*') ? 'active' : '')}}">
                 <a class="nav-link" href="{{url('periodeDewanRedaksi')}}">

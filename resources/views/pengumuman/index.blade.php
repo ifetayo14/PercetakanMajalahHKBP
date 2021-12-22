@@ -36,7 +36,7 @@
                         @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
                         <td><a href="/pengumuman/edit/{{$p->pengumuman_id}}" class="btn btn-outline-primary"><i class="fa fa-edit"></i> Edit</a><a href="/pengumuman/view/{{$p->pengumuman_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> View</a><button class="btn btn-outline-danger"><i class="fa fa-trash"></i> Hapus</button></td>
                         @else
-                            <td><a href="/pengumuman/view/{{$p->pengumuman_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> View</a></td>
+                            <td><a href="/pengumuman/viewonly/{{$p->pengumuman_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> View</a></td>
                         @endif
 
                     </tr>

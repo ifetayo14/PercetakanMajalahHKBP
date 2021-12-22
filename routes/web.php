@@ -103,6 +103,7 @@ Route::middleware(['artikelAccess'])->group(function (){
     Route::post('artikel/refuse/{id}', [ArtikelController::class, 'refuseArtikel']);
 });
 Route::get('pengumuman', [PengumumanController::class, 'index']);
+Route::get('pengumuman/viewonly/{id}', [PengumumanController::class, 'showonly']);
 Route::get('majalah', [MajalahController::class, 'index']);
 
 Route::middleware(['adminPage'])->group(function (){
@@ -176,4 +177,26 @@ Route::middleware(['dewanRedaksiPage'])->group(function (){
     Route::get('artikelDewanRedaksi/view/{id}', [ArtikelController::class, 'showDewanRedaksi']);
     Route::get('beritaDewanRedaksi/view/{id}', [BeritaController::class, 'showDewanRedaksi']);
     Route::get('kotbahDewanRedaksi/view/{id}', [KhotbahController::class, 'showDewanRedaksi']);
+});
+
+Route::middleware(['timaMajalahPage'])->group(function (){
+    //pengumuman
+    Route::get('pengumuman/add', [PengumumanController::class, 'create']);
+    Route::post('pengumuman/add', [PengumumanController::class, 'store']);
+    Route::get('pengumuman/view/{id}', [PengumumanController::class, 'show']);
+    Route::get('pengumuman/edit/{id}', [PengumumanController::class, 'edit']);
+    Route::post('pengumuman/edit/{id}', [PengumumanController::class, 'update']);
+    Route::get('pengumuman/delete/{id}', [PengumumanController::class, 'update']);
+    //majalah
+    Route::get('majalah/add', [MajalahController::class, 'create']);
+    Route::post('majalah/add', [MajalahController::class, 'store']);
+    Route::get('majalah/view/{id}', [MajalahController::class, 'show']);
+    Route::get('majalah/edit/{id}', [MajalahController::class, 'edit']);
+    Route::post('majalah/edit/{id}', [MajalahController::class, 'update']);
+    Route::get('majalah/delete/{id}', [MajalahController::class, 'delete']);
+    Route::get('majalah/ajukan/{id}', [MajalahController::class, 'ajukan']);
+    Route::get('majalah/ajukanDewanRedaksi/{id}', [MajalahController::class, 'ajukanDewanRedaksi']);
+    Route::get('majalah/berita/detail/{id}', [BeritaController::class, 'showAdmin']);
+    Route::get('majalah/artikel/detail/{id}', [ArtikelController::class, 'showAdmin']);
+    Route::get('majalah/khotbah/detail/{id}', [KhotbahController::class, 'showAdmin']);
 });

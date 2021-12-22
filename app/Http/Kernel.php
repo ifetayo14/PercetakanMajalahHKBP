@@ -59,6 +59,9 @@ class Kernel extends HttpKernel
         'memberAccess'=>[
             \App\Http\Middleware\MemberMiddleware::class,
         ],
+        'timaMajalahPage'=>[
+            \App\Http\Middleware\TimMajalahMiddleware::class,
+        ],
     ];
 
     /**

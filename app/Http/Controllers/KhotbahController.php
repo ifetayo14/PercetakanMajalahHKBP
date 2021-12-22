@@ -13,6 +13,7 @@ class KhotbahController extends Controller
         $dataKhotbah = DB::table('kotbah')
             ->join('periode', 'kotbah.periode_id', '=', 'periode.periode_id')
             ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul', 'kotbah.user_id', 'kotbah.status', 'kotbah.created_by')
+            ->orderBy('kotbah.periode_id', 'desc')
             ->where('kotbah.status', '=', '5')
             ->get();
 
@@ -24,6 +25,7 @@ class KhotbahController extends Controller
         $dataKhotbah = DB::table('kotbah')
             ->join('periode', 'kotbah.periode_id', '=', 'periode.periode_id')
             ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul', 'kotbah.user_id', 'kotbah.status', 'kotbah.created_by','kotbah.catatan')
+            ->orderBy('kotbah.periode_id', 'desc')
             ->where('user_id', '=', Session::get('user_id'))->get();
 
         return view('khotbah.pengajuanKhotbah', compact('dataKhotbah'));
@@ -34,6 +36,7 @@ class KhotbahController extends Controller
         $dataKhotbah = DB::table('kotbah')->where('kotbah.status', '!=', '1')
             ->join('periode', 'kotbah.periode_id', '=', 'periode.periode_id')
             ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul', 'kotbah.user_id', 'kotbah.status', 'kotbah.created_by', 'kotbah.catatan')
+            ->orderBy('kotbah.periode_id', 'desc')
             ->get();
         return view('khotbah.review', compact('dataKhotbah'));
     }
