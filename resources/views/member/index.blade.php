@@ -47,7 +47,15 @@
                                 <td>{{ $row->nama }}</td>
                                 <td>{{Carbon\Carbon::parse($row->active_date)->format('H:m d-m-Y')}}</td>
                                 <td>{{ Carbon\Carbon::parse($row->end_date)->format('H:m d-m-Y') }}</td>
-                                <td>{{$row->status}}</td>
+                                <td>
+                                    <?php $datetoday = date('Y-m-d'); ?>
+                                    @if($datetoday <= Carbon\Carbon::parse($row->end_date)->format('Y-m-d'))
+                                        <div class="btn btn-success">Aktif</div>
+                                    @else
+                                        <div class="btn btn-info" >Non Aktif</div>
+                                    @endif
+                            </td>
+                                
                                 <td style="white-space: nowrap">
                                     <!--a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->member_id}}">
                                         <i class="fas fa-trash"></i>
@@ -96,6 +104,9 @@
                                 <th>Lama Member</th>
                                 <th>Harga</th>
                                 <th>Status Pembayaran</th>
+                                <th>Tanggal Permintaan</th>
+                                <th>Tanggal Perifikasi</th>
+                                <th>Tanggal Aktif</th>
                                 <th>Bukti Pembayaran</th>
                                 <th>Aksi</th>
                             </tr>
@@ -108,17 +119,20 @@
                                     <td>{{ $row->lama_member}}</td>
                                     <td>{{ $row->price* $row->lama_member}}</td>
                                     <td>{{ $row->payment_status }}</td>
+                                    <td>{{$row->created_date }}</td>
+                                    <td>{{$row->verified_date}}</td>
+                                    <td>{{$row->verified_date}}</td>
                                     <td>
                                         <button class="btn btn-info" onclick="showBuktiBayar('{{$row->file}}')" data-toggle="modal" data-target="#tagihanModal">Bukti Bayar</button>
                                     </td>
                                     <td style="white-space: nowrap">
-                                    @if($row->payment_status == 'Pending')
-                                        <a href="member/approve/{{$row->transaksimember_id}}" class="btn btn-info">
-                                            <i class="fas fa-check"> Konfirmasi</i>
-                                        </a>
-                                        <a href="member/reject/{{$row->transaksimember_id}}" class="btn btn-danger">
-                                            <i class="fas fa-times"> Tolak</i>
-                                        </a>
+                                        @if($row->payment_status == 'Menunggu Konfirmasi')
+                                            <a href="member/approve/{{$row->transaksimember_id}}" class="btn btn-info">
+                                                <i class="fas fa-check"> Konfirmasi</i>
+                                            </a>
+                                            <a href="member/reject/{{$row->transaksimember_id}}" class="btn btn-danger">
+                                                <i class="fas fa-times"> Tolak</i>
+                                            </a>
                                         @endif
                                     </td>
                                 </tr>
@@ -216,10 +230,11 @@
                         <tr>
                             <td>Status</td>
                             <td>
-                                @if($dataMember->status == 'Aktif')
+                                <?php $datetoday = date('Y-m-d'); ?>
+                                @if($datetoday <= $dataMember->end_date)
                                     <div class="btn btn-success">Aktif</div>
                                 @else
-                                    <div class="btn btn-info" >{{$dataMember->payment_status}}</div>
+                                    <div class="btn btn-info" >Non Aktif</div>
                                 @endif
                             </td>
                         </tr>
@@ -272,6 +287,9 @@
                             <th>Lama Member</th>
                             <th>Harga</th>
                             <th>Status Pembayaran</th>
+                            <th>Tanggal Permintaan</th>
+                            <th>Tanggal Perifikasi</th>
+                            <th>Tanggal Aktif</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody>
@@ -281,6 +299,9 @@
                                 <td>{{$tm->lama_member}}</td>
                                 <td>{{$tm->price * $tm->lama_member}}</td>
                                 <td>{{$tm->payment_status}}</td>
+                                <td>{{$tm->created_date }}</td>
+                                <td>{{$tm->verified_date}}</td>
+                                <td>{{$tm->verified_date}}</td>
                                 <td>@if($tm->payment_status == 'Pending')
                                     <a href="" data-toggle="modal" data-target="#sendFileRequestModal" class="btn btn-primary">Kirim Bukti Pembayaran</a>
                                     @endif

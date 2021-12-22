@@ -21,7 +21,7 @@ class MemberController extends Controller
         if (Session::get('role') == '1' || Session::get('role') == '4'){
             $dataMember = DB::table('member')
                 ->join('user', 'member.user_id', '=', 'user.user_id')
-                ->select('user.nama', 'member.member_id', 'member.status', 'member.active_date', 'member.end_date')
+                ->select('user.nama', 'member.member_id', 'member.status', 'member.active_date', 'member.end_date', 'member.request_date')
                 ->get();
             $transaksiMember =DB::table('transaksimember')
                 ->join('member', 'member.member_id', '=', 'transaksimember.member_id')
@@ -32,7 +32,7 @@ class MemberController extends Controller
         }
         else{
             $dataMember = DB::table('member')
-                ->select('member.member_id', 'member.status', 'member.active_date', 'member.start_date', 'member.end_date', 'transaksimember.price', 'transaksimember.payment_status','transaksimember.lama_member', 'product.deskripsi')
+                ->select('member.member_id', 'member.status', 'member.active_date', 'member.start_date', 'member.request_date', 'member.end_date', 'transaksimember.price', 'transaksimember.payment_status','transaksimember.lama_member', 'product.deskripsi')
                 ->join('transaksimember', 'member.member_id', '=', 'transaksimember.member_id')
                 ->join('product', 'transaksimember.product_id', '=', 'product.product_id')
                 ->where('user_id', '=', Session::get('user_id'))
@@ -101,7 +101,7 @@ class MemberController extends Controller
                 'member_id' => $getMemberID->member_id,
                 'product_id' => '2',
                 'price' => $price,
-                'payment_status' => 'Pending',
+                'payment_status' => 'Menunggu Pembayaran',
                 'lama_member' => $request->input('lama_member'),
                 'created_date' => Carbon::now(),
                 'is_verified' => '0',
@@ -142,7 +142,7 @@ class MemberController extends Controller
                 'member_id' => $dataMember->member_id,
                 'product_id' => '2',
                 'price' => $price,
-                'payment_status' => 'Pending',
+                'payment_status' => 'Menunggu Pembayaran',
                 'lama_member' => $request->input('lama_member'),
                 'created_date' => Carbon::now(),
                 'is_verified' => '0',
@@ -167,14 +167,14 @@ class MemberController extends Controller
                    ->first();
 
                    $fileName = time().$request->file('buktiBayar')->getClientOriginalName();
-                $queryInsert = DB::table('transaksimember')
-                   ->where('member_id', '=', $getMemberID->member_id)
-                   ->where('is_verified', '=', '0')
-                   ->update([
-                       'file' => $fileName,
-                       'payment_status' => 'Paid'
-                       ]
-                   );
+                    $queryInsert = DB::table('transaksimember')
+                        ->where('member_id', '=', $getMemberID->member_id)
+                        ->where('is_verified', '=', '0')
+                        ->update([
+                            'file' => $fileName,
+                            'payment_status' => 'Menunggu Konfirmasi'
+                            ]
+                        );
 
            if ($queryInsert){
                     $request->file('buktiBayar')->move(public_path('uploads/bukti_bayar'), $fileName);
@@ -308,7 +308,7 @@ class MemberController extends Controller
                     ->where('transaksimember_id', '=', $id)
                     ->update([
                         'is_verified' =>'1',
-                        'payment_status' =>'Paid',
+                        'payment_status' =>'Dibayar',
                         'verified_date' => Carbon::now()
                     ]);
                 if($queryUpdate2){
