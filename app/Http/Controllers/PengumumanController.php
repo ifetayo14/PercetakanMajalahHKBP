@@ -144,8 +144,11 @@ class PengumumanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+        if(DB::table('pengumuman')->where('pengumuman_id', $id)->delete()){
+            return redirect('/pengumuman')->with('success', 'Pengumuman Berhasil dihapus!');
+        }else{
+            return redirect('/pengumuman')->with('danger', 'Pengumuman tidak boleh dihapus, karena sudah digunakan!');
+        }
     }
 }

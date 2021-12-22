@@ -52,6 +52,22 @@ class MemberController extends Controller
 //        dd($dataMember);
         return view('member.index', compact('dataMember', 'transaksiMember'));
     }
+    public function transaksimember()
+    {
+        $transaksiMember =[];
+        if (Session::get('role') == '1' || Session::get('role') == '4'){
+            $transaksiMember =DB::table('transaksimember')
+                ->join('member', 'member.member_id', '=', 'transaksimember.member_id')
+                ->join('user', 'member.user_id', '=', 'user.user_id')
+                ->select('transaksimember.*', 'member.*', 'user.*')
+                ->where('product_id', '=', '2')
+                ->get();
+        }
+        else{
+            return redirect('/member')->with('danger', 'Anda tidak memiliki akses!');
+        }
+        return view('member.transaksimember', compact('transaksiMember'));
+    }
 
     /**
      * Show the form for creating a new resource.

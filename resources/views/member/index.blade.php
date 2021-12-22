@@ -9,6 +9,7 @@
     @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Member</h1>
+            <a href="/member/transaksimember" class="btn btn-primary"><i class="fa fa-eye"></i> Transaksi Member</a>
         </div>
     @else
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -37,7 +38,6 @@
                             <th>Tanggal Dimulai</th>
                             <th>Tanggal Berakhir</th>
                             <th>Status Langganan</th>
-                            <th>Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -45,8 +45,8 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $row->nama }}</td>
-                                <td>{{Carbon\Carbon::parse($row->active_date)->format('H:m d-m-Y')}}</td>
-                                <td>{{ Carbon\Carbon::parse($row->end_date)->format('H:m d-m-Y') }}</td>
+                                <td>{{Carbon\Carbon::parse($row->active_date)->format('Y-m-d H:m:i')}}</td>
+                                <td>{{ Carbon\Carbon::parse($row->end_date)->format('Y-m-d H:m:i') }}</td>
                                 <td>
                                     <?php $datetoday = date('Y-m-d'); ?>
                                     @if($datetoday <= Carbon\Carbon::parse($row->end_date)->format('Y-m-d'))
@@ -54,111 +54,13 @@
                                     @else
                                         <div class="btn btn-info" >Non Aktif</div>
                                     @endif
-                            </td>
-                                
-                                <td style="white-space: nowrap">
-                                    <!--a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->member_id}}">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                    <a href="member/edit/{{$row->member_id}}" class="btn btn-info">
-                                        <i class="fas fa-edit"></i -->
-                                    </a>
                                 </td>
                             </tr>
 
-                            <div class="modal fade" id="deleteModal-{{$row->member_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Hapus Data?</h5>
-                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">Hapus {{$row->nama}} ?</div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                                            <a href="artikel/delete/{{ $row->member_id }}" class="btn btn-primary">Hapus</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         @endforeach
                         </tbody>
                     </table>
 
-                </div>
-            </div>
-            <div class="card shadow mb-4">
-                <div class="card-body">
-                    <div class="table-responsive">
-                    <br>
-                        <br>
-                        <h3>Daftar Transaksi Pengajuan Member</h3>
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nama</th>
-                                <th>Lama Member</th>
-                                <th>Harga</th>
-                                <th>Status Pembayaran</th>
-                                <th>Tanggal Permintaan</th>
-                                <th>Tanggal Perifikasi</th>
-                                <th>Tanggal Aktif</th>
-                                <th>Bukti Pembayaran</th>
-                                <th>Aksi</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($transaksiMember as $row)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row->nama }}</td>
-                                    <td>{{ $row->lama_member}}</td>
-                                    <td>{{ $row->price* $row->lama_member}}</td>
-                                    <td>{{ $row->payment_status }}</td>
-                                    <td>{{$row->created_date }}</td>
-                                    <td>{{$row->verified_date}}</td>
-                                    <td>{{$row->verified_date}}</td>
-                                    <td>
-                                        <button class="btn btn-info" onclick="showBuktiBayar('{{$row->file}}')" data-toggle="modal" data-target="#tagihanModal">Bukti Bayar</button>
-                                    </td>
-                                    <td style="white-space: nowrap">
-                                        @if($row->payment_status == 'Menunggu Konfirmasi')
-                                            <a href="member/approve/{{$row->transaksimember_id}}" class="btn btn-info">
-                                                <i class="fas fa-check"> Konfirmasi</i>
-                                            </a>
-                                            <a href="member/reject/{{$row->transaksimember_id}}" class="btn btn-danger">
-                                                <i class="fas fa-times"> Tolak</i>
-                                            </a>
-                                        @endif
-                                    </td>
-                                </tr>
-
-                                <div class="modal fade" id="deleteModal-{{$row->member_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Hapus Data?</h5>
-                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">Hapus {{$row->nama}} ?</div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                                                <a href="artikel/delete/{{ $row->member_id }}" class="btn btn-primary">Hapus</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
         @else
