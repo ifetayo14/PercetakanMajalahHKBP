@@ -37,11 +37,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td><a href="detail/{{$row->kotbah_id}}">{{ $row->judul }}</td>
-                            <td>
-                                {{$row->bulan}}
-                                {{ $row->tahun }}
-                            </td>
-                   
+                            <td>{{$row->bulan}} {{ $row->tahun }}</td>
 
                             <td>
                                 @if($row->status == '1')

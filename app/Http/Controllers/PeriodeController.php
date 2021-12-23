@@ -19,7 +19,7 @@ class PeriodeController extends Controller
      */
     public function index()
     {
-        $periode = Periode::all(); 
+        $periode = Periode::orderBy('periode_id', 'DESC')->get(); 
         return view('periode.index',compact('periode'));
     }
 
@@ -30,12 +30,12 @@ class PeriodeController extends Controller
      */
     public function indexSekjen()
     {
-        $periode = Periode::all(); 
+        $periode = Periode::orderBy('periode_id', 'DESC')->get(); 
         return view('periode.indexSekjen',compact('periode'));
     }
     public function indexDewanRedaksi()
     {
-        $periode = Periode::all(); 
+        $periode = Periode::orderBy('periode_id', 'DESC')->get(); 
         return view('periode.indexDewanRedaksi',compact('periode'));
     }
     /**
@@ -208,5 +208,7 @@ class PeriodeController extends Controller
     public function destroy($id)
     {
         //
+        $query = DB::table('periode')->where('periode_id', $id)->delete();
+        return redirect('/periode')->with('success', 'Periode Berhasil Dihapus!');
     }
 }

@@ -13,6 +13,7 @@ class KhotbahController extends Controller
         $dataKhotbah = DB::table('kotbah')
             ->join('periode', 'kotbah.periode_id', '=', 'periode.periode_id')
             ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul', 'kotbah.user_id', 'kotbah.status', 'kotbah.created_by')
+            ->orderBy('kotbah.periode_id', 'desc')
             ->where('kotbah.status', '=', '5')
             ->get();
 
@@ -24,6 +25,7 @@ class KhotbahController extends Controller
         $dataKhotbah = DB::table('kotbah')
             ->join('periode', 'kotbah.periode_id', '=', 'periode.periode_id')
             ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul', 'kotbah.user_id', 'kotbah.status', 'kotbah.created_by','kotbah.catatan')
+            ->orderBy('kotbah.periode_id', 'desc')
             ->where('user_id', '=', Session::get('user_id'))->get();
 
         return view('khotbah.pengajuanKhotbah', compact('dataKhotbah'));
@@ -33,7 +35,8 @@ class KhotbahController extends Controller
     {
         $dataKhotbah = DB::table('kotbah')->where('kotbah.status', '!=', '1')
             ->join('periode', 'kotbah.periode_id', '=', 'periode.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul', 'kotbah.user_id', 'kotbah.status', 'kotbah.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul', 'kotbah.user_id', 'kotbah.status', 'kotbah.created_by', 'kotbah.catatan')
+            ->orderBy('kotbah.periode_id', 'desc')
             ->get();
         return view('khotbah.review', compact('dataKhotbah'));
     }
@@ -176,7 +179,7 @@ class KhotbahController extends Controller
         $dataKhotbah = DB::table('kotbah')
             ->where('kotbah_id', $id)
             ->join('periode', 'kotbah.periode_id', '=', 'kotbah.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul','kotbah.nama_minggu','kotbah.topik', 'kotbah.file', 'kotbah.nats_alkitab', 'kotbah.isi', 'kotbah.status','kotbah.catatan', 'kotbah.created_by')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul','kotbah.nama_minggu','kotbah.topik', 'kotbah.file', 'kotbah.nats_alkitab', 'kotbah.isi', 'kotbah.status','kotbah.catatan', 'kotbah.created_by', 'kotbah.catatan')
             ->first();
         if (Session::get('role') == '1' || Session::get('role') == '4'){
             if ($dataKhotbah->status == '2'){
@@ -194,7 +197,7 @@ class KhotbahController extends Controller
         $dataKhotbah = DB::table('kotbah')
             ->where('kotbah_id', $id)
             ->join('periode', 'kotbah.periode_id', '=', 'kotbah.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul','kotbah.nama_minggu','kotbah.topik', 'kotbah.file', 'kotbah.nats_alkitab', 'kotbah.isi', 'kotbah.status', 'kotbah.created_by', 'kotbah.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul','kotbah.nama_minggu','kotbah.topik', 'kotbah.file', 'kotbah.nats_alkitab', 'kotbah.isi', 'kotbah.status', 'kotbah.created_by', 'kotbah.periode_id', 'kotbah.catatan')
             ->first();
 
         return view('khotbah.detailSekjen', compact('dataKhotbah'));
@@ -205,7 +208,7 @@ class KhotbahController extends Controller
         $dataKhotbah = DB::table('kotbah')
             ->where('kotbah_id', $id)
             ->join('periode', 'kotbah.periode_id', '=', 'kotbah.periode_id')
-            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul','kotbah.nama_minggu','kotbah.topik', 'kotbah.file', 'kotbah.nats_alkitab', 'kotbah.isi', 'kotbah.status', 'kotbah.created_by', 'kotbah.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul','kotbah.nama_minggu','kotbah.topik', 'kotbah.file', 'kotbah.nats_alkitab', 'kotbah.isi', 'kotbah.status', 'kotbah.created_by', 'kotbah.periode_id', 'kotbah.catatan')
             ->first();
 
         return view('khotbah.detailAdmin', compact('dataKhotbah'));

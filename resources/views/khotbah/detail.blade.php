@@ -61,7 +61,7 @@
                 Periode {{$dataKhotbah->bulan }} {{ $dataKhotbah->tahun }}
             </div>
             <div class="artikelPeriode">
-                Oleh {{ $dataKhotbah->created_by }}
+                Oleh <b>{{ $dataKhotbah->created_by }}</b>
             </div>
             <br>
             <div class="">
@@ -90,11 +90,8 @@
                 </label>
             </div>
             <br>
-            <div class="">
-                <label for="">Catatan :</label>
-                <br>
-                {{$dataKhotbah->catatan}}
-
+            <div class="artikelPeriode">
+                Catatan : <b>{{ $dataKhotbah->catatan }}</b>
             </div>
             <br>
         </div>

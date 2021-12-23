@@ -37,9 +37,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td><a href="detail/{{$row->berita_id}}">{{ $row->judul }}</td>
-                            <td>
-                                {{$row->bulan}}
-                                {{ $row->tahun }}
+                            <td>{{$row->bulan}} {{ $row->tahun }}
                             </td>
                             <td>
                                 @if($row->status == '1')
@@ -66,25 +64,25 @@
                             </td>
                             @if(\Illuminate\Support\Facades\Session::get('role') != '1' && \Illuminate\Support\Facades\Session::get('role') != '4' && $row -> status == '1')
                                 <td style="white-space: nowrap">
-                                    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->berita_id}}">
+                                    <a href="" class="btn btn-danger" data-toggle="modal" title="Hapus Berita!" data-target="#deleteModal-{{$row->berita_id}}">
                                         <i class="fas fa-trash"></i>
                                     </a>
-                                    <a href="/berita/edit/{{$row->berita_id}}" class="btn btn-info">
+                                    <a href="/berita/edit/{{$row->berita_id}}"  title="Ubah Berita!"  class="btn btn-info">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal-{{$row->berita_id}}">
+                                    <a href="" class="btn btn-primary" data-toggle="modal" title="Ajukan Berita Untuk direview!" data-target="#uploadModal-{{$row->berita_id}}">
                                         <i class="fas fa-upload"></i>
                                     </a>
                                 </td>
                             @elseif(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
                                 <td style="white-space: nowrap">
-                                    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->berita_id}}">
+                                    <a href="" class="btn btn-danger" data-toggle="modal"   title="Hapus Berita!"  data-target="#deleteModal-{{$row->berita_id}}">
                                         <i class="fas fa-trash"></i>
                                     </a>
-                                    <a href="/berita/edit/{{$row->berita_id}}" class="btn btn-info">
+                                    <a href="/berita/edit/{{$row->berita_id}}"  title="Ubah Berita!" class="btn btn-info">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal-{{$row->berita_id}}">
+                                    <a href="" class="btn btn-primary" data-toggle="modal" title="Ajukan Berita!" data-target="#uploadModal-{{$row->berita_id}}">
                                         <i class="fas fa-upload"></i>
                                     </a>
                                 </td>
@@ -125,7 +123,7 @@
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">Apabila anda memilih upload, Berita tersebut tidak akan dapat diubah kembali.</div>
+                                    <div class="modal-body">Apabila anda mengajukan berita untuk direview, Berita tersebut tidak akan dapat diubah kembali.</div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
                                         <a href="/berita/upload/{{$row->berita_id}}" class="btn btn-primary">Upload</a>

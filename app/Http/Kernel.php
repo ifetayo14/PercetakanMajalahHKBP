@@ -47,6 +47,9 @@ class Kernel extends HttpKernel
         'adminPage'=>[
             \App\Http\Middleware\AdminMiddleware::class,
         ],
+        'adminPanitiaPage'=>[
+            \App\Http\Middleware\AdminPanitiaMiddleware::class,
+        ],
         'sekjenPage'=>[
             \App\Http\Middleware\SekjenMiddleware::class,
         ],
@@ -58,6 +61,9 @@ class Kernel extends HttpKernel
         ],
         'memberAccess'=>[
             \App\Http\Middleware\MemberMiddleware::class,
+        ],
+        'timaMajalahPage'=>[
+            \App\Http\Middleware\TimMajalahMiddleware::class,
         ],
     ];
 

@@ -26,7 +26,8 @@
                 </div> 
                 <div class="form-group row">
                     <label for="inputDeskripsi" class="col-sm-2 col-form-label">Isi Pengumuman</label>
-                    <div class="col-sm-10">{{$pengumuman[0]->isi}}</div>
+                    <div class="col-sm-10">{{$pengumuman[0]->isi}}
+                    </div>
                 </div> 
                 <div class="form-group row">
                     <label for="inputDeskripsi" class="col-sm-2 col-form-label">Masa Berlaku</label>

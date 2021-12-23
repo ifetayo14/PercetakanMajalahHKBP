@@ -18,6 +18,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Periode</th>
                                 <th>Judul</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
@@ -28,6 +29,7 @@
                             @foreach ($majalah as $p)
                             <tr>
                                 <td>{{$i}}</td> 
+                                <td>{{ $p->bulan . ' '. $p->tahun}}</td>
                                 <td>{{$p->judul}}</td>
                                 <td>{{ $p->status}}</td>
                                 <td>

@@ -37,33 +37,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td><a href="detail/{{$row->artikel_id}}">{{ $row->judul }}</a></td>
                             <td>{{ $row->created_by }}</td>
-                            <td>
-                                @if($row->bulan == '1')
-                                    Januari
-                                @elseif($row->bulan == '2')
-                                    Februari
-                                @elseif($row->bulan == '3')
-                                    Maret
-                                @elseif($row->bulan == '4')
-                                    April
-                                @elseif($row->bulan == '5')
-                                    Mei
-                                @elseif($row->bulan == '6')
-                                    Juni
-                                @elseif($row->bulan == '7')
-                                    Juli
-                                @elseif($row->bulan == '8')
-                                    Agustus
-                                @elseif($row->bulan == '9')
-                                    September
-                                @elseif($row->bulan == '10')
-                                    Oktober
-                                @elseif($row->bulan == '11')
-                                    November
-                                @else
-                                    Desember
-                                @endif
-                                {{ $row->tahun }}
+                            <td>{{$row->bulan}} {{ $row->tahun }}
                             </td>
                             <td>
                                 @if($row->status == '1')
@@ -87,9 +61,13 @@
                                         <i class="">Diterima</i>
                                     </div>
                                 @endif
+                                <br>
+                                <div class="">
+                                        Catatan :<b>{{!!$row->catatan}}
+                                </div>
                             </td>
+                            <td style="white-space: nowrap">
                             @if($row->status == '2' || $row->status == '3')
-                                <td style="white-space: nowrap">
                                     <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->artikel_id}}">
                                         <i class="fas fa-times"></i>
                                         Tolak
@@ -98,8 +76,8 @@
                                         <i class="fas fa-check"></i>
                                         Terima
                                     </a>
-                                </td>
                             @endif
+                            </td>
                         </tr>
 
                         <div class="modal fade" id="deleteModal-{{$row->artikel_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

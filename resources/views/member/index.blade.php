@@ -9,6 +9,7 @@
     @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Member</h1>
+            <a href="/member/transaksimember" class="btn btn-primary"><i class="fa fa-eye"></i> Transaksi Member</a>
         </div>
     @else
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -37,7 +38,6 @@
                             <th>Tanggal Dimulai</th>
                             <th>Tanggal Berakhir</th>
                             <th>Status Langganan</th>
-                            <th>Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -45,106 +45,22 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $row->nama }}</td>
-                                <td>{{Carbon\Carbon::parse($row->active_date)->format('H:m d-m-Y')}}</td>
-                                <td>{{ Carbon\Carbon::parse($row->end_date)->format('H:m d-m-Y') }}</td>
-                                <td>{{$row->status}}</td>
-                                <td style="white-space: nowrap">
-                                    <!--a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->member_id}}">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                    <a href="member/edit/{{$row->member_id}}" class="btn btn-info">
-                                        <i class="fas fa-edit"></i -->
-                                    </a>
+                                <td>{{Carbon\Carbon::parse($row->active_date)->format('Y-m-d H:m:i')}}</td>
+                                <td>{{ Carbon\Carbon::parse($row->end_date)->format('Y-m-d H:m:i') }}</td>
+                                <td>
+                                    <?php $datetoday = date('Y-m-d'); ?>
+                                    @if($datetoday <= Carbon\Carbon::parse($row->end_date)->format('Y-m-d'))
+                                        <div class="btn btn-success">Aktif</div>
+                                    @else
+                                        <div class="btn btn-info" >Non Aktif</div>
+                                    @endif
                                 </td>
                             </tr>
 
-                            <div class="modal fade" id="deleteModal-{{$row->member_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Hapus Data?</h5>
-                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">Hapus {{$row->nama}} ?</div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                                            <a href="artikel/delete/{{ $row->member_id }}" class="btn btn-primary">Hapus</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         @endforeach
                         </tbody>
                     </table>
 
-                </div>
-            </div>
-            <div class="card shadow mb-4">
-                <div class="card-body">
-                    <div class="table-responsive">
-                    <br>
-                        <br>
-                        <h3>Daftar Transaksi Pengajuan Member</h3>
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nama</th>
-                                <th>Lama Member</th>
-                                <th>Harga</th>
-                                <th>Status Pembayaran</th>
-                                <th>Bukti Pembayaran</th>
-                                <th>Aksi</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($transaksiMember as $row)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row->nama }}</td>
-                                    <td>{{ $row->lama_member}}</td>
-                                    <td>{{ $row->price* $row->lama_member}}</td>
-                                    <td>{{ $row->payment_status }}</td>
-                                    <td>
-                                        <button class="btn btn-info" onclick="showBuktiBayar('{{$row->file}}')" data-toggle="modal" data-target="#tagihanModal">Bukti Bayar</button>
-                                    </td>
-                                    <td style="white-space: nowrap">
-                                    @if($row->payment_status == 'Pending')
-                                        <a href="member/approve/{{$row->transaksimember_id}}" class="btn btn-info">
-                                            <i class="fas fa-check"> Konfirmasi</i>
-                                        </a>
-                                        <a href="member/reject/{{$row->transaksimember_id}}" class="btn btn-danger">
-                                            <i class="fas fa-times"> Tolak</i>
-                                        </a>
-                                        @endif
-                                    </td>
-                                </tr>
-
-                                <div class="modal fade" id="deleteModal-{{$row->member_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Hapus Data?</h5>
-                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">Hapus {{$row->nama}} ?</div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                                                <a href="artikel/delete/{{ $row->member_id }}" class="btn btn-primary">Hapus</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
         @else
@@ -216,10 +132,11 @@
                         <tr>
                             <td>Status</td>
                             <td>
-                                @if($dataMember->status == 'Aktif')
+                                <?php $datetoday = date('Y-m-d'); ?>
+                                @if($datetoday <= $dataMember->end_date)
                                     <div class="btn btn-success">Aktif</div>
                                 @else
-                                    <div class="btn btn-info" >{{$dataMember->payment_status}}</div>
+                                    <div class="btn btn-info" >Non Aktif</div>
                                 @endif
                             </td>
                         </tr>
@@ -272,6 +189,9 @@
                             <th>Lama Member</th>
                             <th>Harga</th>
                             <th>Status Pembayaran</th>
+                            <th>Tanggal Permintaan</th>
+                            <th>Tanggal Perifikasi</th>
+                            <th>Tanggal Aktif</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody>
@@ -281,12 +201,46 @@
                                 <td>{{$tm->lama_member}}</td>
                                 <td>{{$tm->price * $tm->lama_member}}</td>
                                 <td>{{$tm->payment_status}}</td>
+                                <td>{{$tm->created_date }}</td>
+                                <td>{{$tm->verified_date}}</td>
+                                <td>{{$tm->verified_date}}</td>
                                 <td>@if($tm->payment_status == 'Pending')
                                     <a href="" data-toggle="modal" data-target="#sendFileRequestModal" class="btn btn-primary">Kirim Bukti Pembayaran</a>
                                     @endif
-                                    <a href="" data-toggle="modal" data-target="#tagihanRequestModal" class="btn btn-primary">Tagihan</a>
+                                    <a href="" data-toggle="modal" data-target="#tagihanRequestModal-{{$tm->transaksimember_id}}" class="btn btn-primary">Tagihan</a>
                                 </td>
                             </tr>
+                                @if($dataMember != null &&  Session::get('role') != '1' && Session::get('role') != '4')
+                                    <div class="modal fade" id="tagihanRequestModal-{{$tm->transaksimember_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Tagihan</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-4">Lama Berlangganan</div>
+                                                        <div class="col-8">{{$tm->lama_member}}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-4">Nominal</div>
+                                                        <div class="col-8">Rp {{number_format($tm->price * $tm->lama_member,2)}}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-4">No. Rekening</div>
+                                                        <div class="col-8">{{$dataMember->deskripsi}}</div>
+                                                    </div>
+                                                       
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             <?php $i++; } ?>
                         </tbody>
 
@@ -373,58 +327,7 @@
             </div>
         @endif
     </div>
-    @if(Session::get('role') == '1' || Session::get('role') == '4')
-    <div class="modal fade" id="tagihanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Bukti Bayar</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <img class="img-fluid" id="gambarBukti"/>
-                </div>
-                <br>
-            </div>
-        </div>
-    </div>
-    @endif
-    @if($dataMember != null &&  Session::get('role') != '1' && Session::get('role') != '4')
-    <div class="modal fade" id="tagihanRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tagihan</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <br>
-                <table class="table">
-                    <tr>
-                        <td>Lama Berlangganan</td>
-                        <td>:</td>
-                        <td>{{$dataMember->lama_member}} bulan</td>
-                    </tr>
-                    <tr>
-                        <td>Nominal</td>
-                        <td>:</td>
-                        <td>Rp {{number_format($dataMember->price * $dataMember->lama_member,2)}}</td>
-                    </tr>
-                    <tr>
-                        <td>No. Rekening</td>
-                        <td>:</td>
-                        <td>{{$dataMember->deskripsi}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    @endif
+    
     <div class="modal fade" id="sendFileRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                  aria-hidden="true">
         <div class="modal-dialog" role="document">

@@ -18,7 +18,9 @@ class MajalahController extends Controller
     {
         $majalah =  DB::table('majalah')
                         ->join('status', 'status.id','=','majalah.status')
-                        ->select('judul', 'status.deskripsi as status', 'majalah.catatan_dewan', 'majalah.approval_dewan',  'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi')
+                        ->join('periode','majalah.periode_id','=','periode.periode_id')
+                        ->select('judul', 'status.deskripsi as status', 'majalah.catatan_dewan', 'majalah.approval_dewan',  'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi','periode.bulan', 'periode.tahun')
+                        ->orderBy('majalah.periode_id', 'desc')
                         ->get();
         return view('majalah.index',compact('majalah'));
     }
@@ -32,7 +34,9 @@ class MajalahController extends Controller
     {
         $majalah =  DB::table('majalah')
                         ->join('status', 'status.id','=','majalah.status')
-                        ->select('judul', 'status.deskripsi as status', 'majalah.catatan_dewan', 'majalah.approval_dewan', 'majalah_id','majalah.deskripsi as deskripsi')
+                        ->join('periode','majalah.periode_id','=','periode.periode_id')
+                        ->select('judul', 'status.deskripsi as status', 'majalah.catatan_dewan', 'majalah.approval_dewan', 'majalah_id','majalah.deskripsi as deskripsi','periode.bulan', 'periode.tahun')
+                        ->orderBy('majalah.periode_id', 'desc')
                         ->get();
         return view('majalah.indexSekjen',compact('majalah'));
     }
@@ -40,7 +44,9 @@ class MajalahController extends Controller
     {
         $majalah =  DB::table('majalah')
                         ->join('status', 'status.id','=','majalah.status')
-                        ->select('judul', 'status.deskripsi as status', 'majalah.catatan_dewan', 'majalah.approval_dewan', 'majalah_id','majalah.deskripsi as deskripsi')
+                        ->join('periode','majalah.periode_id','=','periode.periode_id')
+                        ->select('judul', 'status.deskripsi as status', 'majalah.catatan_dewan', 'majalah.approval_dewan', 'majalah_id','majalah.deskripsi as deskripsi','periode.bulan', 'periode.tahun')
+                        ->orderBy('majalah.periode_id', 'desc')
                         ->get();
         return view('majalah.indexDewanRedaksi',compact('majalah'));
     }
@@ -50,6 +56,7 @@ class MajalahController extends Controller
             ->join('periode','majalah.periode_id','=','periode.periode_id')
             ->select('judul', 'status.deskripsi as status','majalah_id','majalah.deskripsi as deskripsi','periode.bulan', 'periode.tahun')
             ->where('majalah.status','=','5')
+            ->orderBy('majalah.periode_id', 'desc')
             ->get();
         return view('majalah.indexJemaat', compact('majalah'));
     }
@@ -72,6 +79,7 @@ class MajalahController extends Controller
         $majalah =  DB::table('majalah')
             ->join('status', 'status.id','=','majalah.status')
             ->select('judul', 'status.deskripsi as status','majalah_id','majalah.deskripsi as deskripsi')
+            ->orderBy('majalah.periode_id', 'desc')
             ->get();
         return view('majalah.indexSekjen',compact('majalah'));
     }
