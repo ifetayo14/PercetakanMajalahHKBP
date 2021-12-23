@@ -12,6 +12,7 @@ use App\Http\Controllers\MajalahController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KhotbahController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\CheckOngkirController;
 
 
 /*
@@ -177,3 +178,8 @@ Route::middleware(['dewanRedaksiPage'])->group(function (){
     Route::get('beritaDewanRedaksi/view/{id}', [BeritaController::class, 'showDewanRedaksi']);
     Route::get('kotbahDewanRedaksi/view/{id}', [KhotbahController::class, 'showDewanRedaksi']);
 });
+
+
+Route::get('/ongkir', [CheckOngkirController::class, 'index']);
+Route::post('/ongkir', [CheckOngkirController::class,'check_ongkir']);
+Route::get('/cities/{province_id}', [CheckOngkirController::class,'getCities']);
