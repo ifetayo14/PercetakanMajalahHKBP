@@ -207,9 +207,40 @@
                                 <td>@if($tm->payment_status == 'Pending')
                                     <a href="" data-toggle="modal" data-target="#sendFileRequestModal" class="btn btn-primary">Kirim Bukti Pembayaran</a>
                                     @endif
-                                    <a href="" data-toggle="modal" data-target="#tagihanRequestModal" class="btn btn-primary">Tagihan</a>
+                                    <a href="" data-toggle="modal" data-target="#tagihanRequestModal-{{$tm->transaksimember_id}}" class="btn btn-primary">Tagihan</a>
                                 </td>
                             </tr>
+                                @if($dataMember != null &&  Session::get('role') != '1' && Session::get('role') != '4')
+                                    <div class="modal fade" id="tagihanRequestModal-{{$tm->transaksimember_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Tagihan</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-4">Lama Berlangganan</div>
+                                                        <div class="col-8">{{$tm->lama_member}}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-4">Nominal</div>
+                                                        <div class="col-8">Rp {{number_format($tm->price * $tm->lama_member,2)}}</div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-4">No. Rekening</div>
+                                                        <div class="col-8">{{$dataMember->deskripsi}}</div>
+                                                    </div>
+                                                       
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             <?php $i++; } ?>
                         </tbody>
 
@@ -296,58 +327,7 @@
             </div>
         @endif
     </div>
-    @if(Session::get('role') == '1' || Session::get('role') == '4')
-    <div class="modal fade" id="tagihanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Bukti Bayar</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <img class="img-fluid" id="gambarBukti"/>
-                </div>
-                <br>
-            </div>
-        </div>
-    </div>
-    @endif
-    @if($dataMember != null &&  Session::get('role') != '1' && Session::get('role') != '4')
-    <div class="modal fade" id="tagihanRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tagihan</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <br>
-                <table class="table">
-                    <tr>
-                        <td>Lama Berlangganan</td>
-                        <td>:</td>
-                        <td>{{$dataMember->lama_member}} bulan</td>
-                    </tr>
-                    <tr>
-                        <td>Nominal</td>
-                        <td>:</td>
-                        <td>Rp {{number_format($dataMember->price * $dataMember->lama_member,2)}}</td>
-                    </tr>
-                    <tr>
-                        <td>No. Rekening</td>
-                        <td>:</td>
-                        <td>{{$dataMember->deskripsi}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    @endif
+    
     <div class="modal fade" id="sendFileRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                  aria-hidden="true">
         <div class="modal-dialog" role="document">

@@ -57,20 +57,38 @@
                                     <td>{{$row->verified_date}}</td>
                                     <td>{{$row->verified_date}}</td>
                                     <td>
-                                        <button class="btn btn-info" onclick="showBuktiBayar('{{$row->file}}')" data-toggle="modal" data-target="#tagihanModal">Bukti Bayar</button>
+                                        <button class="btn btn-info" data-toggle="modal" data-target="#tagihanModal-{{$row->transaksimember_id}}">Bukti Bayar</button>
                                     </td>
                                     <td style="white-space: nowrap">
                                         @if($row->payment_status == 'Menunggu Konfirmasi')
-                                            <a href="member/approve/{{$row->transaksimember_id}}" class="btn btn-info">
+                                            <a href="/member/approve/{{$row->transaksimember_id}}" class="btn btn-info">
                                                 <i class="fas fa-check"> Konfirmasi</i>
                                             </a>
-                                            <a href="member/reject/{{$row->transaksimember_id}}" class="btn btn-danger">
+                                            <a href="/member/reject/{{$row->transaksimember_id}}" class="btn btn-danger">
                                                 <i class="fas fa-times"> Tolak</i>
                                             </a>
                                         @endif
                                     </td>
                                 </tr>
-
+                                @if(Session::get('role') == '1' || Session::get('role') == '4')
+                                    <div class="modal fade" id="tagihanModal-{{$row->transaksimember_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Bukti Bayar</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <img class="img-fluid" src="{{URL::to('uploads/bukti_bayar/' . $row->file)}}" id="gambarBukti"/>
+                                                </div>
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
                             @endforeach
                             </tbody>
                         </table>
@@ -79,25 +97,7 @@
             </div>
         @endif
     </div>
-    @if(Session::get('role') == '1' || Session::get('role') == '4')
-    <div class="modal fade" id="tagihanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Bukti Bayar</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <img class="img-fluid" id="gambarBukti"/>
-                </div>
-                <br>
-            </div>
-        </div>
-    </div>
-    @endif
+    
    
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 

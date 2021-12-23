@@ -14,8 +14,9 @@ class LogController extends Controller
             ->where('username', $request->username)
             ->where('password', $request->password)->first();
 
-        var_dump($data);
+        // var_dump($data);
         if ($data){
+            // echo $data->role_id;exit;
             $request->session()->put('username', $data->username);
             $request->session()->put('role', $data->role_id);
             $request->session()->put('nama', $data->nama);

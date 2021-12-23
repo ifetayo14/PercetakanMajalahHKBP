@@ -47,6 +47,9 @@ class Kernel extends HttpKernel
         'adminPage'=>[
             \App\Http\Middleware\AdminMiddleware::class,
         ],
+        'adminPanitiaPage'=>[
+            \App\Http\Middleware\AdminPanitiaMiddleware::class,
+        ],
         'sekjenPage'=>[
             \App\Http\Middleware\SekjenMiddleware::class,
         ],

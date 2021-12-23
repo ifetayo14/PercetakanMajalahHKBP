@@ -37,6 +37,7 @@
                                 <th>Periode</th>
                                 <th>Status</th>
                                 <th>Persetujuan Dewan</th>
+                                <th>Persetujuan Sekjen</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -49,6 +50,10 @@
                                 <td>{{ $p->bulan . ' '. $p->tahun}}</td>
                                 <td>{{$p->status}}</td>
                                 <td>{{$p->approval_dewan}}</td>
+                                <td>@if($p->status != 'Dibuat' && $p->status != 'Diajukan')
+                                    {{$p->status}}
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="/majalah/view/{{$p->majalah_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> View</a>
                                     @if(($p->status_id != 5 && $p->status_id !=2) || ($p->approval_dewan != 'Setuju'))

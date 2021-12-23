@@ -46,9 +46,6 @@ class MemberController extends Controller
                 }
                 
         }
-
-        
-
 //        dd($dataMember);
         return view('member.index', compact('dataMember', 'transaksiMember'));
     }

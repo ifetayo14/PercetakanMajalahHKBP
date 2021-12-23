@@ -65,18 +65,18 @@
                                     Catatan : <b>{{ $row->catatan }}</b>
                                 </div>
                             </td>
-                            @if($row->status == '2' || $row->status == '3')
-                                <td style="white-space: nowrap">
-                                    <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->kotbah_id}}">
-                                        <i class="fas fa-times"></i>
-                                        Tolak
-                                    </a>
-                                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#acceptModal-{{$row->kotbah_id}}">
-                                        <i class="fas fa-check"></i>
-                                        Terima
-                                    </a>
-                                </td>
-                            @endif
+                            <td style="white-space: nowrap">
+                                @if($row->status == '2' || $row->status == '3')
+                                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{$row->kotbah_id}}">
+                                            <i class="fas fa-times"></i>
+                                            Tolak
+                                        </a>
+                                        <a href="" class="btn btn-success" data-toggle="modal" data-target="#acceptModal-{{$row->kotbah_id}}">
+                                            <i class="fas fa-check"></i>
+                                            Terima
+                                        </a>
+                                @endif
+                            </td>
                         </tr>
 
                         <div class="modal fade" id="deleteModal-{{$row->kotbah_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
