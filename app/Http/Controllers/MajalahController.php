@@ -70,6 +70,7 @@ class MajalahController extends Controller
             ->join('status', 'status.id','=','majalah.status')
             ->join('periode', 'periode.periode_id','=','majalah.periode_id')
             ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+            ->where(['majalah.majalah_id' => $majalah[0]->majalah_id])
             ->get();
         // var_dump($majalah);die();
         return view('majalah.viewJemaat',compact('majalah','artikel','berita','kotbah'));
