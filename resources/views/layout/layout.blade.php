@@ -251,7 +251,12 @@
                 </a>
             </li>
     @endif
-
+        <li class="nav-item  {{(request()->is('hardcopyJemaat*') ? 'active' : '')}}">
+            <a class="nav-link" href="{{url('hardcopyJemaat')}}">
+                <i class="fa fa-download" style="color: {{(request()->is('hardcopyJemaat*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                <span style="margin-left: 9px;">HardCopy</span>
+            </a>
+        </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 

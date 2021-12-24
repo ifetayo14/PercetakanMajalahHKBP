@@ -12,6 +12,8 @@ use App\Http\Controllers\MajalahController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KhotbahController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\HardcopyController;
+
 
 
 /*
@@ -81,7 +83,9 @@ Route::get('majalahJemaat/view/{id}', [MajalahController::class, 'showJemaat']);
 Route::get('artikelJemaat/view/{id}', [ArtikelController::class, 'showSekjen']);
 Route::get('beritaJemaat/view/{id}', [BeritaController::class, 'showSekjen']);
 Route::get('kotbahJemaat/view/{id}', [KhotbahController::class, 'showSekjen']);
-
+//harcopy
+Route::get('hardcopyJemaat/', [HardcopyController::class, 'index']);
+Route::get('hardcopyJemaat/detail/{id}', [HardcopyController::class, 'detailJemaat']);
 
 //member
 Route::get('member', [MemberController::class, 'index']);
