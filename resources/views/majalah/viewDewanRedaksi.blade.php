@@ -60,7 +60,7 @@
         </div>
     </div>
     <br>
-    <dib class="card-body">
+    <div class="card-body">
         <h3 style="background-color: #bdf7ba; justify-content:center;">Kotbah</h3>
         <table class="table">
             <tr>
@@ -77,8 +77,8 @@
                <?php $i++;
             }?>
         </table>
-    </dib>
-    <dib class="card-body">
+    </div>
+    <div class="card-body">
         <h3 style="background-color: #ecf7ba; justify-content:center;">Artikel</h3>
         <table class="table ">
             <tr>
@@ -95,8 +95,8 @@
                <?php $i++;
             }?>
         </table>
-    </dib>
-    <dib class="card-body">
+    </div>
+    <div class="card-body">
         <h3 style="background-color: #baf7e9; justify-content:center;">Berita</h3>
         <table class="table">
             <tr>
@@ -113,7 +113,16 @@
                <?php $i++;
             }?>
         </table>
-    </dib>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12" oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+                <body oncontextmenu="return false;">
+                <object data="{{URL::to('uploads/' . $majalah[0]->file)}}#toolbar=0" type="application/pdf" width="100%" height="500px"  oncontextmenu="return false;"></object>
+                </body>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection 
