@@ -48,11 +48,11 @@
             </div>
         </div>
         <div class="row p-2 m-2 d-flex justify-content-end">
-            @if($majalah[0]->status_id == 3)
+            @if($majalah[0]->status_id == 2 || $majalah[0]->status_id == 3)
                 <a href="/majalahSekjen/terima/{{$majalah[0]->majalah_id}}" class="btn btn-success p-2 m-2" ><i class="fa fa-check"></i> Setujui</a>
                 <a href="/majalahSekjen/tolak/{{$majalah[0]->majalah_id}}" class="btn btn-primary p-2 m-2" ><i class="fa fa-times"></i> Tolak</a>
             @endif
-                <a href="/majalahSekjen/terima" class="btn btn-danger p-2 m-2" ><i class="fa fa-arrow-left"></i>  Kembali</a>
+                <a href="/majalahSekjen" class="btn btn-danger p-2 m-2" ><i class="fa fa-arrow-left"></i>  Kembali</a>
         </div>
     </div>
     <br>

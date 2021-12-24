@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="row p-2 m-2 d-flex justify-content-end">
-            @if($majalah[0]->approval_dewan == 'Review')
+            @if($majalah[0]->approval_dewan == 'Diajukan' || $majalah[0]->approval_dewan == 'Review')
                 <a href="/majalahDewanRedaksi/terima/{{$majalah[0]->majalah_id}}" class="btn btn-success p-2 m-2" ><i class="fa fa-check"></i> Setujui</a>
                 <a href="/majalahDewanRedaksi/tolak/{{$majalah[0]->majalah_id}}" class="btn btn-primary p-2 m-2" ><i class="fa fa-times"></i> Tolak</a>
             @endif
