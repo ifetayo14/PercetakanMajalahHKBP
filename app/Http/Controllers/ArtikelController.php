@@ -20,6 +20,7 @@ class ArtikelController extends Controller
             ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
             ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.created_by', 'artikel.judul', 'artikel.artikel_id')
             ->where('artikel.status', '=', '5')
+            ->orderBy('artikel.periode_id', 'desc')
             ->get();
         return view('artikel.index', compact('dataArtikel'));
     }
@@ -29,6 +30,7 @@ class ArtikelController extends Controller
         $dataArtikel = DB::table('artikel')->where('user_id', '=', Session::get('user_id'))
             ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
             ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.created_by', 'artikel.judul', 'artikel.artikel_id','artikel.status', 'artikel.catatan')
+            ->orderBy('artikel.periode_id', 'desc')
             ->get();
         return view('artikel.pengajuanArtikel', compact('dataArtikel'));
     }
@@ -38,6 +40,7 @@ class ArtikelController extends Controller
         $dataArtikel = DB::table('artikel')->where('artikel.status', '!=', '1')
             ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
             ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.user_id', 'artikel.status', 'artikel.created_by', 'artikel.catatan')
+            ->orderBy('artikel.periode_id', 'desc')
             ->get();
         return view('artikel.review', compact('dataArtikel'));
     }

@@ -13,6 +13,8 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KhotbahController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CheckOngkirController;
+use App\Http\Controllers\HardcopyController;
+
 
 
 /*
@@ -82,10 +84,16 @@ Route::get('majalahJemaat/view/{id}', [MajalahController::class, 'showJemaat']);
 Route::get('artikelJemaat/view/{id}', [ArtikelController::class, 'showSekjen']);
 Route::get('beritaJemaat/view/{id}', [BeritaController::class, 'showSekjen']);
 Route::get('kotbahJemaat/view/{id}', [KhotbahController::class, 'showSekjen']);
-
+//harcopy
+Route::get('hardcopyJemaat/', [HardcopyController::class, 'index']);
+Route::get('hardcopyJemaat/detail/{id}', [HardcopyController::class, 'detailJemaat']);
+Route::get('/ongkir', [CheckOngkirController::class, 'index']);
+Route::post('/ongkir', [CheckOngkirController::class,'check_ongkir']);
+Route::get('/cities/{province_id}', [CheckOngkirController::class,'getCities']);
 
 //member
 Route::get('member', [MemberController::class, 'index']);
+Route::get('member/transaksimember', [MemberController::class, 'transaksimember']);
 Route::get('member/add', [MemberController::class, 'create']);
 Route::post('member/addProcess', [MemberController::class, 'store']);
 Route::post('member/perpanjangProcess', [MemberController::class, 'perpanjang']);
@@ -104,6 +112,7 @@ Route::middleware(['artikelAccess'])->group(function (){
     Route::post('artikel/refuse/{id}', [ArtikelController::class, 'refuseArtikel']);
 });
 Route::get('pengumuman', [PengumumanController::class, 'index']);
+Route::get('pengumuman/viewonly/{id}', [PengumumanController::class, 'showonly']);
 Route::get('majalah', [MajalahController::class, 'index']);
 
 Route::middleware(['adminPage'])->group(function (){
@@ -117,13 +126,12 @@ Route::middleware(['adminPage'])->group(function (){
     Route::get('akun/delete/{id}', [AccountController::class, 'destroy']);
 
     //pengumuman
-
     Route::get('pengumuman/add', [PengumumanController::class, 'create']);
     Route::post('pengumuman/add', [PengumumanController::class, 'store']);
     Route::get('pengumuman/view/{id}', [PengumumanController::class, 'show']);
     Route::get('pengumuman/edit/{id}', [PengumumanController::class, 'edit']);
     Route::post('pengumuman/edit/{id}', [PengumumanController::class, 'update']);
-    Route::get('pengumuman/delete/{id}', [PengumumanController::class, 'update']);
+    Route::get('pengumuman/delete/{id}', [PengumumanController::class, 'destroy']);
 
     //periode
     Route::get('periode', [PeriodeController::class, 'index']);
@@ -180,6 +188,36 @@ Route::middleware(['dewanRedaksiPage'])->group(function (){
 });
 
 
-Route::get('/ongkir', [CheckOngkirController::class, 'index']);
-Route::post('/ongkir', [CheckOngkirController::class,'check_ongkir']);
-Route::get('/cities/{province_id}', [CheckOngkirController::class,'getCities']);
+
+
+Route::middleware(['timaMajalahPage'])->group(function (){
+    //pengumuman
+    Route::get('pengumuman/add', [PengumumanController::class, 'create']);
+    Route::post('pengumuman/add', [PengumumanController::class, 'store']);
+    Route::get('pengumuman/view/{id}', [PengumumanController::class, 'show']);
+    Route::get('pengumuman/edit/{id}', [PengumumanController::class, 'edit']);
+    Route::post('pengumuman/edit/{id}', [PengumumanController::class, 'update']);
+    Route::get('pengumuman/delete/{id}', [PengumumanController::class, 'destroy']);
+    //majalah
+    Route::get('majalah/add', [MajalahController::class, 'create']);
+    Route::post('majalah/add', [MajalahController::class, 'store']);
+    Route::get('majalah/view/{id}', [MajalahController::class, 'show']);
+    Route::get('majalah/edit/{id}', [MajalahController::class, 'edit']);
+    Route::post('majalah/edit/{id}', [MajalahController::class, 'update']);
+    Route::get('majalah/delete/{id}', [MajalahController::class, 'delete']);
+    Route::get('majalah/ajukan/{id}', [MajalahController::class, 'ajukan']);
+    Route::get('majalah/ajukanDewanRedaksi/{id}', [MajalahController::class, 'ajukanDewanRedaksi']);
+    Route::get('majalah/berita/detail/{id}', [BeritaController::class, 'showAdmin']);
+    Route::get('majalah/artikel/detail/{id}', [ArtikelController::class, 'showAdmin']);
+    Route::get('majalah/khotbah/detail/{id}', [KhotbahController::class, 'showAdmin']);
+
+    //periode
+    Route::get('periode', [PeriodeController::class, 'index']);
+    Route::get('periode/add', [PeriodeController::class, 'create']);
+    Route::post('periode/add', [PeriodeController::class, 'store']);
+    Route::get('periode/view/{id}', [PeriodeController::class, 'show']);
+    Route::get('periode/edit/{id}', [PeriodeController::class, 'edit']);
+    Route::post('periode/edit/{id}', [PeriodeController::class, 'update']);
+    Route::get('periode/delete/{id}', [PeriodeController::class, 'destroy']);
+});
+

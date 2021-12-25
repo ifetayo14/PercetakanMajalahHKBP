@@ -19,7 +19,10 @@
                             <tr>
                                 <th>No</th>
                                 <th>Judul</th>
+                                <th>Periode</th>
                                 <th>Status</th>
+                                <th>Persetujuan Dewan</th>
+                                <th>Persetujuan Sekjen</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -29,9 +32,15 @@
                             <tr>
                                 <td>{{$i}}</td> 
                                 <td>{{$p->judul}}</td>
+                                <td>{{ $p->bulan . ' '. $p->tahun}}</td>
                                 <td>{{ $p->status}}</td>
+                                <td>{{$p->approval_dewan}}</td>
+                                <td>@if($p->status != 'Dibuat' && $p->status != 'Diajukan')
+                                    {{$p->status}}
+                                    @endif
+                                </td>
                                 <td>
-                                <a href="/majalahSekjen/view/{{$p->majalah_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> View</a>
+                                    <a href="/majalahSekjen/view/{{$p->majalah_id}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> View</a>
                                 </td>
                             </tr>
                             <?php $i++; ?>
