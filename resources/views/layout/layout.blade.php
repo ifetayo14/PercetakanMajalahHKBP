@@ -251,11 +251,19 @@
                 </a>
             </li>
     @endif
-        <li class="nav-item  {{(request()->is('hardcopyJemaat*') ? 'active' : '')}}">
-            <a class="nav-link" href="{{url('hardcopyJemaat')}}">
-                <i class="fa fa-download" style="color: {{(request()->is('hardcopyJemaat*') ? '#0500FE' : '#FFFFFF')}}"></i>
-                <span style="margin-left: 9px;">HardCopy</span>
-            </a>
+        <li class="nav-item  {{(request()->is('hardcopyJemaat*') ? 'active' : '')}} {{(request()->is('hardcopyAdmin*') ? 'active' : '')}}">
+            @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
+                <a class="nav-link" href="{{url('hardcopyAdmin')}}">
+                    <i class="fa fa-download" style="color: {{(request()->is('hardcopyAdmin*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                    <span style="margin-left: 9px;">HardCopy</span>
+                </a>
+            @elseif(\Illuminate\Support\Facades\Session::get('role') == '2' || \Illuminate\Support\Facades\Session::get('role') == '5')
+                <a class="nav-link" href="{{url('hardcopyJemaat')}}">
+                    <i class="fa fa-download" style="color: {{(request()->is('hardcopyJemaat*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                    <span style="margin-left: 9px;">HardCopy</span>
+                </a>
+            @endif
+
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">

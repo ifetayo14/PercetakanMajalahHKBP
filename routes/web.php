@@ -86,6 +86,13 @@ Route::get('kotbahJemaat/view/{id}', [KhotbahController::class, 'showSekjen']);
 //harcopy
 Route::get('hardcopyJemaat/', [HardcopyController::class, 'index']);
 Route::get('hardcopyJemaat/detail/{id}', [HardcopyController::class, 'detailJemaat']);
+Route::get('hardcopyAdmin/', [HardcopyController::class, 'indexAdmin']);
+Route::get('hardcopyAdmin/tambah', [HardcopyController::class, 'tambah']);
+Route::post('hardcopyAdmin/tambah', [HardcopyController::class, 'store']);
+
+Route::get('hardcopyAdmin/order', [HardcopyController::class, 'indexOrder']);
+
+
 
 //member
 Route::get('member', [MemberController::class, 'index']);
