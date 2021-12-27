@@ -26,4 +26,5 @@ class HardcopyController extends Controller
             ->first();
         return view('hardcopy.detail',compact('dataHardCopy'));
     }
+    
 }
