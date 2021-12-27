@@ -12,7 +12,7 @@
 <div class="form-group row">
     <div class="col-sm-6">
     <label for="nama" class="col-sm-2 col-form-label">Nama</label>
-        <input type="text" name="nama" value="" class="form-control" id="nama" placeholder="Nama">
+        <input type="text" onkeypress="oninput();" name="nama" value="" class="form-control" id="nama" placeholder="Nama">
     </div>
     <div class="col-sm-6">
         <div class="form-group">
@@ -35,19 +35,23 @@
 </div>
     <div class="col-sm-6">
     <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
-        <input type="text" name="alamat" value="" class="form-control" id="alamat" placeholder="Alamat">
+        <input type="text" onkeypress="onFill();" name="alamat" value="" class="form-control" id="alamat" placeholder="Alamat">
     </div>
     <div class="col-sm-6">
     <label for="negara" class="col-sm-2 col-form-label">Negara</label>
-        <input type="text" name="negara" value="" class="form-control" id="negara" placeholder="Negara">
+        <input type="text" onkeypress="onFill();" name="negara" value="" class="form-control" id="negara" placeholder="Negara">
     </div>
     <div class="col-sm-6">
     <label for="kode_pos" class="col-sm-6 col-form-label">Kode Pos</label>
-        <input type="text" name="kode_pos" value="" class="form-control" id="kode_pos" placeholder="Kode Pos">
+        <input type="text" onkeypress="onFill();" name="kode_pos" value="" class="form-control" id="kode_pos" placeholder="Kode Pos">
     </div>
     <div class="col-sm-6">
         <label for="ongkir" class="col-sm-2 col-form-label">-</label>
-        <button class="btn btn-md btn-primary btn-block btn-check">CEK ONGKOS KIRIM</button>
+        <button class="btn btn-md btn-primary btn-block btn-check" id="btn_kirim" >CEK ONGKOS KIRIM</button>
+        <script>
+            var btn_kirim = document.getElementById("btn_kirim");
+            btn_kirim.disabled = true;
+        </script>
     </div>
 </div>
 <input type="number" hidden value="{{$dataHardCopy->berat * $qty}}"  class="form-control" name="weight" id="weight" placeholder="Masukkan Berat (GRAM)">
@@ -86,6 +90,18 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script>
+         var btn_kirim = document.getElementById("btn_kirim");
+        function onFill(){
+            var nama = document.getElementById("nama").value;
+            var alamat = document.getElementById("alamat").value;
+            var negara = document.getElementById("negara").value;
+            var kode_pos = document.getElementById("kode_pos").value; 
+  
+            if(nama!="" && alamat !="" && negara != "" && kode_pos !=""){
+                btn_kirim.disabled = false;
+            }
+         
+        }                                                                                                                                                                                                                      
         $(document).ready(function(){
             //active select2
             $(".provinsi-tujuan, .kota-tujuan").select2({
