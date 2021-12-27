@@ -99,6 +99,15 @@
             }?>
         </table>
     </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12" oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+                <body oncontextmenu="return false;">
+                <object data="{{URL::to('uploads/' . $majalah[0]->file)}}#toolbar=0" type="application/pdf" width="100%" height="500px"  oncontextmenu="return false;"></object>
+                </body>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection 

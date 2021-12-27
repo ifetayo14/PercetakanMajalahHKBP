@@ -48,15 +48,15 @@
             </div>
         </div>
         <div class="row p-2 m-2 d-flex justify-content-end">
-            @if($majalah[0]->status_id == 3)
+            @if($majalah[0]->status_id == 2 || $majalah[0]->status_id == 3)
                 <a href="/majalahSekjen/terima/{{$majalah[0]->majalah_id}}" class="btn btn-success p-2 m-2" ><i class="fa fa-check"></i> Setujui</a>
                 <a href="/majalahSekjen/tolak/{{$majalah[0]->majalah_id}}" class="btn btn-primary p-2 m-2" ><i class="fa fa-times"></i> Tolak</a>
             @endif
-                <a href="/majalahSekjen/terima" class="btn btn-danger p-2 m-2" ><i class="fa fa-arrow-left"></i>  Kembali</a>
+                <a href="/majalahSekjen" class="btn btn-danger p-2 m-2" ><i class="fa fa-arrow-left"></i>  Kembali</a>
         </div>
     </div>
     <br>
-    <dib class="card-body">
+    <div class="card-body">
         <h3 style="background-color: #bdf7ba; justify-content:center;">Kotbah</h3>
         <table class="table">
             <tr>
@@ -73,8 +73,8 @@
                <?php $i++;
             }?>
         </table>
-    </dib>
-    <dib class="card-body">
+    </div>
+    <div class="card-body">
         <h3 style="background-color: #ecf7ba; justify-content:center;">Artikel</h3>
         <table class="table ">
             <tr>
@@ -91,8 +91,8 @@
                <?php $i++;
             }?>
         </table>
-    </dib>
-    <dib class="card-body">
+    </div>
+    <div class="card-body">
         <h3 style="background-color: #baf7e9; justify-content:center;">Berita</h3>
         <table class="table">
             <tr>
@@ -109,7 +109,16 @@
                <?php $i++;
             }?>
         </table>
-    </dib>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12" oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+                <body oncontextmenu="return false;">
+                <object data="{{URL::to('uploads/' . $majalah[0]->file)}}#toolbar=0" type="application/pdf" width="100%" height="500px"  oncontextmenu="return false;"></object>
+                </body>
+            </div>
+        </div>
+    </div>      
 </div>
 
 @endsection 
