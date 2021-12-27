@@ -90,6 +90,7 @@ Route::get('hardcopyJemaat/detail/{id}', [HardcopyController::class, 'detailJema
 Route::get('/ongkir', [CheckOngkirController::class, 'index']);
 Route::post('/ongkir', [CheckOngkirController::class,'check_ongkir']);
 Route::get('/cities/{province_id}', [CheckOngkirController::class,'getCities']);
+Route::post('/hardcopyJemaat/order', [CheckOngkirController::class, 'order']);
 
 //member
 Route::get('member', [MemberController::class, 'index']);
