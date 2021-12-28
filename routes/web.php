@@ -14,6 +14,7 @@ use App\Http\Controllers\KhotbahController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CheckOngkirController;
 use App\Http\Controllers\HardcopyController;
+use App\Http\Controllers\LaporanController;
 
 
 
@@ -227,4 +228,8 @@ Route::middleware(['timaMajalahPage'])->group(function (){
     Route::post('periode/edit/{id}', [PeriodeController::class, 'update']);
     Route::get('periode/delete/{id}', [PeriodeController::class, 'destroy']);
 });
+
+//laporan
+Route::get('laporan', [LaporanController::class, 'index']);
+Route::post('laporan/printLaporan', [LaporanController::class, 'exportFile']);
 

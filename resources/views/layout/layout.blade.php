@@ -215,6 +215,16 @@
                 </a>
             </li>
     @endif
+
+    @if(\Illuminate\Support\Facades\Session::get('role') != '2')
+        <li class="nav-item  {{(request()->is('laporan*') ? 'active' : '')}}">
+            <a class="nav-link" href="{{url('laporan')}}">
+                <i class="fa fa-file" style="color: {{(request()->is('laporan*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                <span style="margin-left: 9px;">Laporan</span>
+            </a>
+        </li>
+    @endif
+
     @if(\Illuminate\Support\Facades\Session::get('role') == '4')
 
     <li class="nav-item  {{(request()->is('majalah*') ? 'active' : '')}}">
