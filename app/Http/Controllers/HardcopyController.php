@@ -68,6 +68,39 @@ class HardcopyController extends Controller
         $fileName = time().$request->file('file-pelengkap')->getClientOriginalName();
         $queryInsert = DB::table('producthardcopy')->insert([
             'nama' => $request->input('nama'),
+            'cover' => $fileName,
+            'norek' =>'ss',
+            'periode_id' => $request->input('periode'),
+            'harga' => $request->input('harga'),
+            'stok' => $request->input('stok'),
+            'berat' => $request->input('berat'),
+            'deskripsi' => $request->input('deskripsi'),
+        ]);
+        if ($queryInsert){
+            $request->file('file-pelengkap')->move(public_path('uploads/cover'), $fileName);
+            return redirect('/hardcopyAdmin')->with('success', 'Artikel berhasil disimpan. Anda masih dapat mengedit artikel. Atau anda dapat mengirim artikel tersebut untuk direview dengan klik tombol upload di kolom aksi.');
+        }
+
+    }
+    public function edit(Request $request)
+    {
+        $request->validate([
+            'nama'=>'required',
+            'periode'=>'required',
+            'berat' => 'required',
+            'harga' => 'required',
+            'deskripsi' => 'required',
+        ],
+            [
+                'nama.required'=>'Nama tidak boleh kosong',
+                'periode.required'=>'Periode tidak boleh kosong',
+                'berat.required' => 'Berat alkitab tidak boleh kosong',
+                'harga.required' => 'Harga nats alkitab tidak boleh kosong',
+                'deskripsi.required' => 'Deskripsi tidak boleh kosong'
+            ]);
+        $fileName = time().$request->file('file-pelengkap')->getClientOriginalName();
+        $queryInsert = DB::table('producthardcopy')->insert([
+            'nama' => $request->input('nama'),
             'majalah_id' => '1',
             'cover' => $fileName,
             'norek' =>'ss',
@@ -83,6 +116,13 @@ class HardcopyController extends Controller
             return redirect('/hardcopyAdmin')->with('success', 'Artikel berhasil disimpan. Anda masih dapat mengedit artikel. Atau anda dapat mengirim artikel tersebut untuk direview dengan klik tombol upload di kolom aksi.');
         }
 
+    }
+
+    public function delete($id)
+    {
+        $query = DB::table('producthardcopy')->where('producthardcopy_id', $id)->delete();
+        dd("ss");
+        return redirect()->back()->with('success', 'Data Dihapus');
     }
 
     public function orderJemaat(){
