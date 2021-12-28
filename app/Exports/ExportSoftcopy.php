@@ -32,7 +32,9 @@ class ExportSoftcopy implements FromQuery, ShouldAutoSize, WithHeadings, WithSty
                     'user.nama,
                     COUNT(*),
                     MONTH(member.active_date),
-                    YEAR(member.active_date)'
+                    YEAR(member.active_date),
+                    DATE(member.active_date),
+                    DATE(member.end_date)'
                 ))
                 ->where(DB::raw('YEAR(active_date)'), $this->year)
                 ->where('member.status', '=', '1')
@@ -62,7 +64,9 @@ class ExportSoftcopy implements FromQuery, ShouldAutoSize, WithHeadings, WithSty
             'Nama',
             'Jumlah Pembelian',
             'Bulan',
-            'Tahun'
+            'Tahun',
+            'Tanggal Aktif',
+            'Tanggal Kadaluarsa'
         ];
     }
 
