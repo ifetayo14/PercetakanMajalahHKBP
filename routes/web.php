@@ -14,6 +14,7 @@ use App\Http\Controllers\KhotbahController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CheckOngkirController;
 use App\Http\Controllers\HardcopyController;
+use App\Http\Controllers\LaporanController;
 
 
 
@@ -97,6 +98,11 @@ Route::post('/ongkir', [CheckOngkirController::class,'check_ongkir']);
 Route::get('/cities/{province_id}', [CheckOngkirController::class,'getCities']);
 Route::post('/hardcopyJemaat/order', [CheckOngkirController::class,'order']);
 Route::get('/hardcopy/order', [HardcopyController::class, 'orderJemaat']);
+Route::post('/hardcopyJemaat/upload/bukti', [CheckOngkirController::class, 'uploadBukti']);
+Route::get('/hardcopyAdmin/terima/{id}', [CheckOngkirController::class, 'terimaOrder']);
+Route::get('/hardcopyAdmin/tolak/{id}', [CheckOngkirController::class, 'tolakOrder']);
+Route::post('/hardcopyAdmin/upload/resi', [CheckOngkirController::class, 'uploadResi']);
+Route::get('/hardcopyUser/konfirmasi/{id}', [CheckOngkirController::class, 'konfirmasiOrder']);
 
 
 //member
@@ -230,4 +236,8 @@ Route::middleware(['timaMajalahPage'])->group(function (){
     Route::get('periode/delete/{id}', [PeriodeController::class, 'destroy']);
 
 });
+
+//laporan
+Route::get('laporan', [LaporanController::class, 'index']);
+Route::post('laporan/printLaporan', [LaporanController::class, 'exportFile']);
 
