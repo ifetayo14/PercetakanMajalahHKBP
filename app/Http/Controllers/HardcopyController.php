@@ -82,6 +82,11 @@ class HardcopyController extends Controller
         }
 
     }
+    public function delete($id)
+    {
+        $query = DB::table('producthardcopy')->where('producthardcopy_id', $id)->delete();
+        return redirect()->back()->with('success', 'Data Dihapus');
+    }
 
 
 

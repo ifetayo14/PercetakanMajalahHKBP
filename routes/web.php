@@ -90,6 +90,8 @@ Route::get('hardcopyJemaat/detail/{id}', [HardcopyController::class, 'detailJema
 Route::get('hardcopyAdmin/', [HardcopyController::class, 'indexAdmin']);
 Route::get('hardcopyAdmin/tambah', [HardcopyController::class, 'tambah']);
 Route::post('hardcopyAdmin/tambah', [HardcopyController::class, 'store']);
+Route::post('hardcopyAdmin/{id}', [HardcopyController::class, 'delete']);
+
 Route::get('/ongkir', [CheckOngkirController::class, 'index']);
 Route::post('/ongkir', [CheckOngkirController::class,'check_ongkir']);
 Route::get('/cities/{province_id}', [CheckOngkirController::class,'getCities']);
@@ -224,5 +226,6 @@ Route::middleware(['timaMajalahPage'])->group(function (){
     Route::get('periode/edit/{id}', [PeriodeController::class, 'edit']);
     Route::post('periode/edit/{id}', [PeriodeController::class, 'update']);
     Route::get('periode/delete/{id}', [PeriodeController::class, 'destroy']);
+
 });
 
