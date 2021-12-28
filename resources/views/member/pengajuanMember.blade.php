@@ -53,7 +53,6 @@
                             <div class="form-group">
                                 <div class="file-loading">
                                     <input id="file-5" name="file-pelengkap" class="file form-control" type="file" multiple data-theme="fas">
-
                                 </div>
                                 <span style="color: red">
                                     @error('file-pelengkap'){{$message}}@enderror

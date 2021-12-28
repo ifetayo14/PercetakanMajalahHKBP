@@ -88,9 +88,15 @@ Route::get('kotbahJemaat/view/{id}', [KhotbahController::class, 'showSekjen']);
 //harcopy
 Route::get('hardcopyJemaat/', [HardcopyController::class, 'index']);
 Route::get('hardcopyJemaat/detail/{id}', [HardcopyController::class, 'detailJemaat']);
+Route::get('hardcopyAdmin/', [HardcopyController::class, 'indexAdmin']);
+Route::get('hardcopyAdmin/tambah', [HardcopyController::class, 'tambah']);
+Route::post('hardcopyAdmin/tambah', [HardcopyController::class, 'store']);
 Route::get('/ongkir', [CheckOngkirController::class, 'index']);
 Route::post('/ongkir', [CheckOngkirController::class,'check_ongkir']);
 Route::get('/cities/{province_id}', [CheckOngkirController::class,'getCities']);
+Route::post('/hardcopyJemaat/order', [CheckOngkirController::class,'order']);
+Route::get('/hardcopy/order', [HardcopyController::class, 'orderJemaat']);
+
 
 //member
 Route::get('member', [MemberController::class, 'index']);
@@ -187,6 +193,7 @@ Route::middleware(['dewanRedaksiPage'])->group(function (){
     Route::get('beritaDewanRedaksi/view/{id}', [BeritaController::class, 'showDewanRedaksi']);
     Route::get('kotbahDewanRedaksi/view/{id}', [KhotbahController::class, 'showDewanRedaksi']);
 });
+
 
 
 

@@ -10,6 +10,7 @@
 <head>
 
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">   
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -32,7 +33,8 @@
 {{--    dropfile--}}
     <link href="{{url('dropfile/css/fileinput.css')}}" media="all" rel="stylesheet" type="text/css"/>
     <link href="{{url('dropfile/themes/explorer-fas/theme.css')}}" media="all" rel="stylesheet" type="text/css"/>
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@1.3.2/dist/select2-bootstrap4.min.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
@@ -261,11 +263,19 @@
                 </a>
             </li>
     @endif
-        <li class="nav-item  {{(request()->is('hardcopyJemaat*') ? 'active' : '')}}">
-            <a class="nav-link" href="{{url('hardcopyJemaat')}}">
-                <i class="fa fa-download" style="color: {{(request()->is('hardcopyJemaat*') ? '#0500FE' : '#FFFFFF')}}"></i>
-                <span style="margin-left: 9px;">HardCopy</span>
-            </a>
+        <li class="nav-item  {{(request()->is('hardcopyJemaat*') ? 'active' : '')}} {{(request()->is('hardcopyAdmin*') ? 'active' : '')}}">
+            @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
+                <a class="nav-link" href="{{url('hardcopyAdmin')}}">
+                    <i class="fa fa-download" style="color: {{(request()->is('hardcopyAdmin*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                    <span style="margin-left: 9px;">HardCopy</span>
+                </a>
+            @elseif(\Illuminate\Support\Facades\Session::get('role') == '2' || \Illuminate\Support\Facades\Session::get('role') == '5')
+                <a class="nav-link" href="{{url('hardcopyJemaat')}}">
+                    <i class="fa fa-download" style="color: {{(request()->is('hardcopyJemaat*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                    <span style="margin-left: 9px;">HardCopy</span>
+                </a>
+            @endif
+
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
@@ -421,6 +431,8 @@
 <script src="{{url('dropfile/js/locales/es.js')}}" type="text/javascript"></script>
 <script src="{{url('dropfile/themes/fas/theme.js')}}" type="text/javascript"></script>
 <script src="{{url('dropfile/themes/explorer-fas/theme.js')}}" type="text/javascript"></script>
+
+@yield('script')
 <script>
     $("#file-5").fileinput({
         theme: 'fas',
