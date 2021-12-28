@@ -90,11 +90,13 @@ Route::get('hardcopyJemaat/detail/{id}', [HardcopyController::class, 'detailJema
 Route::get('hardcopyAdmin/', [HardcopyController::class, 'indexAdmin']);
 Route::get('hardcopyAdmin/tambah', [HardcopyController::class, 'tambah']);
 Route::post('hardcopyAdmin/tambah', [HardcopyController::class, 'store']);
-Route::post('hardcopyAdmin/{id}', [HardcopyController::class, 'delete']);
+Route::get('hardcopyAdmin/hapus/{id}', [HardcopyController::class, 'delete']);
 
 Route::get('/ongkir', [CheckOngkirController::class, 'index']);
 Route::post('/ongkir', [CheckOngkirController::class,'check_ongkir']);
 Route::get('/cities/{province_id}', [CheckOngkirController::class,'getCities']);
+Route::post('/hardcopyJemaat/order', [CheckOngkirController::class,'order']);
+Route::get('/hardcopy/order', [HardcopyController::class, 'orderJemaat']);
 
 
 //member
