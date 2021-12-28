@@ -103,6 +103,7 @@ Route::get('/hardcopyAdmin/terima/{id}', [CheckOngkirController::class, 'terimaO
 Route::get('/hardcopyAdmin/tolak/{id}', [CheckOngkirController::class, 'tolakOrder']);
 Route::post('/hardcopyAdmin/upload/resi', [CheckOngkirController::class, 'uploadResi']);
 Route::get('/hardcopyUser/konfirmasi/{id}', [CheckOngkirController::class, 'konfirmasiOrder']);
+Route::get('/hardcopy/order/detail/{id}', [HardcopyController::class, 'orderDetail']);
 
 
 //member
