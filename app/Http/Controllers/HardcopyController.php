@@ -100,6 +100,7 @@ class HardcopyController extends Controller
             ->join('producthardcopy', 'orders.producthardcopy_id' ,'producthardcopy.producthardcopy_id')
             ->get();
         }
+
         return view('hardcopy.listOrder', compact('produk'));
     }
 

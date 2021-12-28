@@ -64,13 +64,13 @@ class CheckOngkirController extends Controller
         $price = ($request->qty * $request->harga_hd) +$request->rOngkir;
 
 
-        if($request->file('buktiBayar')){
-               $fileName = time().$request->file('buktiBayar')->getClientOriginalName();
+        // if($request->file('buktiBayar')){
+        //        $fileName = time().$request->file('buktiBayar')->getClientOriginalName();
                
                 $save = Orders::create([
                     'user_id' => session()->get('user_id'),
                     'order_date' => "2021-07-26 08:10:19",
-                    'status' => "Proses",
+                    'status' => "Menunggu Pembayaran",
                     'ship_date' => "2021-07-26 08:10:19",
                     'ship_name' => $request->nama,
                     'ship_address' => $request->alamat,
@@ -81,17 +81,73 @@ class CheckOngkirController extends Controller
                     'qty' => $request->qty,
                     'producthardcopy_id' => $request->producthardcopy_id,
                     'price' => $price,
-                    'bukti' => $fileName
+                    'bukti' => "null"
                 ]);
 
        if ($save){
-                $request->file('buktiBayar')->move(public_path('uploads/bukti_bayar'), $fileName);
+                // $request->file('buktiBayar')->move(public_path('uploads/bukti_bayar'), $fileName);
                 return redirect('/hardcopy/order')->with('success', 'Upload Berhasil');
             }else{
                 dd("fail");
             }
 
-   }
+//    }
+
+    }
+
+    public function uploadBukti(Request $request){
+        if($request->file('fileBukti')){
+            $fileName = time().$request->file('fileBukti')->getClientOriginalName();
+            
+            $produk = Orders::find($request->id);
+
+            $produk->status = "Menunggu Konfirmasi";
+            $produk->bukti = $fileName;
+            if ($produk->update()){
+
+                $request->file('fileBukti')->move(public_path('uploads/bukti_bayar'), $fileName);
+                return redirect('/hardcopy/order')->with('success', 'Upload Berhasil');
+            }
+        }
+    }
+
+    public function terimaOrder($id){
+        $produk = Orders::find($id);
+        $produk->status = "Proses pengiriman barang";
+        if ($produk->update()){
+            return redirect('/hardcopy/order')->with('success', 'Berhasil meneria orseran');
+        }
+    }
+
+    public function uploadResi(Request $request){
+        if($request->file('fileResi')){
+            $fileName = time().$request->file('fileResi')->getClientOriginalName();
+            
+            $produk = Orders::find($request->id);
+
+            $produk->status = "Dikirim";
+            $produk->bukti = $fileName;
+            if ($produk->update()){
+                $request->file('fileResi')->move(public_path('uploads/resi'), $fileName);
+                return redirect('/hardcopy/order')->with('success', 'Upload Berhasil');
+            }
+        }
+    }
+    public function tolakOrder($id){
+        $produk = Orders::find($id);
+        $produk->status = "Ditolak";
+        if ($produk->update()){
+            return redirect('/hardcopy/order')->with('success', 'Berhasil meneria orseran');
+        }
+
+    }
+
+    public function konfirmasiOrder($id){
+        $produk = Orders::find($id);
+        $produk->status = "Selesai";
+        if ($produk->update()){
+            return redirect('/hardcopy/order')->with('success', 'Berhasil meneria orseran');
+        }
 
     }
 }

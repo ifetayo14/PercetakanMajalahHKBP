@@ -71,6 +71,7 @@
         </div>
     </div>
     <div class="col-sm-12" name="totalPembayaran" id="totalPembayaran">
+        <p id="txtTP"></p>
     </div>
     <div class="col-sm-12"  name="bukti" id="bukti">
     </div>
@@ -79,7 +80,11 @@
 
 
     <div class="col-sm-6" id="btnSubmit">
+    <input  class="btn btn-md btn-primary btn-block" type="submit" value="Submit">
     </div>
+        <script>
+            document.getElementById("btnSubmit").style.display = "none";
+        </script>
 </form>
 
 <!-- Optional JavaScript -->
@@ -156,11 +161,7 @@
                             $('#ongkir').empty();
                             $('.ongkir').addClass('d-block');
                             $.each(response[0]['costs'], function (key, value) {
-                                var tP = value.cost[0].value+(<?php echo $dataHardCopy->harga * $qty ?>)
-                                $('#ongkir').append('<li class="list-group-item"> <input type="radio" name="rOngkir" checked value="'+value.cost[0].value+'"> '+response[0].code.toUpperCase()+' : <strong>'+value.service+'</strong> - Rp. '+value.cost[0].value+' ('+value.cost[0].etd+' hari)</li>')
-                                $('#totalPembayaran').append('<p>Total pembayaran Rp.'+tP+'</p>')
-                                $('#bukti').append('<label  class="col-sm-2 col-form-label">Upload Bukti</label> <input type="file" data-theme="fas" multiple name="buktiBayar" value="" class="file form-control" >');
-                                $('#btnSubmit').append('</br><input  class="btn btn-md btn-primary btn-block btn-check" type="submit" value="Submit">')
+                                $('#ongkir').append('<li class="list-group-item"> <input type="radio" onclick="checkRadio('+value.cost[0].value+')" id="radioOngkir" onclick="alert("s");" name="rOngkir"  value="'+value.cost[0].value+'"> '+response[0].code.toUpperCase()+' : <strong>'+value.service+'</strong> - Rp. '+value.cost[0].value+' ('+value.cost[0].etd+' hari)</li>')
                             });
 
                         }
@@ -170,6 +171,15 @@
             });
 
         });
+        function checkRadio(tP){
+            var total = tP+(<?php echo $dataHardCopy->harga * $qty ?>)
+            document.getElementById("txtTP").textContent = "Total pembayaran Rp."+total;
+            document.getElementById("btnSubmit").style.display = "block";
+            // $('#totalPembayaran').append('<p>Total pembayaran Rp.'+total+'</p>')
+            //                     $('#bukti').append('<label  class="col-sm-2 col-form-label">Upload Bukti</label> <input type="file" data-theme="fas" multiple name="buktiBayar" value="" class="file form-control" >');
+                            //    $('#btnSubmit').append('</br><input  class="btn btn-md btn-primary btn-block btn-check" type="submit" value="Submit">')
+                         
+        }
     </script>
     @endsection
 @endsection
