@@ -64,7 +64,7 @@
                 'Nama',
                 'Jumlah Pembelian',
                 'Bulan',
-                'Year',
+                'Tahun',
                 'Alamat'
             ];
         }

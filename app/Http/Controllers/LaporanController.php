@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ExportHardcopy;
+use App\Exports\ExportMember;
+use App\Exports\ExportSoftcopy;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -31,11 +33,11 @@ class LaporanController extends Controller
             $fileName = $request->input('month');
         }
         if ($request->input('laporanType') == 'hardcopy'){
-            return (new ExportHardcopy)->getParam($request->input('month'), $request->input('year'))->download('LaporanHardcopy_' . $fileName . '/' . $request->input('year') . '.xlsx');
+            return (new ExportHardcopy)->getParam($request->input('month'), $request->input('year'))->download('LaporanHardcopy_' . $fileName . '-' . $request->input('year') . '.xlsx');
         }elseif ($request->input('laporanType') == 'softcopy'){
-
+            return (new ExportSoftcopy())->getParam($request->input('month'), $request->input('year'))->download('LaporanSoftcopy_' . $fileName . '-' . $request->input('year') . '.xlsx');
         }else{
-
+            return (new ExportMember())->getParam($request->input('month'), $request->input('year'))->download('LaporanMember_' . $fileName . '-' . $request->input('year') . '.xlsx');
         }
     }
 }
