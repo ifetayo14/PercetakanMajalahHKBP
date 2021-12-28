@@ -93,6 +93,8 @@ Route::post('hardcopyAdmin/tambah', [HardcopyController::class, 'store']);
 Route::get('/ongkir', [CheckOngkirController::class, 'index']);
 Route::post('/ongkir', [CheckOngkirController::class,'check_ongkir']);
 Route::get('/cities/{province_id}', [CheckOngkirController::class,'getCities']);
+Route::post('/hardcopyJemaat/order', [CheckOngkirController::class,'order']);
+Route::get('/hardcopy/order', [HardcopyController::class, 'orderJemaat']);
 
 
 //member

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Blade;
+use App\Models\Orders;
+
 class HardcopyController extends Controller
 {
     public function index()
@@ -69,7 +71,7 @@ class HardcopyController extends Controller
             'majalah_id' => '1',
             'cover' => $fileName,
             'norek' =>'ss',
-            'status' =>'1',
+            'status' =>'Prsoes Approve',
             'periode_id' => $request->input('periode'),
             'harga' => $request->input('harga'),
             'stok' => $request->input('stok'),
@@ -81,6 +83,24 @@ class HardcopyController extends Controller
             return redirect('/hardcopyAdmin')->with('success', 'Artikel berhasil disimpan. Anda masih dapat mengedit artikel. Atau anda dapat mengirim artikel tersebut untuk direview dengan klik tombol upload di kolom aksi.');
         }
 
+    }
+
+    public function orderJemaat(){
+        // DB::table('producthardcopy')
+        // ->join('periode', 'producthardcopy.periode_id', '=', 'periode.periode_id')
+        // ->select('producthardcopy.producthardcopy_id','producthardcopy.nama','producthardcopy.cover','producthardcopy.stok','producthardcopy.berat','producthardcopy.harga','producthardcopy.deskripsi','periode.bulan','periode.tahun')
+
+        $produk = DB::table('orders')
+        ->where('user_id', session()->get('user_id'))
+        ->join('producthardcopy', 'orders.producthardcopy_id' ,'producthardcopy.producthardcopy_id')
+        ->get();
+
+        if(session()->get('role') == 1){
+            $produk = DB::table('orders')
+            ->join('producthardcopy', 'orders.producthardcopy_id' ,'producthardcopy.producthardcopy_id')
+            ->get();
+        }
+        return view('hardcopy.listOrder', compact('produk'));
     }
 
 

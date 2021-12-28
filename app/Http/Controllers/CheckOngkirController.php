@@ -86,13 +86,11 @@ class CheckOngkirController extends Controller
 
        if ($save){
                 $request->file('buktiBayar')->move(public_path('uploads/bukti_bayar'), $fileName);
-                return redirect('/member')->with('success', 'Upload Berhasil');
+                return redirect('/hardcopy/order')->with('success', 'Upload Berhasil');
             }else{
                 dd("fail");
             }
 
-   }else{
-       dd('f');
    }
 
     }
