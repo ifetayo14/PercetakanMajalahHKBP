@@ -67,6 +67,11 @@
                             <div class="col-sm-0">:</div>
                             <div class="col-sm-8">{{$produk->status}}</div>
                         </div>
+                        <div class="row mt-1">
+                            <div class="col-sm-3">Pembayarn ke</div>
+                            <div class="col-sm-0">:</div>
+                            <div class="col-sm-8">{{$produk->norek}}</div>
+                        </div>
                     </div>
             </form>
             </div>

@@ -64,7 +64,15 @@ class CheckOngkirController extends Controller
 
         $price = ($request->qty * $request->harga_hd) +$request->rOngkir;
 
+        $dataHardCopy =  DB::table('producthardcopy')
+        ->where('producthardcopy_id', $request->producthardcopy_id)
+        ->first();
 
+        DB::table('producthardcopy')
+        ->where('producthardcopy_id', $request->producthardcopy_id)
+        ->update([
+            'stok' => $dataHardCopy->stok-$request->qty
+        ]);
         // if($request->file('buktiBayar')){
         //        $fileName = time().$request->file('buktiBayar')->getClientOriginalName();
                
@@ -137,6 +145,16 @@ class CheckOngkirController extends Controller
     public function tolakOrder($id){
         $produk = Orders::find($id);
         $produk->status = "Ditolak";
+
+        $dataHardCopy =  DB::table('producthardcopy')
+        ->where('producthardcopy_id', $produk->producthardcopy_id)
+        ->first();
+
+        DB::table('producthardcopy')
+        ->where('producthardcopy_id',  $produk->producthardcopy_id)
+        ->update([
+            'stok' => $dataHardCopy->stok+$produk->qty
+        ]);
         if ($produk->update()){
             return redirect('/hardcopy/order')->with('success', 'Berhasil menolak orderan');
         }
