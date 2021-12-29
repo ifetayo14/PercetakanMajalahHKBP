@@ -14,6 +14,7 @@ use App\Http\Controllers\KhotbahController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CheckOngkirController;
 use App\Http\Controllers\HardcopyController;
+use App\Http\Controllers\LaporanController;
 
 
 
@@ -90,11 +91,19 @@ Route::get('hardcopyJemaat/detail/{id}', [HardcopyController::class, 'detailJema
 Route::get('hardcopyAdmin/', [HardcopyController::class, 'indexAdmin']);
 Route::get('hardcopyAdmin/tambah', [HardcopyController::class, 'tambah']);
 Route::post('hardcopyAdmin/tambah', [HardcopyController::class, 'store']);
-Route::get('/ongkir', [CheckOngkirController::class, 'index']);
+Route::get('hardcopyAdmin/hapus/{id}', [HardcopyController::class, 'delete']);
+
+Route::get('/hardcopyJemaat/ongkir', [CheckOngkirController::class, 'index']);
 Route::post('/ongkir', [CheckOngkirController::class,'check_ongkir']);
 Route::get('/cities/{province_id}', [CheckOngkirController::class,'getCities']);
 Route::post('/hardcopyJemaat/order', [CheckOngkirController::class,'order']);
 Route::get('/hardcopy/order', [HardcopyController::class, 'orderJemaat']);
+Route::post('/hardcopyJemaat/upload/bukti', [CheckOngkirController::class, 'uploadBukti']);
+Route::get('/hardcopyAdmin/terima/{id}', [CheckOngkirController::class, 'terimaOrder']);
+Route::get('/hardcopyAdmin/tolak/{id}', [CheckOngkirController::class, 'tolakOrder']);
+Route::post('/hardcopyAdmin/upload/resi', [CheckOngkirController::class, 'uploadResi']);
+Route::get('/hardcopyUser/konfirmasi/{id}', [CheckOngkirController::class, 'konfirmasiOrder']);
+Route::get('/hardcopy/order/detail/{id}', [HardcopyController::class, 'orderDetail']);
 
 
 //member
@@ -226,5 +235,10 @@ Route::middleware(['timaMajalahPage'])->group(function (){
     Route::get('periode/edit/{id}', [PeriodeController::class, 'edit']);
     Route::post('periode/edit/{id}', [PeriodeController::class, 'update']);
     Route::get('periode/delete/{id}', [PeriodeController::class, 'destroy']);
+
 });
+
+//laporan
+Route::get('laporan', [LaporanController::class, 'index']);
+Route::post('laporan/printLaporan', [LaporanController::class, 'exportFile']);
 

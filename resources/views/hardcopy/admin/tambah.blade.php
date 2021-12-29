@@ -6,7 +6,7 @@
 @section('main-content')
     <div class="card container-fluid p-3" style="min-height: 400px">
         <div class="text-center mt-2"> <h1 class="h4 page-head-title mb-4">Tambah Produk</h1></div>
-        <form  method="post" action="/hardcopyAdmin/tambah" enctype="multipart/form-data">
+        <form  method="post" action="/hardcopyAdmin/tambah" enctype= "multipart/form-data">
             @csrf
             <div class="row mt-2">
                 <div class="col-md-3"></div>

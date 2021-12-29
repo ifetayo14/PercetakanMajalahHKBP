@@ -10,7 +10,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">   
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -35,6 +35,7 @@
     <link href="{{url('dropfile/themes/explorer-fas/theme.css')}}" media="all" rel="stylesheet" type="text/css"/>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@1.3.2/dist/select2-bootstrap4.min.css" rel="stylesheet" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body id="page-top">
@@ -215,6 +216,16 @@
                 </a>
             </li>
     @endif
+
+    @if(\Illuminate\Support\Facades\Session::get('role') != '2')
+        <li class="nav-item  {{(request()->is('laporan*') ? 'active' : '')}}">
+            <a class="nav-link" href="{{url('laporan')}}">
+                <i class="fa fa-file" style="color: {{(request()->is('laporan*') ? '#0500FE' : '#FFFFFF')}}"></i>
+                <span style="margin-left: 9px;">Laporan</span>
+            </a>
+        </li>
+    @endif
+
     @if(\Illuminate\Support\Facades\Session::get('role') == '4')
 
     <li class="nav-item  {{(request()->is('majalah*') ? 'active' : '')}}">
@@ -253,7 +264,7 @@
                 </a>
             </li>
     @endif
-        <li class="nav-item  {{(request()->is('hardcopyJemaat*') ? 'active' : '')}} {{(request()->is('hardcopyAdmin*') ? 'active' : '')}}">
+        <li class="nav-item  {{(request()->is('hardcopyJemaat*') ? 'active' : '')}} {{(request()->is('hardcopyAdmin*') ? 'active' : '')}} {{(request()->is('hardcopy*') ? 'active' : '')}}">
             @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
                 <a class="nav-link" href="{{url('hardcopyAdmin')}}">
                     <i class="fa fa-download" style="color: {{(request()->is('hardcopyAdmin*') ? '#0500FE' : '#FFFFFF')}}"></i>
@@ -424,6 +435,7 @@
 
 @yield('script')
 <script>
+
     $("#file-5").fileinput({
         theme: 'fas',
         showUpload: false,

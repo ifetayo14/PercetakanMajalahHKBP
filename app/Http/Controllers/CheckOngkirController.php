@@ -9,6 +9,7 @@ use Kavist\RajaOngkir\Facades\RajaOngkir;
 use DB;
 use App\Models\Orders;
 use Session;
+use Carbon\Carbon;
 
 class CheckOngkirController extends Controller
 {
@@ -63,35 +64,110 @@ class CheckOngkirController extends Controller
 
         $price = ($request->qty * $request->harga_hd) +$request->rOngkir;
 
+        $dataHardCopy =  DB::table('producthardcopy')
+        ->where('producthardcopy_id', $request->producthardcopy_id)
+        ->first();
 
-        if($request->file('buktiBayar')){
-               $fileName = time().$request->file('buktiBayar')->getClientOriginalName();
+        DB::table('producthardcopy')
+        ->where('producthardcopy_id', $request->producthardcopy_id)
+        ->update([
+            'stok' => $dataHardCopy->stok-$request->qty
+        ]);
+        // if($request->file('buktiBayar')){
+        //        $fileName = time().$request->file('buktiBayar')->getClientOriginalName();
                
                 $save = Orders::create([
                     'user_id' => session()->get('user_id'),
-                    'order_date' => "2021-07-26 08:10:19",
-                    'status' => "Proses",
-                    'ship_date' => "2021-07-26 08:10:19",
+                    'order_date' => Carbon::now(),
+                    'status' => "Menunggu Pembayaran",
+                    'ship_date' => Carbon::now(),
                     'ship_name' => $request->nama,
                     'ship_address' => $request->alamat,
                     'ship_city' => $request->city_destination,
                     'ship_region' => $request->province_destination,
                     'ship_postal_code' => $request->kode_pos,
-                    'ship_country' => "ID",
+                    'ship_country' => $request->negara,
                     'qty' => $request->qty,
                     'producthardcopy_id' => $request->producthardcopy_id,
                     'price' => $price,
-                    'bukti' => $fileName
+                    'bukti' => "null"
                 ]);
 
        if ($save){
-                $request->file('buktiBayar')->move(public_path('uploads/bukti_bayar'), $fileName);
+                // $request->file('buktiBayar')->move(public_path('uploads/bukti_bayar'), $fileName);
                 return redirect('/hardcopy/order')->with('success', 'Upload Berhasil');
             }else{
                 dd("fail");
             }
 
-   }
+//    }
+
+    }
+
+    public function uploadBukti(Request $request){
+        if($request->file('fileBukti')){
+            $fileName = time().$request->file('fileBukti')->getClientOriginalName();
+            
+            $produk = Orders::find($request->id);
+
+            $produk->status = "Menunggu Konfirmasi";
+            $produk->bukti = $fileName;
+            if ($produk->update()){
+
+                $request->file('fileBukti')->move(public_path('uploads/bukti_bayar'), $fileName);
+                return redirect('/hardcopy/order')->with('success', 'Upload Bukti Berhasil');
+            }
+        }
+    }
+
+    public function terimaOrder($id){
+        $produk = Orders::find($id);
+        $produk->status = "Proses pengiriman barang";
+        if ($produk->update()){
+            return redirect('/hardcopy/order')->with('success', 'Berhasil meneria orderan');
+        }
+    }
+
+    public function uploadResi(Request $request){
+        if($request->file('fileResi')){
+            $fileName = time().$request->file('fileResi')->getClientOriginalName();
+            
+            $produk = Orders::find($request->id);
+
+            $produk->status = "Dikirim";
+            $produk->resi = $fileName;
+            if ($produk->update()){
+                $request->file('fileResi')->move(public_path('uploads/resi'), $fileName);
+                return redirect('/hardcopy/order')->with('success', 'Upload Resi Berhasil');
+            }
+        }
+    }
+    public function tolakOrder($id){
+        $produk = Orders::find($id);
+        $produk->status = "Ditolak";
+
+        $dataHardCopy =  DB::table('producthardcopy')
+        ->where('producthardcopy_id', $produk->producthardcopy_id)
+        ->first();
+
+        DB::table('producthardcopy')
+        ->where('producthardcopy_id',  $produk->producthardcopy_id)
+        ->update([
+            'stok' => $dataHardCopy->stok+$produk->qty
+        ]);
+        if ($produk->update()){
+            return redirect('/hardcopy/order')->with('success', 'Berhasil menolak orderan');
+        }
+
+    }
+
+    public function konfirmasiOrder($id){
+        $produk = Orders::find($id);
+        $produk->status = "Selesai";
+        $produk->ship_date = Carbon::now();
+        if ($produk->update()){
+            return redirect('/hardcopy/order')->with('success', 'Barang berhasil diterima');
+        }
 
     }
 }

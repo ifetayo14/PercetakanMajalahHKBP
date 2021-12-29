@@ -12,7 +12,12 @@
 <div class="form-group row">
     <div class="col-sm-6">
     <label for="nama" class="col-sm-2 col-form-label">Nama</label>
-        <input type="text" onkeypress="oninput();" name="nama" value="" class="form-control" id="nama" placeholder="Nama">
+        <input type="text" oninput="oninput();" name="nama" value="" class="form-control" id="nama" placeholder="Nama">
+    </div>
+  
+    <div class="col-sm-6">
+    <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+        <input type="text" oninput="onFill();" name="alamat" value="" class="form-control" id="alamat" placeholder="Alamat">
     </div>
     <div class="col-sm-6">
         <div class="form-group">
@@ -25,28 +30,25 @@
                         </select>
                     </div>
     </div>
+    
+    <div class="col-sm-6">
+    <label for="negara" class="col-sm-2 col-form-label">Negara</label>
+        <input type="text" oninput="onFill();" name="negara" value="" class="form-control" id="negara" placeholder="Negara">
+    </div>
     <div class="col-sm-6">
     <div class="form-group">
         <label class="font-weight-bold">KOTA / KABUPATEN TUJUAN</label>
             <select class="form-control kota-tujuan" name="city_destination">
                 <option value="">-- pilih kota tujuan --</option>
              </select>
-                    </div>    
+    </div>    
 </div>
     <div class="col-sm-6">
-    <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
-        <input type="text" onkeypress="onFill();" name="alamat" value="" class="form-control" id="alamat" placeholder="Alamat">
-    </div>
-    <div class="col-sm-6">
-    <label for="negara" class="col-sm-2 col-form-label">Negara</label>
-        <input type="text" onkeypress="onFill();" name="negara" value="" class="form-control" id="negara" placeholder="Negara">
-    </div>
-    <div class="col-sm-6">
     <label for="kode_pos" class="col-sm-6 col-form-label">Kode Pos</label>
-        <input type="text" onkeypress="onFill();" name="kode_pos" value="" class="form-control" id="kode_pos" placeholder="Kode Pos">
+        <input type="text" oninput="onFill();" name="kode_pos" value="" class="form-control" id="kode_pos" placeholder="Kode Pos">
     </div>
     <div class="col-sm-6">
-        <label for="ongkir" class="col-sm-2 col-form-label">-</label>
+        <label for="ongkir" class="col-sm-2 col-form-label">    </label>
         <button class="btn btn-md btn-primary btn-block btn-check" id="btn_kirim" >CEK ONGKOS KIRIM</button>
         <script>
             var btn_kirim = document.getElementById("btn_kirim");
@@ -71,6 +73,9 @@
         </div>
     </div>
     <div class="col-sm-12" name="totalPembayaran" id="totalPembayaran">
+        <p>Harga Produk Rp.{{$dataHardCopy->harga}}</p>
+        <p>Stok Pesanan {{$qty}}
+        <p id="txtTP"></p>
     </div>
     <div class="col-sm-12"  name="bukti" id="bukti">
     </div>
@@ -79,7 +84,12 @@
 
 
     <div class="col-sm-6" id="btnSubmit">
+    <input  class="btn btn-md btn-primary btn-block" type="submit" value="Submit">
     </div>
+        <script>
+            document.getElementById("totalPembayaran").style.display ="none";
+            document.getElementById("btnSubmit").style.display = "none";
+        </script>
 </form>
 
 <!-- Optional JavaScript -->
@@ -156,11 +166,7 @@
                             $('#ongkir').empty();
                             $('.ongkir').addClass('d-block');
                             $.each(response[0]['costs'], function (key, value) {
-                                var tP = value.cost[0].value+(<?php echo $dataHardCopy->harga * $qty ?>)
-                                $('#ongkir').append('<li class="list-group-item"> <input type="radio" name="rOngkir" checked value="'+value.cost[0].value+'"> '+response[0].code.toUpperCase()+' : <strong>'+value.service+'</strong> - Rp. '+value.cost[0].value+' ('+value.cost[0].etd+' hari)</li>')
-                                $('#totalPembayaran').append('<p>Total pembayaran Rp.'+tP+'</p>')
-                                $('#bukti').append('<label  class="col-sm-2 col-form-label">Upload Bukti</label> <input type="file" data-theme="fas" multiple name="buktiBayar" value="" class="file form-control" >');
-                                $('#btnSubmit').append('</br><input  class="btn btn-md btn-primary btn-block btn-check" type="submit" value="Submit">')
+                                $('#ongkir').append('<li class="list-group-item"> <input type="radio" onclick="checkRadio('+value.cost[0].value+')" id="radioOngkir" onclick="alert("s");" name="rOngkir"  value="'+value.cost[0].value+'"> '+response[0].code.toUpperCase()+' : <strong>'+value.service+'</strong> - Rp. '+value.cost[0].value+' ('+value.cost[0].etd+' hari)</li>')
                             });
 
                         }
@@ -170,6 +176,16 @@
             });
 
         });
+        function checkRadio(tP){
+            var total = tP+(<?php echo $dataHardCopy->harga * $qty ?>)
+            document.getElementById("txtTP").textContent = "Total pembayaran Rp."+total;
+            document.getElementById("btnSubmit").style.display = "block";
+            document.getElementById("totalPembayaran").style.display ="block";
+            // $('#totalPembayaran').append('<p>Total pembayaran Rp.'+total+'</p>')
+            //                     $('#bukti').append('<label  class="col-sm-2 col-form-label">Upload Bukti</label> <input type="file" data-theme="fas" multiple name="buktiBayar" value="" class="file form-control" >');
+                            //    $('#btnSubmit').append('</br><input  class="btn btn-md btn-primary btn-block btn-check" type="submit" value="Submit">')
+                         
+        }
     </script>
     @endsection
 @endsection
