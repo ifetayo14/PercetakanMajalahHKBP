@@ -43,6 +43,12 @@ class HardcopyController extends Controller
             ->get();
         return view('hardcopy.admin.tambah',compact('dataPeriode'));
     }
+    public function ubah()
+    {
+        $dataPeriode = DB::table('periode')
+            ->get();
+        return view('hardcopy.admin.tambah',compact('dataPeriode'));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -82,6 +88,7 @@ class HardcopyController extends Controller
         }
 
     }
+
     public function edit(Request $request)
     {
         $request->validate([

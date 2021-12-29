@@ -17,6 +17,13 @@ class CheckOngkirController extends Controller
      */
     public function index(Request $request)
     {
+        $request->validate([
+            'stok'=>'required',
+        ],
+            [
+                'stok.required'=>'Stok tidak boleh kosong',
+
+            ]);
         $dataHardCopy =  DB::table('producthardcopy')
         ->join('periode', 'producthardcopy.periode_id', '=', 'periode.periode_id')
         ->select('producthardcopy.producthardcopy_id','producthardcopy.nama','producthardcopy.cover','producthardcopy.stok','producthardcopy.berat','producthardcopy.harga','producthardcopy.deskripsi','periode.bulan','periode.tahun')
@@ -43,7 +50,7 @@ class CheckOngkirController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function check_ongkir(Request $request)
-    {   
+    {
 
         $weight = $request->weight;
         if($weight<1){
@@ -66,7 +73,7 @@ class CheckOngkirController extends Controller
 
         // if($request->file('buktiBayar')){
         //        $fileName = time().$request->file('buktiBayar')->getClientOriginalName();
-               
+
                 $save = Orders::create([
                     'user_id' => session()->get('user_id'),
                     'order_date' => "2021-07-26 08:10:19",
@@ -98,7 +105,7 @@ class CheckOngkirController extends Controller
     public function uploadBukti(Request $request){
         if($request->file('fileBukti')){
             $fileName = time().$request->file('fileBukti')->getClientOriginalName();
-            
+
             $produk = Orders::find($request->id);
 
             $produk->status = "Menunggu Konfirmasi";
@@ -122,7 +129,7 @@ class CheckOngkirController extends Controller
     public function uploadResi(Request $request){
         if($request->file('fileResi')){
             $fileName = time().$request->file('fileResi')->getClientOriginalName();
-            
+
             $produk = Orders::find($request->id);
 
             $produk->status = "Dikirim";

@@ -8,7 +8,7 @@
 
         <div class="row p-3">
             <div class="col-md-5">
-                <img class="w-100" src="https://winstarlink.com/wp-content/uploads/2020/02/jasa-pembuatan-desain-katalog-Portrait-10.jpg" alt="" height="400px">
+                <img class="w-100" src="{{URL::to('uploads/cover/' . $dataHardCopy->cover)}}" alt="" height="400px">
             </div>
             <div class="col-md-7">
                 <h1 class="page-head-title h3 text-center radius">{{$dataHardCopy->nama}}</h1>
@@ -46,7 +46,8 @@
                             </div>
                             <div class="col-sm-0 align-self-center">:</div>
                             <div class="col-sm-2">
-                                <input type="number" class="form-control" id="stok" name="stok">
+                                <input type="number" class="form-control" id="stok" name="stok" min="0" >
+
                             </div>
                         </div>
                     </div>
