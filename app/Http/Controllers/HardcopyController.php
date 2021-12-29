@@ -142,13 +142,31 @@ class HardcopyController extends Controller
         ->join('producthardcopy', 'orders.producthardcopy_id' ,'producthardcopy.producthardcopy_id')
         ->get();
 
-        if(session()->get('role') == 1){
+        if(session()->get('role') == 1 || session()->get('role') == 4){
             $produk = DB::table('orders')
             ->join('producthardcopy', 'orders.producthardcopy_id' ,'producthardcopy.producthardcopy_id')
             ->get();
         }
 
         return view('hardcopy.listOrder', compact('produk'));
+    }
+
+    public function orderDetail($id){
+        $produk =DB::table('orders')
+        ->where('orders_id', $id)
+        ->join('producthardcopy', 'orders.producthardcopy_id' ,'producthardcopy.producthardcopy_id')
+        ->first();
+
+        $city = DB::table('cities')
+        ->where('city_id', $produk->ship_city)
+        ->first();
+
+        $provinces = DB::table('provinces')
+        ->where('province_id', $produk->ship_region)
+        ->first();
+
+        
+        return view('hardcopy.detailOrder', compact('produk', 'city', 'provinces'));
     }
 
 

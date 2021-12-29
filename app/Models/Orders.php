@@ -26,7 +26,8 @@ class Orders extends Model
     'qty',
     'price',
     'producthardcopy_id',
-    'bukti'
+    'bukti',
+    'resi'
 ];
     protected $table = 'orders';
 }

@@ -264,7 +264,7 @@
                 </a>
             </li>
     @endif
-        <li class="nav-item  {{(request()->is('hardcopyJemaat*') ? 'active' : '')}} {{(request()->is('hardcopyAdmin*') ? 'active' : '')}}">
+        <li class="nav-item  {{(request()->is('hardcopyJemaat*') ? 'active' : '')}} {{(request()->is('hardcopyAdmin*') ? 'active' : '')}} {{(request()->is('hardcopy*') ? 'active' : '')}}">
             @if(\Illuminate\Support\Facades\Session::get('role') == '1' || \Illuminate\Support\Facades\Session::get('role') == '4')
                 <a class="nav-link" href="{{url('hardcopyAdmin')}}">
                     <i class="fa fa-download" style="color: {{(request()->is('hardcopyAdmin*') ? '#0500FE' : '#FFFFFF')}}"></i>

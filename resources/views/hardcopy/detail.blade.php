@@ -12,7 +12,7 @@
             </div>
             <div class="col-md-7">
                 <h1 class="page-head-title h3 text-center radius">{{$dataHardCopy->nama}}</h1>
-                <form method="get" action="{{url('/ongkir')}}">
+                <form method="get" action="{{url('/hardcopyJemaat/ongkir')}}">
                     <input type="text" hidden name="id" value="{{$dataHardCopy->producthardcopy_id}}">
                     <div class="card-text mt-4 pt-2 pb-2 pl-2 pr-2" style="min-height: 300px">
                         <div class="row  mt-1">

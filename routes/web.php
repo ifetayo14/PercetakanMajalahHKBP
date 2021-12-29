@@ -93,7 +93,7 @@ Route::get('hardcopyAdmin/tambah', [HardcopyController::class, 'tambah']);
 Route::post('hardcopyAdmin/tambah', [HardcopyController::class, 'store']);
 Route::get('hardcopyAdmin/hapus/{id}', [HardcopyController::class, 'delete']);
 
-Route::get('/ongkir', [CheckOngkirController::class, 'index']);
+Route::get('/hardcopyJemaat/ongkir', [CheckOngkirController::class, 'index']);
 Route::post('/ongkir', [CheckOngkirController::class,'check_ongkir']);
 Route::get('/cities/{province_id}', [CheckOngkirController::class,'getCities']);
 Route::post('/hardcopyJemaat/order', [CheckOngkirController::class,'order']);
@@ -103,6 +103,7 @@ Route::get('/hardcopyAdmin/terima/{id}', [CheckOngkirController::class, 'terimaO
 Route::get('/hardcopyAdmin/tolak/{id}', [CheckOngkirController::class, 'tolakOrder']);
 Route::post('/hardcopyAdmin/upload/resi', [CheckOngkirController::class, 'uploadResi']);
 Route::get('/hardcopyUser/konfirmasi/{id}', [CheckOngkirController::class, 'konfirmasiOrder']);
+Route::get('/hardcopy/order/detail/{id}', [HardcopyController::class, 'orderDetail']);
 
 
 //member

@@ -5,8 +5,8 @@
 @endsection
 @section('main-content')
     <div class="row card d-flex flex-row-reverse p-1 align-content-center mt-0 mb-2" style="min-height: 40px">
-        <a href="hardcopyAdmin/tambah"><button class="btn btn-sm btn-success" data-placement="bottom" data-toggle="tooltip" title="Tambah Produk"><i class="fas fa-plus"></i></button></a>
-        <a href="hardcopy/order"><button class="btn btn-sm btn-success mr-2" data-placement="bottom" data-toggle="tooltip" title="Order"><i class="fas fa-sticky-note"></i></button></a>
+        <a href="hardcopyAdmin/tambah"><button class="btn btn-sm btn-success" data-placement="bottom" data-toggle="tooltip" title="Tambah Produk">Tambah Prdouct <i class="fas fa-plus"></i></button></a>
+        <a href="hardcopy/order"><button class="btn btn-sm btn-success mr-2" data-placement="bottom" data-toggle="tooltip" title="Order">List Order <i class="fas fa-sticky-note"></i></button></a>
 
     </div>
 
