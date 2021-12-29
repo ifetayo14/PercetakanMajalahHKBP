@@ -14,7 +14,7 @@
         @foreach($dataHardCopy as $row)
             <div class="col-md-3 mt-2 mb-2">
                 <div class="card w-100">
-                    <img class="card-img-top" src="https://winstarlink.com/wp-content/uploads/2020/02/jasa-pembuatan-desain-katalog-Portrait-10.jpg" alt="Card image cap" style="height: 170px">
+                    <img class="card-img-top" src="{{URL::to('uploads/cover/' . $row->cover)}}" alt="Card image cap" style="height: 170px">
                     <div class="card-body" >
                         <h5 class="card-title">{{$row->nama}}</h5>
                         <p class="card-text">{{$row->deskripsi}}</p>
@@ -25,7 +25,7 @@
                            </div>
                             <div class="col-md-4 d-flex flex-row-reverse">
                                 <button class="btn btn-sm btn-danger" data-placement="bottom" data-toggle="tooltip" title="Hapus Produk" onclick="deleteHardCopy({{$row->producthardcopy_id}}) "><i class="fas fa-trash"></i></button>
-                                <button class="btn btn-sm btn-primary mr-2" data-placement="bottom" data-toggle="tooltip" title="Edit Produk"><i class="fas fa-edit"></i></button>
+                                <a href="hardcopyJemaat/edit/{{$row->producthardcopy_id}}"><button class="btn btn-sm btn-primary mr-2" data-placement="bottom" data-toggle="tooltip" title="Edit Produk"><i class="fas fa-edit"></i></button></a>
                             </div>
                         </div>
 
