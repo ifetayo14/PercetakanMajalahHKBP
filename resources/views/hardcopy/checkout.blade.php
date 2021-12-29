@@ -74,7 +74,7 @@
     </div>
     <div class="col-sm-12" name="totalPembayaran" id="totalPembayaran">
         <p>Harga Produk Rp.{{$dataHardCopy->harga}}</p>
-        <p>Stok Pesanan {{$qty}}
+        <p>Jumlah Pesanan {{$qty}}
         <p id="txtTP"></p>
     </div>
     <div class="col-sm-12"  name="bukti" id="bukti">
