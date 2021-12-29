@@ -28,32 +28,40 @@
             if ($this->month == 13){
                 return DB::table('orders')
                     ->join('user', 'orders.user_id', '=', 'user.user_id')
+                    ->join('producthardcopy', 'orders.producthardcopy_id', '=', 'producthardcopy.producthardcopy_id')
                     ->select(DB::raw(
                         'user.nama,
-                    COUNT(*),
-                    MONTH(orders.order_date),
-                    YEAR(orders.order_date),
-                    orders.alamat_pengiriman'
+                        qty,
+                        price,
+                        qty*price,
+                        MONTH(orders.order_date),
+                        YEAR(orders.order_date),
+                        orders.ship_address,
+                        orders.status,
+                        producthardcopy.stok'
                     ))
                     ->where(DB::raw('YEAR(order_date)'), $this->year)
-                    ->where('status_payment', '=', 'Dibayar')
-                    ->groupBy('orders.user_id')
-                    ->orderBy('orders.user_id');
+                    ->where('orders.status', '!=', 'Menunggu Pembayaran')
+                    ->orderBy('orders.order_date');
             }else{
                 return DB::table('orders')
                     ->join('user', 'orders.user_id', '=', 'user.user_id')
+                    ->join('producthardcopy', 'orders.producthardcopy_id', '=', 'producthardcopy.producthardcopy_id')
                     ->select(DB::raw(
                         'user.nama,
-                    COUNT(*),
-                    MONTH(orders.order_date),
-                    YEAR(orders.order_date),
-                    orders.alamat_pengiriman'
+                        qty,
+                        price,
+                        qty*price,
+                        MONTH(orders.order_date),
+                        YEAR(orders.order_date),
+                        orders.ship_address,
+                        orders.status,
+                        producthardcopy.stok'
                     ))
                     ->where(DB::raw('MONTH(orders.order_date)'), $this->month)
                     ->where(DB::raw('YEAR(order_date)'), $this->year)
-                    ->where('status_payment', '=', 'Dibayar')
-                    ->groupBy('orders.user_id')
-                    ->orderBy('orders.user_id');
+                    ->where('orders.status', '!=', 'Menunggu Pembayaran')
+                    ->orderBy('orders.order_date');
             }
 
         }
@@ -62,10 +70,14 @@
         {
             return [
                 'Nama',
-                'Jumlah Pembelian',
+                'Quantity',
+                'Price',
+                'Total Pembelian',
                 'Bulan',
                 'Tahun',
-                'Alamat'
+                'Alamat',
+                'Status',
+                'Stok'
             ];
         }
 
