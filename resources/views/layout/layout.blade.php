@@ -29,7 +29,9 @@
     <!-- Custom styles for this template-->
     <link href="{{url('templateResources/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{url('templateResources/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-
+    <!-- modal image -->
+    <link href="{{url('modalImage.css')}}" media="all" rel="stylesheet" type="text/css"/>
+   
 {{--    dropfile--}}
     <link href="{{url('dropfile/css/fileinput.css')}}" media="all" rel="stylesheet" type="text/css"/>
     <link href="{{url('dropfile/themes/explorer-fas/theme.css')}}" media="all" rel="stylesheet" type="text/css"/>
