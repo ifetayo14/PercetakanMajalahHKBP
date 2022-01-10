@@ -50,6 +50,7 @@ class CheckOngkirController extends Controller
         if($weight<1){
             $weight = 1;
         }
+        
         $cost = RajaOngkir::ongkosKirim([
             'origin'        => 465, // ID kota/kabupaten asal -> 465 id Tapanuli Utara
             'destination'   => $request->city_destination, // ID kota/kabupaten tujuan
