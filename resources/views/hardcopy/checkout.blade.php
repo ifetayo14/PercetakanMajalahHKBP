@@ -12,7 +12,7 @@
 <div class="form-group row">
     <div class="col-sm-6">
     <label for="nama" class="col-sm-2 col-form-label">Nama</label>
-        <input type="text" oninput="oninput();" name="nama" value="" class="form-control" id="nama" placeholder="Nama">
+        <input type="text" oninput="onFill();" name="nama" value="" class="form-control" id="nama" placeholder="Nama">
     </div>
   
     <div class="col-sm-6">
@@ -177,8 +177,19 @@
 
         });
         function checkRadio(tP){
-            var total = tP+(<?php echo $dataHardCopy->harga * $qty ?>)
-            document.getElementById("txtTP").textContent = "Total pembayaran Rp."+total;
+            var total = tP+(<?php echo $dataHardCopy->harga * $qty ?>);
+            var berat = (<?php echo $dataHardCopy->berat * $qty ?>)/1000;
+            var res = 0;
+            var x03 = (Math.round(berat)+0.3);
+            if(berat < x03){
+                res = Math.round(berat);
+            }else{
+                res = Math.ceil(berat);
+            }
+            if(res <1){
+                res = 1;
+            }
+            document.getElementById("txtTP").textContent = "Total pembayaran : "+res+"kg x Rp."+tP+" + Rp."+<?php echo $dataHardCopy->harga * $qty ?>+" = Rp."+total;
             document.getElementById("btnSubmit").style.display = "block";
             document.getElementById("totalPembayaran").style.display ="block";
             // $('#totalPembayaran').append('<p>Total pembayaran Rp.'+total+'</p>')
@@ -186,6 +197,7 @@
                             //    $('#btnSubmit').append('</br><input  class="btn btn-md btn-primary btn-block btn-check" type="submit" value="Submit">')
                          
         }
+       
     </script>
     @endsection
 @endsection

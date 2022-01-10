@@ -45,7 +45,7 @@
                         <td>{{$p->ship_name}}</td>
                         @endif
                         <td>{{$p->status}}</td>
-                        @if(session()->get('role') == 2)
+                        @if(session()->get('role') == 2 || session()->get('role') == 5)
                             <td>
                                 @if($p->status == "Menunggu Pembayaran")
                                     <a href="" class="btn btn-outline-primary"  data-toggle="modal" data-target="#upload-{{$p->orders_id}}"><i class="fa fa-upload"></i> Upload Bukti Byar</a>
