@@ -3,6 +3,9 @@
 @section('title')
     Detail HardCopy {{$produk->nama}}
 @endsection
+@section('css')
+    <link href="{{url('modalImage.css')}}" media="all" rel="stylesheet" type="text/css"/>
+@endsection
 @section('main-content')
 <div class="row d-flex justify-content-between">
     <h1 class="h3">Detail Pembelian</h1>
