@@ -145,6 +145,7 @@ class HardcopyController extends Controller
         if(session()->get('role') == 1 || session()->get('role') == 4){
             $produk = DB::table('orders')
             ->join('producthardcopy', 'orders.producthardcopy_id' ,'producthardcopy.producthardcopy_id')
+            ->orderBy('orders_id', 'DESC')
             ->get();
         }
 
