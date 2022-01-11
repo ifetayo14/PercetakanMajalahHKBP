@@ -75,6 +75,7 @@
     <div class="col-sm-12" name="totalPembayaran" id="totalPembayaran">
         <p>Harga Produk Rp.{{$dataHardCopy->harga}}</p>
         <p>Jumlah Pesanan {{$qty}}
+        <p id="txtBerat"></p>
         <p id="txtTP"></p>
     </div>
     <div class="col-sm-12"  name="bukti" id="bukti">
@@ -189,7 +190,8 @@
             if(res <1){
                 res = 1;
             }
-            document.getElementById("txtTP").textContent = "Total pembayaran : "+res+"kg x Rp."+tP+" + Rp."+<?php echo $dataHardCopy->harga * $qty ?>+" = Rp."+total;
+            document.getElementById("txtTP").textContent = "Total pembayaran : Rp."+tP+" + Rp."+<?php echo $dataHardCopy->harga * $qty ?>+" = Rp."+total;
+            document.getElementById("txtBerat").textContent = "Berat : "+res+"kg";
             document.getElementById("btnSubmit").style.display = "block";
             document.getElementById("totalPembayaran").style.display ="block";
             // $('#totalPembayaran').append('<p>Total pembayaran Rp.'+total+'</p>')
