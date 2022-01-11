@@ -48,7 +48,7 @@
                         <div class="row mt-1">
                             <div class="col-sm-3">Berat</div>
                             <div class="col-sm-0">:</div>
-                            <div class="col-sm-8">{{$produk->berat}} kg</div>
+                            <div class="col-sm-8">{{$produk->berat}} gram</div>
                         </div>
                         <div class="row mt-1">
                             <div class="col-sm-3">Qty</div>
