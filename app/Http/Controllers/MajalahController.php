@@ -180,9 +180,9 @@ class MajalahController extends Controller
         // var_dump($majalah);die();
         $artikel = DB::table('artikel')->where(['periode_id' => $id, 'artikel.status' =>5])
         ->join('status', 'status.id','=','artikel.status')->select('artikel.*', 'status.deskripsi as status_des')->get();
-        $berita = DB::table('berita')->where(['periode_id' => $id, 'artikel.status' =>5])
+        $berita = DB::table('berita')->where(['periode_id' => $id, 'berita.status' =>5])
         ->join('status', 'status.id','=','berita.status')->select('berita.*', 'status.deskripsi as status_des')->get();
-        $kotbah = DB::table('kotbah')->where(['periode_id' => $id, 'artikel.status' =>5])
+        $kotbah = DB::table('kotbah')->where(['periode_id' => $id, 'kotbah.status' =>5])
         ->join('status', 'status.id','=','kotbah.status')->select('kotbah.*', 'status.deskripsi as status_des')->get();
         // $majalah =  DB::table('majalah')
         //                 ->join('status', 'status.id','=','majalah.status')
