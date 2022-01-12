@@ -70,7 +70,7 @@
                                         @endif
                                     </td>
                                 </tr>
-                                @if(Session::get('role') == '1' && Session::get('role') == '4')
+                                @if(Session::get('role') == '1' || Session::get('role') == '4')
                                     <div class="modal fade" id="tagihanModal-{{$row->transaksimember_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                         aria-hidden="true">
                                         <div class="modal-dialog" role="document">
