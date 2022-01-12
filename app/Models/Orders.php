@@ -9,6 +9,8 @@ class Orders extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'orders_id';
+
     protected $fillable = ['user_id',
     'order_date',
     'status',
@@ -24,7 +26,8 @@ class Orders extends Model
     'qty',
     'price',
     'producthardcopy_id',
-    'bukti'
+    'bukti',
+    'resi'
 ];
     protected $table = 'orders';
 }
