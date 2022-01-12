@@ -174,7 +174,7 @@ class MajalahController extends Controller
         $majalah =  DB::table('majalah')
         ->join('status', 'status.id','=','majalah.status')
         ->join('periode', 'periode.periode_id','=','majalah.periode_id')
-        ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.catatan_dewan', 'majalah.approval_dewan', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+        ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.catatan_dewan', 'majalah.approval_dewan', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema', 'majalah.periode_id')
         ->where(['majalah.majalah_id' => $id])
         ->get();
         // var_dump($majalah);die();
