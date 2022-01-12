@@ -419,7 +419,7 @@ class MajalahController extends Controller
     {
         //
         $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get();
-        if($majalah[0]->status != 3){
+        if($majalah[0]->status == 3){
             return redirect('/majalahSekjen/view/'.$id)->with('error', 'Akses langsung melalui URL tidak diizinkan!');
         }
         // var_dump($majalah);die();
@@ -434,7 +434,7 @@ class MajalahController extends Controller
     public function terimaUpdate(Request $request, $id)
     {
         $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get();
-        if($majalah[0]->status != 3){
+        if($majalah[0]->status == 3){
             return redirect('/majalahSekjen/view/'.$id)->with('error', 'Akses langsung melalui URL tidak diizinkan!');
         }
         $queryInsert = DB::table('majalah')->where(['majalah_id'=>$id])
@@ -460,7 +460,7 @@ class MajalahController extends Controller
     public function tolak($id)
     {
         $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get();
-        if($majalah[0]->status != 3){
+        if($majalah[0]->status == 3){
             return redirect('/majalahSekjen/view/'.$id)->with('error', 'Akses langsung melalui URL tidak diizinkan!');
         }
         //
@@ -478,7 +478,7 @@ class MajalahController extends Controller
     public function tolakUpdate(Request $request, $id)
     {
         $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get();
-        if($majalah[0]->status != 3){
+        if($majalah[0]->status == 3){
             return redirect('/majalahSekjen/view/'.$id)->with('error', 'Akses langsung melalui URL tidak diizinkan!');
         }
         $queryInsert = DB::table('majalah')->where(['majalah_id'=>$id])
