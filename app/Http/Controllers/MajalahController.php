@@ -178,11 +178,11 @@ class MajalahController extends Controller
         ->where(['majalah.majalah_id' => $id])
         ->get();
         // var_dump($majalah);die();
-        $artikel = DB::table('artikel')->where(['periode_id' => $id, 'status' =>5])
+        $artikel = DB::table('artikel')->where(['periode_id' => $id, 'artikel.status' =>5])
         ->join('status', 'status.id','=','artikel.status')->select('artikel.*', 'status.deskripsi as status_des')->get();
-        $berita = DB::table('berita')->where(['periode_id' => $id, 'status' =>5])
+        $berita = DB::table('berita')->where(['periode_id' => $id, 'artikel.status' =>5])
         ->join('status', 'status.id','=','berita.status')->select('berita.*', 'status.deskripsi as status_des')->get();
-        $kotbah = DB::table('kotbah')->where(['periode_id' => $id, 'status' =>5])
+        $kotbah = DB::table('kotbah')->where(['periode_id' => $id, 'artikel.status' =>5])
         ->join('status', 'status.id','=','kotbah.status')->select('kotbah.*', 'status.deskripsi as status_des')->get();
         // $majalah =  DB::table('majalah')
         //                 ->join('status', 'status.id','=','majalah.status')
@@ -284,7 +284,7 @@ class MajalahController extends Controller
      */
     public function showDewanRedaksiByPeriode($id)
     {
-        // $majalah = DB::table('majalah')->where(['periode_id' => $id])->get();
+        // $majalah = DB::table('majalah')->where([])->get();
         // $artikel = DB::table('artikel')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
         // $berita = DB::table('berita')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
         // $kotbah = DB::table('kotbah')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
@@ -294,7 +294,7 @@ class MajalahController extends Controller
         //                 ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
         //                 ->where(['majalah.majalah_id' => $majalah[0]->majalah_id])
         //                 ->get();
-        $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get(); 
+        $majalah = DB::table('majalah')->where(['periode_id' => $id])->get(); 
         if($majalah[0]->approval_dewan == 'Diajukan'){
             DB::table('majalah')->where(['majalah_id'=>$id])->update([
                 'approval_dewan' => 'Review',
@@ -313,6 +313,28 @@ class MajalahController extends Controller
                         ->get();
         // var_dump($majalah);die();
         return view('majalah.viewDewanRedaksi',compact('majalah','artikel','berita','kotbah'));
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showJemaatByPeriode($id)
+    {
+        $majalah = DB::table('majalah')->where(['periode_id' => $id])->get();
+        $artikel = DB::table('artikel')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $berita = DB::table('berita')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $kotbah = DB::table('kotbah')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $majalah =  DB::table('majalah')
+            ->join('status', 'status.id','=','majalah.status')
+            ->join('periode', 'periode.periode_id','=','majalah.periode_id')
+            ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+            ->where(['majalah.majalah_id' => $majalah[0]->majalah_id])
+            ->get();
+        // var_dump($majalah);die();
+        return view('majalah.viewJemaat',compact('majalah','artikel','berita','kotbah'));
+
     }
     /**
      * Show the form for editing the specified resource.

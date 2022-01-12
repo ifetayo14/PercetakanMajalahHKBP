@@ -81,9 +81,10 @@ Route::post('khotbah/refuse/{id}', [KhotbahController::class, 'refuseKhotbah']);
 //majalah jemaat
 Route::get('majalahJemaat', [MajalahController::class, 'indexJemaat']);
 Route::get('majalahJemaat/view/{id}', [MajalahController::class, 'showJemaat']);
-Route::get('artikelJemaat/view/{id}', [ArtikelController::class, 'showSekjen']);
-Route::get('beritaJemaat/view/{id}', [BeritaController::class, 'showSekjen']);
-Route::get('kotbahJemaat/view/{id}', [KhotbahController::class, 'showSekjen']);
+Route::get('artikelJemaat/view/{id}', [ArtikelController::class, 'showJemaat']);
+Route::get('beritaJemaat/view/{id}', [BeritaController::class, 'showJemaat']);
+Route::get('kotbahJemaat/view/{id}', [KhotbahController::class, 'showJemaat']);
+Route::get('/majalahJemaat/viewByPeriode/{id}', [MajalahController::class, 'showJemaatByPeriode']);
 //harcopy
 Route::get('hardcopyJemaat/', [HardcopyController::class, 'index']);
 Route::get('hardcopyJemaat/detail/{id}', [HardcopyController::class, 'detailJemaat']);
