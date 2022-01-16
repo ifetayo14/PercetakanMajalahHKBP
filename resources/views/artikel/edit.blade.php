@@ -75,6 +75,7 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
             $("#file-5-edit").fileinput({
                 theme: 'fas',
                 showUpload: false,

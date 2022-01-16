@@ -51,10 +51,7 @@
                             </div>
                         </div>
                     </div>
-                <div class="row">
-                    <input type="submit" class="btn btn-success w-100" value="Beli">
-                </div>
-            </form>
+                </form>
 
 
             </div>

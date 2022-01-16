@@ -89,7 +89,9 @@ Route::get('kotbahJemaat/view/{id}', [KhotbahController::class, 'showSekjen']);
 Route::get('hardcopyJemaat/', [HardcopyController::class, 'index']);
 Route::get('hardcopyJemaat/detail/{id}', [HardcopyController::class, 'detailJemaat']);
 Route::get('hardcopyAdmin/', [HardcopyController::class, 'indexAdmin']);
+Route::get('hardcopyAdmin/detail/{id}', [HardcopyController::class, 'detailAdmin']);
 Route::get('hardcopyAdmin/tambah', [HardcopyController::class, 'tambah']);
+Route::get('hardcopyAdmin/edit/{id}', [HardcopyController::class, 'ubah']);
 Route::post('hardcopyAdmin/tambah', [HardcopyController::class, 'store']);
 Route::get('hardcopyAdmin/hapus/{id}', [HardcopyController::class, 'delete']);
 

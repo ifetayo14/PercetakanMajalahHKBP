@@ -28,6 +28,15 @@ class HardcopyController extends Controller
             ->first();
         return view('hardcopy.detail',compact('dataHardCopy'));
     }
+    public function detailAdmin($id)
+    {
+        $dataHardCopy =  DB::table('producthardcopy')
+            ->join('periode', 'producthardcopy.periode_id', '=', 'periode.periode_id')
+            ->select('producthardcopy.producthardcopy_id','producthardcopy.nama','producthardcopy.cover','producthardcopy.stok','producthardcopy.berat','producthardcopy.harga','producthardcopy.deskripsi','periode.bulan','periode.tahun')
+            ->where('producthardcopy.producthardcopy_id',$id)
+            ->first();
+        return view('hardcopy.admin.detail',compact('dataHardCopy'));
+    }
     public function indexAdmin()
     {
         $dataHardCopy =  DB::table('producthardcopy')
@@ -43,11 +52,14 @@ class HardcopyController extends Controller
             ->get();
         return view('hardcopy.admin.tambah',compact('dataPeriode'));
     }
-    public function ubah()
+    public function ubah($id)
     {
+        $dataProduct = DB::table('producthardcopy')
+            ->where('producthardcopy.producthardcopy_id', $id)
+            ->first();
         $dataPeriode = DB::table('periode')
             ->get();
-        return view('hardcopy.admin.tambah',compact('dataPeriode'));
+        return view('hardcopy.admin.edit',compact('dataPeriode','dataProduct'));
     }
     /**
      * Store a newly created resource in storage.
@@ -165,7 +177,7 @@ class HardcopyController extends Controller
         ->where('province_id', $produk->ship_region)
         ->first();
 
-        
+
         return view('hardcopy.detailOrder', compact('produk', 'city', 'provinces'));
     }
 
