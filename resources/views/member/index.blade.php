@@ -204,7 +204,7 @@
                                 <td>{{$tm->created_date }}</td>
                                 <td>{{$tm->verified_date}}</td>
                                 <td>{{$tm->verified_date}}</td>
-                                <td>@if($tm->payment_status == 'Pending')
+                                <td>@if($tm->payment_status == 'Menunggu Pembayaran')
                                     <a href="" data-toggle="modal" data-target="#sendFileRequestModal" class="btn btn-primary">Kirim Bukti Pembayaran</a>
                                     @endif
                                     <a href="" data-toggle="modal" data-target="#tagihanRequestModal-{{$tm->transaksimember_id}}" class="btn btn-primary">Tagihan</a>

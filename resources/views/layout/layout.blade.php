@@ -29,6 +29,9 @@
     <!-- Custom styles for this template-->
     <link href="{{url('templateResources/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{url('templateResources/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <!-- modal image -->
+
+    @yield('css')
 
 {{--    dropfile--}}
     <link href="{{url('dropfile/css/fileinput.css')}}" media="all" rel="stylesheet" type="text/css"/>
@@ -217,7 +220,7 @@
             </li>
     @endif
 
-    @if(\Illuminate\Support\Facades\Session::get('role') != '2')
+    @if(\Illuminate\Support\Facades\Session::get('role') != '2' && \Illuminate\Support\Facades\Session::get('role') != '5'))
         <li class="nav-item  {{(request()->is('laporan*') ? 'active' : '')}}">
             <a class="nav-link" href="{{url('laporan')}}">
                 <i class="fa fa-file" style="color: {{(request()->is('laporan*') ? '#0500FE' : '#FFFFFF')}}"></i>

@@ -134,7 +134,25 @@ class ArtikelController extends Controller
             ->first();
         return view('artikel.detailSekjen', compact('dataArtikel'));
     }
+    public function showJemaat($id)
+    {
+        $dataArtikel = DB::table('artikel')
+            ->where('artikel_id', $id)
+            ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.isi', 'artikel.file', 'artikel.status', 'artikel.periode_id', 'artikel.created_by', 'artikel.catatan')
+            ->first();
+        return view('artikel.detailJemaat', compact('dataArtikel'));
+    }
 
+    public function showDewanRedaksi($id)
+    {
+        $dataArtikel = DB::table('artikel')
+            ->where('artikel_id', $id)
+            ->join('periode', 'artikel.periode_id', '=', 'periode.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'artikel.artikel_id', 'artikel.judul', 'artikel.isi', 'artikel.file', 'artikel.status', 'artikel.periode_id', 'artikel.created_by', 'artikel.catatan')
+            ->first();
+        return view('artikel.detailDewanRedaksi', compact('dataArtikel'));
+    }
     public function showAdmin($id)
     {
         $dataArtikel = DB::table('artikel')

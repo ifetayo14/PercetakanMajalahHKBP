@@ -174,15 +174,15 @@ class MajalahController extends Controller
         $majalah =  DB::table('majalah')
         ->join('status', 'status.id','=','majalah.status')
         ->join('periode', 'periode.periode_id','=','majalah.periode_id')
-        ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.catatan_dewan', 'majalah.approval_dewan', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+        ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.catatan_dewan', 'majalah.approval_dewan', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema', 'majalah.periode_id')
         ->where(['majalah.majalah_id' => $id])
         ->get();
         // var_dump($majalah);die();
-        $artikel = DB::table('artikel')->where(['periode_id' => $id])->whereIn('status',[2,3,5])
+        $artikel = DB::table('artikel')->where(['periode_id' => $majalah[0]->periode_id, 'artikel.status' =>5])
         ->join('status', 'status.id','=','artikel.status')->select('artikel.*', 'status.deskripsi as status_des')->get();
-        $berita = DB::table('berita')->where(['periode_id' => $id])->whereIn('status',[2,3,5])
+        $berita = DB::table('berita')->where(['periode_id' => $majalah[0]->periode_id, 'berita.status' =>5])
         ->join('status', 'status.id','=','berita.status')->select('berita.*', 'status.deskripsi as status_des')->get();
-        $kotbah = DB::table('kotbah')->where(['periode_id' => $id])->whereIn('status',[2,3,5])
+        $kotbah = DB::table('kotbah')->where(['periode_id' => $majalah[0]->periode_id, 'kotbah.status' =>5])
         ->join('status', 'status.id','=','kotbah.status')->select('kotbah.*', 'status.deskripsi as status_des')->get();
         // $majalah =  DB::table('majalah')
         //                 ->join('status', 'status.id','=','majalah.status')
@@ -276,6 +276,66 @@ class MajalahController extends Controller
         return view('majalah.viewSekjen',compact('majalah','artikel','berita','kotbah'));
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showDewanRedaksiByPeriode($id)
+    {
+        // $majalah = DB::table('majalah')->where([])->get();
+        // $artikel = DB::table('artikel')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        // $berita = DB::table('berita')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        // $kotbah = DB::table('kotbah')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        // $majalah =  DB::table('majalah')
+        //                 ->join('status', 'status.id','=','majalah.status')
+        //                 ->join('periode', 'periode.periode_id','=','majalah.periode_id')
+        //                 ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+        //                 ->where(['majalah.majalah_id' => $majalah[0]->majalah_id])
+        //                 ->get();
+        $majalah = DB::table('majalah')->where(['periode_id' => $id])->get(); 
+        if($majalah[0]->approval_dewan == 'Diajukan'){
+            DB::table('majalah')->where(['majalah_id'=>$id])->update([
+                'approval_dewan' => 'Review',
+                'updated_by' =>Session::get('username'),
+                'updated_date' => Carbon::now(),
+            ]);
+        }
+        $artikel = DB::table('artikel')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $berita = DB::table('berita')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $kotbah = DB::table('kotbah')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $majalah =  DB::table('majalah')
+                        ->join('status', 'status.id','=','majalah.status')
+                        ->join('periode', 'periode.periode_id','=','majalah.periode_id')
+                        ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.catatan_dewan', 'majalah.approval_dewan', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+                        ->where(['majalah.majalah_id' => $majalah[0]->majalah_id])
+                        ->get();
+        // var_dump($majalah);die();
+        return view('majalah.viewDewanRedaksi',compact('majalah','artikel','berita','kotbah'));
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showJemaatByPeriode($id)
+    {
+        $majalah = DB::table('majalah')->where(['periode_id' => $id])->get();
+        $artikel = DB::table('artikel')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $berita = DB::table('berita')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $kotbah = DB::table('kotbah')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+        $majalah =  DB::table('majalah')
+            ->join('status', 'status.id','=','majalah.status')
+            ->join('periode', 'periode.periode_id','=','majalah.periode_id')
+            ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+            ->where(['majalah.majalah_id' => $majalah[0]->majalah_id])
+            ->get();
+        // var_dump($majalah);die();
+        return view('majalah.viewJemaat',compact('majalah','artikel','berita','kotbah'));
+
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -381,7 +441,7 @@ class MajalahController extends Controller
     {
         //
         $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get();
-        if($majalah[0]->status != 3){
+        if($majalah[0]->status == 3){
             return redirect('/majalahSekjen/view/'.$id)->with('error', 'Akses langsung melalui URL tidak diizinkan!');
         }
         // var_dump($majalah);die();
@@ -396,7 +456,7 @@ class MajalahController extends Controller
     public function terimaUpdate(Request $request, $id)
     {
         $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get();
-        if($majalah[0]->status != 3){
+        if($majalah[0]->status == 3){
             return redirect('/majalahSekjen/view/'.$id)->with('error', 'Akses langsung melalui URL tidak diizinkan!');
         }
         $queryInsert = DB::table('majalah')->where(['majalah_id'=>$id])
@@ -422,7 +482,7 @@ class MajalahController extends Controller
     public function tolak($id)
     {
         $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get();
-        if($majalah[0]->status != 3){
+        if($majalah[0]->status == 3){
             return redirect('/majalahSekjen/view/'.$id)->with('error', 'Akses langsung melalui URL tidak diizinkan!');
         }
         //
@@ -440,7 +500,7 @@ class MajalahController extends Controller
     public function tolakUpdate(Request $request, $id)
     {
         $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get();
-        if($majalah[0]->status != 3){
+        if($majalah[0]->status == 3){
             return redirect('/majalahSekjen/view/'.$id)->with('error', 'Akses langsung melalui URL tidak diizinkan!');
         }
         $queryInsert = DB::table('majalah')->where(['majalah_id'=>$id])

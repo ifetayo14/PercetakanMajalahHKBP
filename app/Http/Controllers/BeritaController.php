@@ -172,6 +172,25 @@ class BeritaController extends Controller
         return view('berita.detailSekjen', compact('dataBerita'));
     }
 
+    public function showDewanRedaksi($id)
+    {
+        $dataBerita= DB::table('berita')
+            ->where('berita_id', $id)
+            ->join('periode', 'berita.periode_id', '=', 'berita.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.isi','berita.file', 'berita.status', 'berita.created_by', 'berita.periode_id', 'berita.catatan')
+            ->first();
+        return view('berita.detailDewanRedaksi', compact('dataBerita'));
+    }
+    public function showJemaat($id)
+    {
+        $dataBerita= DB::table('berita')
+            ->where('berita_id', $id)
+            ->join('periode', 'berita.periode_id', '=', 'berita.periode_id')
+            ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'berita.berita_id', 'berita.judul', 'berita.isi','berita.file', 'berita.status', 'berita.created_by', 'berita.periode_id', 'berita.catatan')
+            ->first();
+        return view('berita.detailJemaat', compact('dataBerita'));
+    }
+
     public function showAdmin($id)
     {
         $dataBerita= DB::table('berita')

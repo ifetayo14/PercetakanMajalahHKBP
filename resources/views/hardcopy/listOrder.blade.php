@@ -45,7 +45,7 @@
                         <td>{{$p->ship_name}}</td>
                         @endif
                         <td>{{$p->status}}</td>
-                        @if(session()->get('role') == 2)
+                        @if(session()->get('role') == 2 || session()->get('role') == 5)
                             <td>
                                 @if($p->status == "Menunggu Pembayaran")
                                     <a href="" class="btn btn-outline-primary"  data-toggle="modal" data-target="#upload-{{$p->orders_id}}"><i class="fa fa-upload"></i> Upload Bukti Byar</a>
@@ -57,7 +57,26 @@
                             </td>
                         @endif
 
-                        @if(session()->get('role') == 1 || session()->get('role') == 4)
+                        @if(session()->get('role') == 1)
+                            <td>
+                                 @if($p->status == "Menunggu Pembayaran")
+                                    <a href="" class="btn btn-outline-primary"  data-toggle="modal" data-target="#upload-{{$p->orders_id}}"><i class="fa fa-upload"></i> Upload Bukti Byar</a>
+                                @endif
+                                @if($p->status == "Dikirim")
+                                    <a href="" class="btn btn-outline-primary"  data-toggle="modal" data-target="#selesai-{{$p->orders_id}}"><i class="fa fa-check"></i> Konfirmasi Terima</a>
+                                @endif
+                                @if($p->status == "Menunggu Konfirmasi")
+                                    <a href="" class="btn btn-outline-primary"  data-toggle="modal" data-target="#terima-{{$p->orders_id}}"><i class="fa fa-check"></i> Terima</a>
+                                    <a href="" class="btn btn-outline-primary"  data-toggle="modal" data-target="#tolak-{{$p->orders_id}}"><i class="fa fa-ban"></i> Tolak</a>
+                                @endif
+                                @if($p->status == "Proses pengiriman barang")
+                                    <a href="" class="btn btn-outline-primary"  data-toggle="modal" data-target="#resi-{{$p->orders_id}}"><i class="fa fa-upload"></i> Upload Resi</a>
+                                @endif
+                                    <a href="{{url('hardcopy/order/detail/'.$p->orders_id)}}" class="btn btn-outline-warning"><i class="fa fa-eye"></i> View</a>
+                            </td>
+                        @endif
+
+                        @if(session()->get('role') == 4)
                             <td>
                                 @if($p->status == "Menunggu Konfirmasi")
                                     <a href="" class="btn btn-outline-primary"  data-toggle="modal" data-target="#terima-{{$p->orders_id}}"><i class="fa fa-check"></i> Terima</a>

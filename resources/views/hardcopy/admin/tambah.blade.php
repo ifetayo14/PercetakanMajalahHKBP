@@ -39,7 +39,7 @@
                                     @error('berat'){{$message}}@enderror
                                 </span>
                 </div>
-                <div class="col-md-1 align-self-center text-center">Berat</div>
+                <div class="col-md-1 align-self-center text-center">Berat (Gram)</div>
                 <div  class="col-md-2 ">
                     <input type="number" class="form-control form-control-user" name="berat">
                     <span style="color: red">
