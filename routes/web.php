@@ -92,6 +92,7 @@ Route::get('hardcopyAdmin/', [HardcopyController::class, 'indexAdmin']);
 Route::get('hardcopyAdmin/detail/{id}', [HardcopyController::class, 'detailAdmin']);
 Route::get('hardcopyAdmin/tambah', [HardcopyController::class, 'tambah']);
 Route::get('hardcopyAdmin/edit/{id}', [HardcopyController::class, 'ubah']);
+Route::post('hardcopyAdmin/edit/', [HardcopyController::class, 'update']);
 Route::get('hardcopyAdmin/hapus/{id}', [HardcopyController::class, 'delete']);
 
 Route::post('hardcopyAdmin/tambah', [HardcopyController::class, 'store']);

@@ -6,7 +6,7 @@
 @section('main-content')
     <div class="card container-fluid p-3" style="min-height: 400px">
         <div class="text-center mt-2"> <h1 class="h4 page-head-title mb-4">Edit Produk</h1></div>
-        <form  method="post" action="/hardcopyAdmin/tambah" enctype= "multipart/form-data">
+        <form  method="post" action="/hardcopyAdmin/edit" enctype= "multipart/form-data">
             @csrf
             <div class="row mt-2">
                 <div class="col-md-3"></div>
@@ -80,7 +80,7 @@
             <div class="row  mt-2">
                 <div class="col-md-4"> </div>
                 <div class="col-md-5">
-                    <button class="btn btn-success w-100 ml-4" type="submit">Tambah</button>
+                    <button class="btn btn-success w-100 ml-4" type="submit">Edit</button>
                 </div>
             </div>
         </form>
