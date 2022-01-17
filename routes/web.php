@@ -89,7 +89,11 @@ Route::get('/majalahJemaat/viewByPeriode/{id}', [MajalahController::class, 'show
 Route::get('hardcopyJemaat/', [HardcopyController::class, 'index']);
 Route::get('hardcopyJemaat/detail/{id}', [HardcopyController::class, 'detailJemaat']);
 Route::get('hardcopyAdmin/', [HardcopyController::class, 'indexAdmin']);
+Route::get('hardcopyAdmin/detail/{id}', [HardcopyController::class, 'detailAdmin']);
 Route::get('hardcopyAdmin/tambah', [HardcopyController::class, 'tambah']);
+Route::get('hardcopyAdmin/edit/{id}', [HardcopyController::class, 'ubah']);
+Route::get('hardcopyAdmin/hapus/{id}', [HardcopyController::class, 'delete']);
+
 Route::post('hardcopyAdmin/tambah', [HardcopyController::class, 'store']);
 Route::get('/ongkir', [CheckOngkirController::class, 'index']);
 Route::post('/ongkir', [CheckOngkirController::class,'check_ongkir']);

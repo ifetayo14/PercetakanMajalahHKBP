@@ -18,14 +18,14 @@
                     <div class="card-body" >
                         <h5 class="card-title">{{$row->nama}}</h5>
                         <p class="card-text">{{$row->deskripsi}}</p>
-                        <a href="hardcopyJemaat/detail/{{$row->producthardcopy_id}}" class="btn btn-success w-100">Lihat Selengkapnya</a>
+                        <a href="hardcopyAdmin/detail/{{$row->producthardcopy_id}}" class="btn btn-success w-100">Lihat Selengkapnya</a>
                         <div class="row  mt-2">
                            <div class="col-md-8">
                                <p class="card-text"><small class="text-muted">Edisi {{$row->bulan . ' ' .$row->tahun }}</small></p>
                            </div>
                             <div class="col-md-4 d-flex flex-row-reverse">
                                 <button class="btn btn-sm btn-danger" data-placement="bottom" data-toggle="tooltip" title="Hapus Produk" onclick="deleteHardCopy({{$row->producthardcopy_id}}) "><i class="fas fa-trash"></i></button>
-                                <a href="hardcopyJemaat/edit/{{$row->producthardcopy_id}}"><button class="btn btn-sm btn-primary mr-2" data-placement="bottom" data-toggle="tooltip" title="Edit Produk"><i class="fas fa-edit"></i></button></a>
+                                <a href="hardcopyAdmin/edit/{{$row->producthardcopy_id}}"><button class="btn btn-sm btn-primary mr-2" data-placement="bottom" data-toggle="tooltip" title="Edit Produk"><i class="fas fa-edit"></i></button></a>
                             </div>
                         </div>
 
@@ -36,6 +36,7 @@
         @endforeach
 
     </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function  deleteHardCopy(id){
             console.log(id);

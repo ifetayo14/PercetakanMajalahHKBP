@@ -220,7 +220,7 @@
             </li>
     @endif
 
-    @if(\Illuminate\Support\Facades\Session::get('role') != '2' && \Illuminate\Support\Facades\Session::get('role') != '5'))
+    @if(\Illuminate\Support\Facades\Session::get('role') != '2' && \Illuminate\Support\Facades\Session::get('role') != '5')
         <li class="nav-item  {{(request()->is('laporan*') ? 'active' : '')}}">
             <a class="nav-link" href="{{url('laporan')}}">
                 <i class="fa fa-file" style="color: {{(request()->is('laporan*') ? '#0500FE' : '#FFFFFF')}}"></i>

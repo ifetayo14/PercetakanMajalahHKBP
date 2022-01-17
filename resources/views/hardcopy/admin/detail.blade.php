@@ -23,7 +23,7 @@
                         <div class="row mt-1">
                             <div class="col-sm-2">Berat</div>
                             <div class="col-sm-0">:</div>
-                            <div class="col-sm-9">{{$dataHardCopy->berat}} gram</div>
+                            <div class="col-sm-9">{{$dataHardCopy->berat}} kg</div>
                         </div>
                         <div class="row mt-1">
                             <div class="col-sm-2">Periode</div>
@@ -51,10 +51,7 @@
                             </div>
                         </div>
                     </div>
-                <div class="row">
-                    <input type="submit" class="btn btn-success w-100" value="Beli">
-                </div>
-            </form>
+                </form>
 
 
             </div>
