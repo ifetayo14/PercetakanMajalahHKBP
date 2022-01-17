@@ -96,12 +96,11 @@ class HardcopyController extends Controller
         ]);
         if ($queryInsert){
             $request->file('file-pelengkap')->move(public_path('uploads/cover'), $fileName);
-            return redirect('/hardcopyAdmin')->with('success', 'Artikel berhasil disimpan. Anda masih dapat mengedit artikel. Atau anda dapat mengirim artikel tersebut untuk direview dengan klik tombol upload di kolom aksi.');
+            return redirect('/hardcopyAdmin')->with('success', 'HardCopy berhasil disimpan. Anda masih dapat mengedit artikel. Atau anda dapat mengirim artikel tersebut untuk direview dengan klik tombol upload di kolom aksi.');
         }
 
     }
-
-    public function edit(Request $request)
+    public function update(Request $request)
     {
         $request->validate([
             'nama'=>'required',
@@ -117,25 +116,41 @@ class HardcopyController extends Controller
                 'harga.required' => 'Harga nats alkitab tidak boleh kosong',
                 'deskripsi.required' => 'Deskripsi tidak boleh kosong'
             ]);
-        $fileName = time().$request->file('file-pelengkap')->getClientOriginalName();
-        $queryInsert = DB::table('producthardcopy')->insert([
-            'nama' => $request->input('nama'),
-            'majalah_id' => '1',
-            'cover' => $fileName,
-            'norek' =>'ss',
-            'status' =>'Prsoes Approve',
-            'periode_id' => $request->input('periode'),
-            'harga' => $request->input('harga'),
-            'stok' => $request->input('stok'),
-            'berat' => $request->input('berat'),
-            'deskripsi' => $request->input('deskripsi'),
-        ]);
-        if ($queryInsert){
-            $request->file('file-pelengkap')->move(public_path('uploads/cover'), $fileName);
-            return redirect('/hardcopyAdmin')->with('success', 'Artikel berhasil disimpan. Anda masih dapat mengedit artikel. Atau anda dapat mengirim artikel tersebut untuk direview dengan klik tombol upload di kolom aksi.');
+        if(is_null($request->file('file-pelengkap'))) {
+            $queryInsert = DB::table('producthardcopy')->update([
+                'nama' => $request->input('nama'),
+                'norek' =>'ss',
+                'periode_id' => $request->input('periode'),
+                'harga' => $request->input('harga'),
+                'stok' => $request->input('stok'),
+                'berat' => $request->input('berat'),
+                'deskripsi' => $request->input('deskripsi'),
+            ]);
+            if ($queryInsert){
+                return redirect('/hardcopyAdmin')->with('success', 'Artikel berhasil disimpan. Anda masih dapat mengedit artikel. Atau anda dapat mengirim artikel tersebut untuk direview dengan klik tombol upload di kolom aksi.');
+            }
+        }
+        else{
+            $fileName = time().$request->file('file-pelengkap')->getClientOriginalName();
+            $queryInsert = DB::table('producthardcopy')->update([
+                'nama' => $request->input('nama'),
+                'cover' => $fileName,
+                'norek' =>'ss',
+                'periode_id' => $request->input('periode'),
+                'harga' => $request->input('harga'),
+                'stok' => $request->input('stok'),
+                'berat' => $request->input('berat'),
+                'deskripsi' => $request->input('deskripsi'),
+            ]);
+            if ($queryInsert){
+                $request->file('file-pelengkap')->move(public_path('uploads/cover'), $fileName);
+                return redirect('/hardcopyAdmin')->with('success', 'Artikel berhasil disimpan. Anda masih dapat mengedit artikel. Atau anda dapat mengirim artikel tersebut untuk direview dengan klik tombol upload di kolom aksi.');
+            }
         }
 
+
     }
+
 
     public function delete($id)
     {
