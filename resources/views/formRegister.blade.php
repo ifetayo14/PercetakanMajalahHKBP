@@ -81,7 +81,7 @@
                                             <label for="role" style="margin-left: 15px">Daftar Sebagai</label>
                                             <select name="role" style="width: 225px; margin-left: 10px" class="form-control">
                                                 <option value="">...</option>
-                                                <option value="pendeta">Pendeta</option>
+                                                <option value="pendeta">Pelayan</option>
                                                 <option value="jemaat">Jemaat</option>
                                             </select>
                                         </div>

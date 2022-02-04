@@ -159,23 +159,23 @@ class HardcopyController extends Controller
     }
 
     public function orderJemaat(){
-        // DB::table('producthardcopy')
-        // ->join('periode', 'producthardcopy.periode_id', '=', 'periode.periode_id')
-        // ->select('producthardcopy.producthardcopy_id','producthardcopy.nama','producthardcopy.cover','producthardcopy.stok','producthardcopy.berat','producthardcopy.harga','producthardcopy.deskripsi','periode.bulan','periode.tahun')
-
-        $produk = DB::table('orders')
-        ->where('user_id', session()->get('user_id'))
-        ->join('producthardcopy', 'orders.producthardcopy_id' ,'producthardcopy.producthardcopy_id')
-        ->orderBy('orders_id', 'DESC')
-        ->get();
 
         if(session()->get('role') == 1 || session()->get('role') == 4){
             $produk = DB::table('orders')
             ->join('producthardcopy', 'orders.producthardcopy_id' ,'producthardcopy.producthardcopy_id')
             ->orderBy('orders_id', 'DESC')
+            ->select('orders.*', 'producthardcopy.nama', 'producthardcopy.periode_id', 'producthardcopy.majalah_id', 'producthardcopy.harga')
+            ->get();
+        }else{
+            $produk = DB::table('orders')
+            ->where('user_id', session()->get('user_id'))
+            ->join('producthardcopy', 'orders.producthardcopy_id' ,'producthardcopy.producthardcopy_id')
+            ->orderBy('orders_id', 'DESC')
+            ->select('orders.*', 'producthardcopy.nama', 'producthardcopy.periode_id', 'producthardcopy.majalah_id', 'producthardcopy.harga')
             ->get();
         }
 
+        // die($produk);
         return view('hardcopy.listOrder', compact('produk'));
     }
 
@@ -183,6 +183,7 @@ class HardcopyController extends Controller
         $produk =DB::table('orders')
         ->where('orders_id', $id)
         ->join('producthardcopy', 'orders.producthardcopy_id' ,'producthardcopy.producthardcopy_id')
+        ->select('orders.*', 'producthardcopy.nama', 'producthardcopy.periode_id', 'producthardcopy.majalah_id', 'producthardcopy.harga', 'producthardcopy.deskripsi', 'producthardcopy.berat', 'producthardcopy.norek')
         ->first();
 
         $city = DB::table('cities')

@@ -220,7 +220,7 @@ class KhotbahController extends Controller
             ->join('periode', 'kotbah.periode_id', '=', 'kotbah.periode_id')
             ->select('periode.bulan', 'periode.tahun', 'periode.tema', 'kotbah.kotbah_id', 'kotbah.judul','kotbah.nama_minggu','kotbah.topik', 'kotbah.file', 'kotbah.nats_alkitab', 'kotbah.isi', 'kotbah.status', 'kotbah.created_by', 'kotbah.periode_id', 'kotbah.catatan')
             ->first();
-
+            
         return view('khotbah.detailJemaat', compact('dataKhotbah'));
     }
 

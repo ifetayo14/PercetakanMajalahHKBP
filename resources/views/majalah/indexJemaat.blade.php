@@ -11,6 +11,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-body">
+            <h3 class="text-danger">{{$message}}</h3>
             <div class="table-responsive">
                 <table style="width:100%" class="table table-striped" id="dataTable" >
                     <thead>

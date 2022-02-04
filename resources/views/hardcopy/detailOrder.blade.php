@@ -51,7 +51,7 @@
                             <div class="col-sm-8">{{$produk->berat}} gram</div>
                         </div>
                         <div class="row mt-1">
-                            <div class="col-sm-3">Qty</div>
+                            <div class="col-sm-3">Jumlah</div>
                             <div class="col-sm-0">:</div>
                             <div class="col-sm-8">{{$produk->qty}}</div>
                         </div>
@@ -63,7 +63,12 @@
                         <div class="row mt-1">
                             <div class="col-sm-3">Ongkir Produk</div>
                             <div class="col-sm-0">:</div>
-                            <div class="col-sm-8">Rp. {{$produk->price-$produk->harga}}</div>
+                            <div class="col-sm-8">Rp. {{$produk->price-($produk->harga*$produk->qty)}}</div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-sm-3">Total Pembayaran</div>
+                            <div class="col-sm-0">:</div>
+                            <div class="col-sm-8">Rp. {{$produk->price}}</div>
                         </div>
                         <div class="row mt-1">
                             <div class="col-sm-3">Status</div>
@@ -71,7 +76,7 @@
                             <div class="col-sm-8">{{$produk->status}}</div>
                         </div>
                         <div class="row mt-1">
-                            <div class="col-sm-3">Pembayarn ke</div>
+                            <div class="col-sm-3">Pembayaran ke</div>
                             <div class="col-sm-0">:</div>
                             <div class="col-sm-8">{{$produk->norek}}</div>
                         </div>

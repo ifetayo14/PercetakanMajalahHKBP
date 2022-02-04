@@ -51,27 +51,49 @@ class MajalahController extends Controller
         return view('majalah.indexDewanRedaksi',compact('majalah'));
     }
     public function indexJemaat(){
-        $majalah =  DB::table('majalah')
+        $getMemberID = DB::table('member')
+                ->where('user_id', '=', Session::get('user_id'))
+                ->first();
+        $today = date('Y-m-d H:i:s');
+        $message=null;
+        if($getMemberID && $getMemberID->end_date>= $today){
+            $majalah =  DB::table('majalah')
             ->join('status', 'status.id','=','majalah.status')
             ->join('periode','majalah.periode_id','=','periode.periode_id')
             ->select('judul', 'status.deskripsi as status','majalah_id','majalah.deskripsi as deskripsi','periode.bulan', 'periode.tahun')
             ->where('majalah.status','=','5')
             ->orderBy('majalah.periode_id', 'desc')
             ->get();
-        return view('majalah.indexJemaat', compact('majalah'));
+        }else{
+            $majalah = [];
+            $message = 'Anda belum menjadi member/belum memperpanjang membership!';
+        }
+        
+        return view('majalah.indexJemaat', compact('majalah', 'message' ));
     }
     public function showJemaat($id)
     {
-        $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get();
-        $artikel = DB::table('artikel')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
-        $berita = DB::table('berita')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
-        $kotbah = DB::table('kotbah')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
-        $majalah =  DB::table('majalah')
-            ->join('status', 'status.id','=','majalah.status')
-            ->join('periode', 'periode.periode_id','=','majalah.periode_id')
-            ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
-            ->where(['majalah.majalah_id' => $majalah[0]->majalah_id])
-            ->get();
+        $getMemberID = DB::table('member')
+                ->where('user_id', '=', Session::get('user_id'))
+                ->first();
+        $today = date('Y-m-d H:i:s');
+        if($getMemberID && $getMemberID->end_date>= $today){
+            $majalah = DB::table('majalah')->where(['majalah_id' => $id])->get();
+            $artikel = DB::table('artikel')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+            $berita = DB::table('berita')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+            $kotbah = DB::table('kotbah')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+            $majalah =  DB::table('majalah')
+                ->join('status', 'status.id','=','majalah.status')
+                ->join('periode', 'periode.periode_id','=','majalah.periode_id')
+                ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+                ->where(['majalah.majalah_id' => $majalah[0]->majalah_id])
+                ->get();
+        }else{
+            $artikel = [];
+            $berita = [];
+            $kotbah = [];
+            $majalah = [];
+        }
         // var_dump($majalah);die();
         return view('majalah.viewJemaat',compact('majalah','artikel','berita','kotbah'));
     }
@@ -322,16 +344,28 @@ class MajalahController extends Controller
      */
     public function showJemaatByPeriode($id)
     {
-        $majalah = DB::table('majalah')->where(['periode_id' => $id])->get();
-        $artikel = DB::table('artikel')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
-        $berita = DB::table('berita')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
-        $kotbah = DB::table('kotbah')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
-        $majalah =  DB::table('majalah')
-            ->join('status', 'status.id','=','majalah.status')
-            ->join('periode', 'periode.periode_id','=','majalah.periode_id')
-            ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
-            ->where(['majalah.majalah_id' => $majalah[0]->majalah_id])
-            ->get();
+        $getMemberID = DB::table('member')
+                ->where('user_id', '=', Session::get('user_id'))
+                ->first();
+        $today = date('Y-m-d H:i:s');
+        if($getMemberID && $getMemberID->end_date>= $today){
+
+            $majalah = DB::table('majalah')->where(['periode_id' => $id])->get();
+            $artikel = DB::table('artikel')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+            $berita = DB::table('berita')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+            $kotbah = DB::table('kotbah')->where(['periode_id' => $majalah[0]->periode_id, 'status' =>5])->get();
+            $majalah =  DB::table('majalah')
+                ->join('status', 'status.id','=','majalah.status')
+                ->join('periode', 'periode.periode_id','=','majalah.periode_id')
+                ->select('judul', 'majalah.catatan','majalah.file', 'status.deskripsi as status', 'majalah.status as status_id','majalah_id','majalah.deskripsi as deskripsi', 'periode.bulan', 'periode.tahun','periode.tema')
+                ->where(['majalah.majalah_id' => $majalah[0]->majalah_id])
+                ->get();
+        }else{
+            $artikel = [];
+            $berita = [];
+            $kotbah = [];
+            $majalah = [];
+        }
         // var_dump($majalah);die();
         return view('majalah.viewJemaat',compact('majalah','artikel','berita','kotbah'));
 
